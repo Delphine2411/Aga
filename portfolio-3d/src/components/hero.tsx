@@ -1,15 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaFacebook, FaPhone } from "react-icons/fa";
 import { useLanguage } from "@/src/components/contexts/language_context";
-import { useEffect } from "react";
 import Link from "next/link";
 
 export default function HeroSection() {
-  const translations = {
+   const translations = {
     fr: {
       title: "Télécharger le CV",
       role: "Développeuse Full Stack & Analyste-Économiste",
@@ -49,84 +46,63 @@ export default function HeroSection() {
     },
   };
 
-  const { language } = useLanguage()
+  const { language } = useLanguage();
   const t = translations[language];
+
   return (
-    <section className="min-h-screen bg-gradient-to-br from-gray-900 to-black  text-white flex items-center justify-center px-10 lg:py-0 py-6">
-      <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl gap-10">
+    <section className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center px-6 md:px-10 py-10 md:py-20">
+      <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-7xl gap-10">
+        
         {/* --- TEXTE À GAUCHE --- */}
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
-          className="flex-1"
+          className="flex-1 text-center md:text-left"
         >
-
-          <h1 className="text-6xl font-bold mt-3">Delphine KPANKPAN
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mt-3">
+            Delphine KPANKPAN
           </h1>
-          <h3 className="text-2xl mt-3 text-[#10b981] font-semibold">
+          <h3 className="text-lg sm:text-xl lg:text-2xl mt-3 text-[#10b981] font-semibold">
             {t.role}
           </h3>
-          <p className="text-gray-300 mt-4 max-w-md">
+          <p className="text-gray-300 mt-4 max-w-lg mx-auto md:mx-0  sm:text-base">
             {t.intro}
           </p>
 
           {/* --- Bouton + Icônes --- */}
-          <div className="flex items-center gap-5 mt-8">
-            <a
-              href="/files/CV_Delphine_KPANKPAN.pdf"
-              download="CV_Delphine_KPANKPAN.pdf"
-            >
+          <div className="flex flex-wrap justify-center md:justify-start items-center gap-5 mt-8">
+            <a href="/files/CV_Delphine_KPANKPAN.pdf" download="CV_Delphine_KPANKPAN.pdf">
               <motion.button
                 whileHover={{ scale: 1.1 }}
-                className="px-6 py-3 bg-transparent border-2 border-[#10b981] text-[#10b981] font-semibold rounded-full hover:bg-[#10b981] hover:text-black transition-all flex items-center"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-transparent border-2 border-[#10b981] text-[#10b981] font-semibold rounded-full hover:bg-[#10b981] hover:text-black transition-all flex items-center text-sm sm:text-base"
               >
                 <FaDownload className="inline-block mr-2" />
                 {t.title}
               </motion.button>
             </a>
 
-            <div className="flex gap-4 text-[#10b981] text-2xl">
-<Link
-            href="https://github.com/awogbin2411"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Profil GitHub de Delphine Kpankpan"
-          >
-            <FaGithub className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          <Link
-            href="https://www.linkedin.com/in/delphine-kpankpan"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Profil LinkedIn de Delphine Kpankpan"
-          >
-            <FaLinkedin className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          <Link href="mailto:delphinekpankpan11@gmail.com" aria-label="Envoyer un email">
-            <FaEnvelope className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          <Link
-            href="https://www.facebook.com/ton.profil"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Profil Facebook de Delphine Kpankpan"
-          >
-            <FaFacebook className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          <Link href="tel:+22943832687" aria-label="Appeler Delphine Kpankpan">
-            <FaPhone className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
+            <div className="flex gap-4 text-[#10b981] text-xl sm:text-2xl">
+              <Link href="https://github.com/awogbin2411" target="_blank" rel="noopener noreferrer">
+                <FaGithub className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+              </Link>
+              <Link href="https://www.linkedin.com/in/delphine-kpankpan" target="_blank" rel="noopener noreferrer">
+                <FaLinkedin className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+              </Link>
+              <Link href="mailto:delphinekpankpan11@gmail.com">
+                <FaEnvelope className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+              </Link>
+              <Link href="https://www.facebook.com/ton.profil" target="_blank" rel="noopener noreferrer">
+                <FaFacebook className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+              </Link>
+              <Link href="tel:+22943832687">
+                <FaPhone className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+              </Link>
             </div>
           </div>
         </motion.div>
 
-        {/* --- IMAGE AVEC ANIMATION 3D --- */}
+        {/* --- IMAGE RESPONSIVE --- */}
         <div className="relative flex items-center justify-center w-[400px] h-[500px]">
           {/* --- Conteneur de l'image --- */}
 
@@ -144,7 +120,6 @@ export default function HeroSection() {
             }}
           ></motion.div>
         </div>
-
       </div>
     </section>
   );

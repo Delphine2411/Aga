@@ -93,10 +93,10 @@ export default function Hero3D() {
       <div className="absolute text-center text-white">
 
         {/* Titre */}
-        <h1 className="text-5xl font-bold">{text[lang].hello}</h1>
+        <h1 className="lg:text-5xl text-3xl font-bold">{text[lang].hello}</h1>
 
         {/* Job animé */}
-        <p className="text-lg mt-3">
+        <p className="lg:text-lg mt-3">
           <TypeAnimation
             key={lang}
             sequence={[text[lang].job]}
@@ -108,7 +108,7 @@ export default function Hero3D() {
         </p>
 
         {/* Sous-texte animé */}
-        <h2 className="text-3xl mt-5">
+        <h2 className="lg:text-3xl text-2xl text-gray-400 mt-5">
           <TypeAnimation
             key={lang}  // ⭐ Force le composant à se recréer quand la langue change
             sequence={[

@@ -104,7 +104,7 @@ function BioSection() {
             <p className="text-gray-400 text-lg leading-relaxed">
                {t.intro}
             </p>
-            <p className="text-gray-400 text-lg leading-relaxed">
+            <p className="text-gray-400 leading-relaxed">
              {t.desc}
             </p>
             <a

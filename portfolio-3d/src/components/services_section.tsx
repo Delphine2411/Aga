@@ -80,7 +80,7 @@ export default function ServicesSection() {
   return (
     <section className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-20 px-6">
       <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold mt-2 text-[#10b981]">{t.sectionTitle}</h2>
+        <h2 className="lg:text-4xl text-3xl font-bold mt-2 text-[#10b981]">{t.sectionTitle}</h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">

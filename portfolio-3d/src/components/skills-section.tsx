@@ -99,7 +99,7 @@ export default function SkillsSection() {
           <p className="text-sm text-gray-400 tracking-widest uppercase">
             {t.sectionSubtitle}
           </p>
-          <h2 className="text-4xl font-bold text-[#10b981] mb-4">
+          <h2 className="lg:text-4xl text-3xl font-bold text-[#10b981] mb-4">
             {t.sectionTitle}
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">{t.sectionDescription}</p>

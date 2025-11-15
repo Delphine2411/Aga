@@ -103,7 +103,7 @@ export default function ExperienceSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-5xl font-bold text-white text-center mb-16"
+          className="lg:text-5xl text-3xl font-bold text-white text-center mb-16"
         >
           {content.title.split(" ")[0]}{" "}
           <span className="text-[#10b981]">

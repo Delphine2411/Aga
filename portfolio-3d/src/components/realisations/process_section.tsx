@@ -38,13 +38,13 @@ export default function ProcessSection() {
   const t = translations[language];
 
   return (
-    <section className="bg-gradient-to-b from-black to-gray-900 py-24 px-6">
+    <section className="bg-gradient-to-b from-black to-gray-900 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-5xl font-bold text-white text-center mb-16"
+          className="lg:text-5xl text-3xl font-bold text-white text-center mb-16"
         >
           {t.title.split(" ")[0]} <span className="text-[#10b981]">{t.title.split(" ")[1]}</span>
         </motion.h2>
