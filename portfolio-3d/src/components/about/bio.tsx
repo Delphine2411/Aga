@@ -34,7 +34,7 @@ function BioSection() {
       capables de répondre avec précision aux besoins réels des utilisateurs.`,
       button: "Découvrir mes réalisations",
       button1: "Télécharger CV",
-      me: "Salut, Je suis "
+      me: "Je suis "
     },
     en: {
       title: "About Me",
@@ -45,8 +45,20 @@ function BioSection() {
       that truly meets users’ needs.`,
       button: "View My Work",
       button1: "Download CV",
-      me: "Hi, I'm "
+      me: "I'm "
     },
+    es: {
+  title: "Sobre Mí",
+  role: "Desarrolladora Full Stack y Analista Económica",
+  intro: `Me destaco por mi rigor, curiosidad y compromiso con el aprendizaje continuo.`,
+  desc: `Apasionada por la creación de soluciones de alto rendimiento, me encanta transformar ideas en productos concretos y útiles. 
+  Los desafíos son mi principal fuente de motivación e innovación. Mi objetivo es diseñar software inteligente y eficiente 
+  que realmente satisfaga las necesidades de los usuarios.`,
+  button: "Ver Mis Proyectos",
+  button1: "Descargar CV",
+  me: "Soy ",
+},
+
   };
 
   const { language, setLanguage } = useLanguage();
@@ -95,6 +107,10 @@ function BioSection() {
             <p className="text-gray-400 text-lg leading-relaxed">
              {t.desc}
             </p>
+            <a
+              href="/files/CV_Delphine_KPANKPAN.pdf"
+              download="CV_Delphine_KPANKPAN.pdf"
+            >
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 255, 102, 0.5)" }}
               whileTap={{ scale: 0.95 }}
@@ -102,6 +118,7 @@ function BioSection() {
             >
               {t.button1}
             </motion.button>
+            </a>
           </motion.div>
         </motion.div>
       </div>

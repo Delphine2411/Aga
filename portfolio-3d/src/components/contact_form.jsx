@@ -3,11 +3,51 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaFacebook, FaPhone } from "react-icons/fa";
 import Link from 'next/link';
+import { useLanguage } from "@/src/components/contexts/language_context";
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
 
+// 🎯 Traductions locales (FR, EN, ES)
+const translations = {
+  fr: {
+    title1: "Contacter",
+    title2: "Moi",
+    subtitle: "Posez-moi toutes vos questions",
+    fullName: "Nom complet",
+    email: "Email",
+    phone: "Numéro de téléphone",
+    subject: "Sujet",
+    message: "Votre message",
+    send: "Envoyer un message",
+  },
+  en: {
+    title1: "Contact",
+    title2: "Me",
+    subtitle: "Ask me anything",
+    fullName: "Full Name",
+    email: "Email",
+    phone: "Phone Number",
+    subject: "Subject",
+    message: "Your message",
+    send: "Send Message",
+  },
+  es: {
+    title1: "Contactar",
+    title2: "Me",
+    subtitle: "Hazme cualquier pregunta",
+    fullName: "Nombre completo",
+    email: "Correo",
+    phone: "Número de teléfono",
+    subject: "Asunto",
+    message: "Tu mensaje",
+    send: "Enviar mensaje",
+  },
+};
+
 export default function ContactSection() {
   const canvasRef = useRef(null);
+  const { language } = useLanguage();
+  const t = translations[language];
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -189,7 +229,7 @@ export default function ContactSection() {
     }
   };
 
-  
+
 
   return (
     <div className="relative min-h-screen bg-black flex items-center justify-center px-4 py-12 overflow-hidden">
@@ -210,23 +250,30 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-5xl md:text-6xl font-bold text-center mb-16"
+          className="text-5xl md:text-6xl font-bold text-center mb-1"
         >
-          <span className="text-white">Contacter </span>
-          <span className="text-[#10b981]">Moi</span>
+          <span className="text-white">{t.title1} </span>
+          <span className="text-[#10b981]">{t.title2}</span>
+          
         </motion.h1>
-
+    <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+     className='text-center text-gray-400 text-xl'>
+      {t.subtitle}
+      </motion.h2>
         <div className="flex items-center gap-5 mt-8">
 
 
-          
+
         </div>
-{/* Barre latérale fixe d'icônes sociales */}
-<motion.div
-  initial={{ x: -80, opacity: 0 }}
-  animate={{ x: 0, opacity: 1 }}
-  transition={{ duration: 1, ease: "easeOut" }}
-  className="
+        {/* Barre latérale fixe d'icônes sociales */}
+        <motion.div
+          initial={{ x: -80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="
     fixed 
     left-2 sm:left-4 lg:left-6 
     top-auto sm:top-1/2 sm:-translate-y-1/2 
@@ -238,49 +285,49 @@ export default function ContactSection() {
     text-2xl sm:text-3xl lg:text-4xl 
     z-50
   "
->
-  {/* Ligne décorative (visible seulement sur desktop) */}
-  <div className="hidden sm:block w-[2px] h-20 bg-[#10b981]/50 mb-2" />
+        >
+          {/* Ligne décorative (visible seulement sur desktop) */}
+          <div className="hidden sm:block w-[2px] h-20 bg-[#10b981]/50 mb-2" />
 
-  {/* Icônes */}
-  <Link
-    href="https://github.com/awogbin2411"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Profil GitHub de Delphine Kpankpan"
-  >
-    <FaGithub className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-  </Link>
+          {/* Icônes */}
+          <Link
+            href="https://github.com/awogbin2411"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Profil GitHub de Delphine Kpankpan"
+          >
+            <FaGithub className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+          </Link>
 
-  <Link
-    href="https://www.linkedin.com/in/delphine-kpankpan"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Profil LinkedIn de Delphine Kpankpan"
-  >
-    <FaLinkedin className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-  </Link>
+          <Link
+            href="https://www.linkedin.com/in/delphine-kpankpan"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Profil LinkedIn de Delphine Kpankpan"
+          >
+            <FaLinkedin className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+          </Link>
 
-  <Link href="mailto:delphinekpankpan11@gmail.com" aria-label="Envoyer un email">
-    <FaEnvelope className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-  </Link>
+          <Link href="mailto:delphinekpankpan11@gmail.com" aria-label="Envoyer un email">
+            <FaEnvelope className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+          </Link>
 
-  <Link
-    href="https://www.facebook.com/ton.profil"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Profil Facebook de Delphine Kpankpan"
-  >
-    <FaFacebook className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-  </Link>
+          <Link
+            href="https://www.facebook.com/ton.profil"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Profil Facebook de Delphine Kpankpan"
+          >
+            <FaFacebook className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+          </Link>
 
-  <Link href="tel:+22943832687" aria-label="Appeler Delphine Kpankpan">
-    <FaPhone className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-  </Link>
+          <Link href="tel:+22943832687" aria-label="Appeler Delphine Kpankpan">
+            <FaPhone className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
+          </Link>
 
-  {/* Ligne décorative (visible seulement sur desktop) */}
-  <div className="hidden sm:block w-[2px] h-20 bg-[#10b981]/50 mt-2" />
-</motion.div>
+          {/* Ligne décorative (visible seulement sur desktop) */}
+          <div className="hidden sm:block w-[2px] h-20 bg-[#10b981]/50 mt-2" />
+        </motion.div>
 
 
         {/* Grille du formulaire */}
@@ -348,7 +395,7 @@ export default function ContactSection() {
               onClick={handleSubmit}
               className="px-10 py-3.5 bg-[#10b981] hover:bg-green-400 text-black font-semibold rounded-full transition-all duration-300 self-start shadow-lg shadow-green-500/30"
             >
-              Envoyer un Message
+              {t.send}
             </motion.button>
           </motion.div>
         </div>
@@ -370,7 +417,7 @@ export default function ContactSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-red-500"
+            className="w-16 h-16 bg-[#f59e0b] rounded-full flex items-center justify-center shadow-2xl border-4 border-[#10b981]"
           >
             <div className="text-center leading-tight ">
               <div className="text-red-600 font-bold text-[10px]">I LOVE</div>

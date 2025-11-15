@@ -34,20 +34,20 @@ export default function Hero3D() {
   // 🌍 Textes multilingues
   const text = {
     fr: {
-      hello: "Salut, je suis Awogbin 👋",
-      job: "Développeur Web & Designer 3D & Créateur de portfolio",
+      hello: "Salut, je suis Delphine KPANKPAN 👋",
+      job: "Développeuse Web / Mobile & Designer 3D & Créateur de portfolio",
       welcome: "Bienvenue dans mon espace personnel !",
       button: "Lisez-moi !",
     },
     en: {
-      hello: "Hi, I'm Awogbin 👋",
-      job: "Web Developer & 3D Designer & Portfolio Creator",
+      hello: "Hi, I'm Delphine KPANKPAN 👋",
+      job: "Web / Mobile Developer & 3D Designer & Portfolio Creator",
       welcome: "Welcome to my personal space!",
       button: "Read Me!",
     },
     es: {
-      hello: "Hola, soy Awogbin 👋",
-      job: "Desarrollador Web & Diseñador 3D & Creador de Portafolios",
+      hello: "Hola, soy Delphine KPANKPAN 👋",
+      job: "Desarrollador Web / Mobile & Diseñador 3D & Creador de Portafolios",
       welcome: "¡Bienvenido a mi espacio personal!",
       button: "Léeme!",
     },
