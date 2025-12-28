@@ -30,7 +30,7 @@ function CTASection() {
   const { language } = useLanguage();
   const t = translations[language];
   return (
-    <section className="relative bg-black py-24 px-6 overflow-hidden">
+    <section className="relative bg-black py-24 px-4 overflow-hidden">
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -39,7 +39,7 @@ function CTASection() {
           className="text-5xl md:text-6xl font-bold text-white mb-6"
         >
           {t.title1}
-          <span className="text-[#10b981]">
+          <span className="text-blue-500">
             {t.title}
           </span>
         </motion.h2>
@@ -58,9 +58,9 @@ function CTASection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(0, 255, 102, 0.5)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(0, 153, 255, 0.53)" }}
             whileTap={{ scale: 0.95 }}
-            className="px-12 py-5 bg-[#10b981] text-black text-lg font-bold rounded-full hover:bg-[#00FF66]/90 transition-all"
+            className="px-12 py-5 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 text-black text-lg font-bold rounded-full hover:bg-blue-600 transition-all"
           >
             {t.button}
           </motion.button>

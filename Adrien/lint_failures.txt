@@ -1,0 +1,147 @@
+
+> portfolio-3d@0.1.0 lint /home/kci/Bureau/portfolio/Aga/Adrien
+> eslint
+
+
+/home/kci/Bureau/portfolio/Aga/Adrien/app/about/page.tsx
+  1:8  warning  'ContactForm' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/kci/Bureau/portfolio/Aga/Adrien/app/layout.tsx
+  2:10  warning  'Geist' is defined but never used       @typescript-eslint/no-unused-vars
+  2:17  warning  'Geist_Mono' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/kci/Bureau/portfolio/Aga/Adrien/app/page.tsx
+  1:8  warning  'Image' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/kci/Bureau/portfolio/Aga/Adrien/app/realisations/page.tsx
+  3:8  warning  'Hero' is defined but never used           @typescript-eslint/no-unused-vars
+  4:8  warning  'Service' is defined but never used        @typescript-eslint/no-unused-vars
+  5:8  warning  'SkillsSection' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/Footer3D.tsx
+  3:25  warning  'useMemo' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/about/bio.tsx
+    2:18  warning  'useScroll' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+    2:29  warning  'useTransform' is defined but never used                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   84:21  warning  'setLanguage' is assigned a value but never used                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  109:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/contact_form.jsx
+    4:10  warning  'FaGithub' is defined but never used    @typescript-eslint/no-unused-vars
+    4:44  warning  'FaDownload' is defined but never used  @typescript-eslint/no-unused-vars
+  182:14  warning  'err' is defined but never used         @typescript-eslint/no-unused-vars
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/footer.tsx
+  3:17  warning  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+  3:27  warning  'useRef' is defined but never used    @typescript-eslint/no-unused-vars
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/hero.tsx
+   4:10  warning  'FaGithub' is defined but never used                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+  97:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/hero3d.tsx
+    3:28  warning  'useThree' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+    4:46  warning  'Sphere' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+    5:10  warning  'Mesh' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+    5:23  warning  'Vector3' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   14:3   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/purity')
+   18:19  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/hero3d.tsx:18:19
+  16 |     const p = new Float32Array(2000 * 3);
+  17 |     for (let i = 0; i < 2000; i++) {
+> 18 |       p[i * 3] = (Math.random() - 0.5) * 20;
+     |                   ^^^^^^^^^^^^^ Cannot call impure function
+  19 |       p[i * 3 + 1] = (Math.random() - 0.5) * 20;
+  20 |       p[i * 3 + 2] = (Math.random() - 0.5) * 20;
+  21 |     }  react-hooks/purity
+   19:23  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/hero3d.tsx:19:23
+  17 |     for (let i = 0; i < 2000; i++) {
+  18 |       p[i * 3] = (Math.random() - 0.5) * 20;
+> 19 |       p[i * 3 + 1] = (Math.random() - 0.5) * 20;
+     |                       ^^^^^^^^^^^^^ Cannot call impure function
+  20 |       p[i * 3 + 2] = (Math.random() - 0.5) * 20;
+  21 |     }
+  22 |     return p;                          react-hooks/purity
+   20:23  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/hero3d.tsx:20:23
+  18 |       p[i * 3] = (Math.random() - 0.5) * 20;
+  19 |       p[i * 3 + 1] = (Math.random() - 0.5) * 20;
+> 20 |       p[i * 3 + 2] = (Math.random() - 0.5) * 20;
+     |                       ^^^^^^^^^^^^^ Cannot call impure function
+  21 |     }
+  22 |     return p;
+  23 |   }, []);                                                     react-hooks/purity
+  159:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @next/next/no-img-element
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/realisations/realisations.tsx
+  156:3   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/purity')
+  160:21  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/realisations/realisations.tsx:160:21
+  158 |     const pos = new Float32Array(particlesCount * 3);
+  159 |     for (let i = 0; i < particlesCount; i++) {
+> 160 |       pos[i * 3] = (Math.random() - 0.5) * 10;
+      |                     ^^^^^^^^^^^^^ Cannot call impure function
+  161 |       pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
+  162 |       pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
+  163 |     }                                                                                                                                                                                                                                                           react-hooks/purity
+  161:25  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/realisations/realisations.tsx:161:25
+  159 |     for (let i = 0; i < particlesCount; i++) {
+  160 |       pos[i * 3] = (Math.random() - 0.5) * 10;
+> 161 |       pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
+      |                         ^^^^^^^^^^^^^ Cannot call impure function
+  162 |       pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
+  163 |     }
+  164 |     return pos;                                                                                                                                                                                                                                                                                             react-hooks/purity
+  162:25  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/realisations/realisations.tsx:162:25
+  160 |       pos[i * 3] = (Math.random() - 0.5) * 10;
+  161 |       pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
+> 162 |       pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
+      |                         ^^^^^^^^^^^^^ Cannot call impure function
+  163 |     }
+  164 |     return pos;
+  165 |   }, []);                                                                                                                                                                                                                                                                                                                                  react-hooks/purity
+  389:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/kci/Bureau/portfolio/Aga/Adrien/src/components/realisations/realisations.tsx:389:7
+  387 |   useEffect(() => {
+  388 |     if (isOpen) {
+> 389 |       setCurrentImageIndex(0);
+      |       ^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  390 |       setIsAutoPlaying(true);
+  391 |     }
+  392 |   }, [isOpen]);  react-hooks/set-state-in-effect
+  451:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @next/next/no-img-element
+  495:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @next/next/no-img-element
+
+✖ 35 problems (7 errors, 28 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+
+ ELIFECYCLE  Command failed with exit code 1.

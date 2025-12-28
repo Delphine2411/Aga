@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX, FiSun, FiMoon, FiGlobe } from "react-icons/fi";
+import { FiMenu, FiX, FiGlobe } from "react-icons/fi";
 import { useLanguage } from "@/src/components/contexts/language_context";
 
 
@@ -23,7 +23,7 @@ type Translations = {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>(() => {
+  const [theme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
       return (localStorage.getItem("theme") as Theme) || "dark";
     }
@@ -41,14 +41,13 @@ export default function Navbar() {
 
   // Sauvegarder la langue
   useEffect(() => {
-  document.documentElement.setAttribute("lang", language);
-}, [language]);
+    document.documentElement.setAttribute("lang", language);
+  }, [language]);
 
 
   // Changer le thème
-  const toggleTheme = () => {
-    setTheme((prev) => prev === "dark" ? "light" : "dark");
-  };
+  // Fonctions de thème supprimées car inutilisées
+
 
   // Changer la langue
   const changeLanguage = (lang: Language) => {
@@ -105,9 +104,7 @@ export default function Navbar() {
         {/* LOGO */}
         <Link href="/">
           <h1 className="text-2xl font-bold cursor-pointer">
-            A<span className="text-blue-500">D</span>
-            R<span className="text-blue-500">I</span>
-            E<span className="text-blue-500">N</span>
+            ADRIEN <span className="text-blue-500">DOGO</span>
           </h1>
         </Link>
 
@@ -124,9 +121,8 @@ export default function Navbar() {
               >
                 <Link
                   href={link.path}
-                  className={`cursor-pointer transition-colors ${
-                    isActive ? "text-blue-500" : "hover:text-blue-500"
-                  }`}
+                  className={`cursor-pointer transition-colors ${isActive ? "text-blue-500" : "hover:text-blue-500"
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -146,7 +142,7 @@ export default function Navbar() {
         {/* Actions Desktop (Theme + Language) */}
         <div className="hidden md:flex items-center gap-4">
           {/* Bouton Theme */}
-         {/* <motion.button
+          {/* <motion.button
             whileHover={{ scale: 1.1, rotate: 180 }}
             whileTap={{ scale: 0.9 }}
             onClick={toggleTheme}
@@ -166,7 +162,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setShowLangMenu(!showLangMenu)}
-              className="p-2 rounded-full bg-gray-800 hover:bg-[#10b981]/20 transition-colors flex items-center gap-2"
+              className="p-2 rounded-full bg-gray-800 hover:bg-blue-500/20 transition-colors flex items-center gap-2"
               aria-label="Change language"
             >
               <FiGlobe className="text-blue-500 text-xl" />
@@ -188,9 +184,8 @@ export default function Navbar() {
                       key={lang.code}
                       whileHover={{ backgroundColor: "rgba(0, 255, 102, 0.1)" }}
                       onClick={() => changeLanguage(lang.code)}
-                      className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors ${
-                        language === lang.code ? "bg-blue-500 text-white" : "text-white"
-                      }`}
+                      className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors ${language === lang.code ? "bg-blue-500 text-white" : "text-white"
+                        }`}
                     >
                       <span className="text-xl">{lang.flag}</span>
                       <span className="text-sm font-medium">{lang.name}</span>
@@ -205,7 +200,7 @@ export default function Navbar() {
         {/* Menu Mobile Toggle */}
         <div className="md:hidden flex items-center gap-4">
           {/* Theme Mobile */}
-         {/* <motion.button
+          {/* <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={toggleTheme}
             className="p-2 text-2xl"
@@ -236,7 +231,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#0b0c10]/95 border-t border-[#10b981]/20 overflow-hidden"
+            className="md:hidden bg-[#0b0c10]/95 border-t border-blue-500/20 overflow-hidden"
           >
             <ul className="flex flex-col items-center gap-6 py-8 text-lg">
               {links.map((link) => {
@@ -245,9 +240,8 @@ export default function Navbar() {
                   <li key={link.key}>
                     <Link
                       href={link.path}
-                      className={`cursor-pointer transition-colors  ${
-                        isActive ? "text-[#10b981]" : "hover:text-[#10b981] text-white"
-                      }`}
+                      className={`cursor-pointer transition-colors  ${isActive ? "text-blue-500" : "hover:text-blue-500 text-white"
+                        }`}
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
@@ -264,11 +258,10 @@ export default function Navbar() {
                   key={lang.code}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => changeLanguage(lang.code)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
-                    language === lang.code
-                      ? "bg-[#10b981] text-black"
-                      : "bg-gray-800 text-white hover:bg-gray-700"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${language === lang.code
+                    ? "bg-blue-500 text-black"
+                    : "bg-gray-800 text-white hover:bg-gray-700"
+                    }`}
                 >
                   {lang.flag} {lang.code.toUpperCase()}
                 </motion.button>

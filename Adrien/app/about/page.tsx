@@ -4,9 +4,11 @@ import Navbar from "../../src/components/navbar";
 import HeroSection from "../../src/components/about/about";
 import BioSection from "../../src/components/about/bio";
 import ExperienceSection from "../../src/components/about/experiences";
+import PersonalLifeSection from "../../src/components/about/personal_life";
 import StatsSection from "../../src/components/about/stats";
 import SkillsSection from "../../src/components/skills-section";
 import CTASection from "../../src/components/realisations/cta_section";
+import ProcessSection from "@/src/components/realisations/process_section";
 
 export default function ContactPage() {
   return (
@@ -14,13 +16,15 @@ export default function ContactPage() {
       <Navbar />
       <br />
       <br />
-    <HeroSection />
-    <BioSection />
-    <ExperienceSection />
-    <StatsSection />
-    <SkillsSection />
-    <CTASection />
-    <Footer />
+      <HeroSection />
+      <BioSection />
+      <ExperienceSection />
+      <PersonalLifeSection />
+      <StatsSection />
+      <SkillsSection />
+      <ProcessSection />
+      <CTASection />
+      <Footer />
     </main>
   );
 }       

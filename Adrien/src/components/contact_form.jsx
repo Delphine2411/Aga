@@ -10,44 +10,50 @@ import * as THREE from 'three';
 // 🎯 Traductions locales (FR, EN, ES)
 const translations = {
   fr: {
-    title1: "Contacter",
-    title2: "Moi",
-    subtitle: "Posez-moi toutes vos questions",
+    title1: "Prêt à",
+    title2: "Collaborer ?",
+    subtitle: "Parlons de votre prochain projet nutritionnel.",
     fullName: "Nom complet",
-    email: "Email",
-    phone: "Numéro de téléphone",
+    email: "E-mail",
+    phone: "Téléphone",
     subject: "Sujet",
-    message: "Votre message",
-    send: "Envoyer un message",
+    message: "Votre message...",
+    send: "Envoyer le message",
+    contactInfo: "Informations de Contact",
+    address: "Bénin, Afrique de l'Ouest",
   },
   en: {
-    title1: "Contact",
-    title2: "Me",
-    subtitle: "Ask me anything",
+    title1: "Ready to",
+    title2: "Collaborate?",
+    subtitle: "Let's discuss your next nutritional project.",
     fullName: "Full Name",
     email: "Email",
     phone: "Phone Number",
     subject: "Subject",
-    message: "Your message",
+    message: "Your message...",
     send: "Send Message",
+    contactInfo: "Contact Information",
+    address: "Benin, West Africa",
   },
   es: {
-    title1: "Contactar",
-    title2: "Me",
-    subtitle: "Hazme cualquier pregunta",
+    title1: "¿Listo para",
+    title2: "Colaborar?",
+    subtitle: "Hablemos de su próximo proyecto nutricional.",
     fullName: "Nombre completo",
     email: "Correo",
-    phone: "Número de teléfono",
+    phone: "Teléfono",
     subject: "Asunto",
-    message: "Tu mensaje",
+    message: "Tu mensaje...",
     send: "Enviar mensaje",
+    contactInfo: "Información de contacto",
+    address: "Benín, África Occidental",
   },
 };
 
 export default function ContactSection() {
   const canvasRef = useRef(null);
   const { language } = useLanguage();
-  const t = translations[language];
+  const t = translations[language] || translations.en;
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -59,7 +65,6 @@ export default function ContactSection() {
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    // Configuration de la scène
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({
@@ -69,361 +74,261 @@ export default function ContactSection() {
     });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     camera.position.z = 5;
 
-    // Lumières
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x00ff88, 2, 100);
+    const pointLight1 = new THREE.PointLight(0x3b82f6, 2, 100);
     pointLight1.position.set(5, 5, 5);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0x00cc66, 1.5, 100);
+    const pointLight2 = new THREE.PointLight(0x60a5fa, 1.5, 100);
     pointLight2.position.set(-5, -5, -5);
     scene.add(pointLight2);
 
-    // Création des sphères avec géométrie et matériau
     const spheres = [];
-    const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+    const sphereGeometry = new THREE.SphereGeometry(1, 48, 48);
 
-    // Sphère 1
-    const material1 = new THREE.MeshStandardMaterial({
-      color: 0x00ff88,
-      metalness: 0.8,
-      roughness: 0.2,
-      emissive: 0x00ff88,
+    const mat1 = new THREE.MeshStandardMaterial({
+      color: 0x3b82f6,
+      metalness: 0.9,
+      roughness: 0.1,
+      emissive: 0x3b82f6,
       emissiveIntensity: 0.2
     });
-    const sphere1 = new THREE.Mesh(sphereGeometry, material1);
-    sphere1.position.set(-3, 2, -5);
-    scene.add(sphere1);
-    spheres.push({ mesh: sphere1, speed: 0.5, offset: 0 });
+    const s1 = new THREE.Mesh(sphereGeometry, mat1);
+    s1.position.set(-3, 2, -5);
+    scene.add(s1);
+    spheres.push({ mesh: s1, speed: 0.5, offset: 0 });
 
-    // Sphère 2
-    const material2 = new THREE.MeshStandardMaterial({
-      color: 0x00cc66,
-      metalness: 0.8,
-      roughness: 0.2,
-      emissive: 0x00cc66,
+    const mat2 = new THREE.MeshStandardMaterial({
+      color: 0x2563eb,
+      metalness: 0.9,
+      roughness: 0.1,
+      emissive: 0x2563eb,
       emissiveIntensity: 0.2
     });
-    const sphere2 = new THREE.Mesh(sphereGeometry, material2);
-    sphere2.position.set(3, -2, -8);
-    scene.add(sphere2);
-    spheres.push({ mesh: sphere2, speed: 0.7, offset: Math.PI });
+    const s2 = new THREE.Mesh(sphereGeometry, mat2);
+    s2.position.set(3, -2, -8);
+    scene.add(s2);
+    spheres.push({ mesh: s2, speed: 0.7, offset: Math.PI });
 
-    // Sphère 3
-    const material3 = new THREE.MeshStandardMaterial({
-      color: 0x00ff44,
-      metalness: 0.8,
-      roughness: 0.2,
-      emissive: 0x00ff44,
-      emissiveIntensity: 0.2
-    });
-    const sphere3 = new THREE.Mesh(sphereGeometry, material3);
-    sphere3.position.set(0, 0, -10);
-    scene.add(sphere3);
-    spheres.push({ mesh: sphere3, speed: 0.3, offset: Math.PI / 2 });
-
-    // Particules
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 100;
-    const positions = new Float32Array(particlesCount * 3);
-
-    for (let i = 0; i < particlesCount * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 20;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const count = 150;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i++) pos[i] = (Math.random() - 0.5) * 25;
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     const particlesMaterial = new THREE.PointsMaterial({
-      color: 0x00ff88,
-      size: 0.05,
+      color: 0x3b82f6,
+      size: 0.04,
       transparent: true,
-      opacity: 0.6
+      opacity: 0.4
     });
-    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particles);
+    const pts = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(pts);
 
-    // Animation
+    let frameId;
     let time = 0;
-    function animate() {
-      requestAnimationFrame(animate);
-      time += 0.01;
-
-      // Rotation et mouvement des sphères
+    const animate = () => {
+      time += 0.008;
       spheres.forEach(({ mesh, speed, offset }) => {
-        mesh.rotation.x = Math.sin(time * speed + offset) * 0.3;
-        mesh.rotation.y = Math.cos(time * speed + offset) * 0.3;
-        mesh.position.y += Math.sin(time * speed + offset) * 0.002;
+        mesh.rotation.x = Math.sin(time * speed + offset) * 0.2;
+        mesh.rotation.y = Math.cos(time * speed + offset) * 0.2;
+        mesh.position.y += Math.sin(time * speed + offset) * 0.001;
       });
-
-      // Rotation des particules
-      particles.rotation.y = time * 0.1;
-      particles.rotation.x = time * 0.05;
-
-      // Animation des lumières
-      pointLight1.position.x = Math.sin(time * 0.5) * 5;
-      pointLight1.position.y = Math.cos(time * 0.5) * 5;
-
+      pts.rotation.y = time * 0.05;
       renderer.render(scene, camera);
-    }
-
+      frameId = requestAnimationFrame(animate);
+    };
     animate();
 
-    // Gestion du redimensionnement
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
-
     window.addEventListener('resize', handleResize);
 
-    // Nettoyage
     return () => {
+      cancelAnimationFrame(frameId);
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
       sphereGeometry.dispose();
-      material1.dispose();
-      material2.dispose();
-      material3.dispose();
+      mat1.dispose();
+      mat2.dispose();
       particlesGeometry.dispose();
       particlesMaterial.dispose();
     };
   }, []);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch("/api/send", {
+      const res = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
-      if (response.ok) {
-        alert("✅ Message envoyé avec succès !");
-        setFormData({
-          fullName: "",
-          email: "",
-          phone: "",
-          subject: "",
-          message: "",
-        });
-      } else {
-        alert("❌ Échec de l’envoi. Réessaie plus tard.");
-      }
-    } catch (error) {
-      console.error("Erreur:", error);
-      alert("⚠️ Une erreur est survenue.");
+      if (res.ok) {
+        alert("✅ Success!");
+        setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
+      } else alert("❌ Failed.");
+    } catch (err) {
+      alert("⚠️ Error.");
     }
   };
 
-
-
   return (
-    <div className="relative min-h-screen bg-black flex items-center justify-center px-4 py-12 overflow-hidden">
-      {/* Canvas 3D en arrière-plan */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 opacity-30"
-        style={{ width: '100%', height: '100%' }}
-      />
+    <div className="relative min-h-screen bg-black flex items-center justify-center px-4 py-24 overflow-hidden">
+      <canvas ref={canvasRef} className="absolute inset-0 opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-black to-black pointer-events-none" />
 
-      {/* Effet de vignette */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/60 to-black pointer-events-none" />
+      <div className="relative z-10 w-full max-w-6xl">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-      {/* Contenu principal */}
-      <div className="relative z-10 w-full max-w-4xl">
-        {/* Titre */}
-        <motion.h1
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-5xl md:text-6xl font-bold text-center mb-1"
-        >
-          <span className="text-white">{t.title1} </span>
-          <span className="text-[#10b981]">{t.title2}</span>
-          
-        </motion.h1>
-    <motion.h2
-    initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-     className='text-center text-gray-400 text-xl'>
-      {t.subtitle}
-      </motion.h2>
-        <div className="flex items-center gap-5 mt-8">
-
-
-
-        </div>
-        {/* Barre latérale fixe d'icônes sociales */}
-        <motion.div
-          initial={{ x: -80, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="
-    fixed 
-    left-2 sm:left-4 lg:left-6 
-    top-auto sm:top-1/2 sm:-translate-y-1/2 
-    bottom-4 sm:bottom-auto
-    flex flex-row sm:flex-col 
-    items-center 
-    gap-4 sm:gap-6 
-    text-[#10b981] 
-    text-2xl sm:text-3xl lg:text-4xl 
-    z-50
-  "
-        >
-          {/* Ligne décorative (visible seulement sur desktop) */}
-          <div className="hidden sm:block w-[2px] h-20 bg-[#10b981]/50 mb-2" />
-
-          {/* Icônes */}
-          <Link
-            href="https://github.com/awogbin2411"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Profil GitHub de Delphine Kpankpan"
-          >
-            <FaGithub className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          <Link
-            href="https://www.linkedin.com/in/delphine-kpankpan"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Profil LinkedIn de Delphine Kpankpan"
-          >
-            <FaLinkedin className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          <Link href="mailto:delphinekpankpan11@gmail.com" aria-label="Envoyer un email">
-            <FaEnvelope className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          <Link
-            href="https://www.facebook.com/ton.profil"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Profil Facebook de Delphine Kpankpan"
-          >
-            <FaFacebook className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          <Link href="tel:+22943832687" aria-label="Appeler Delphine Kpankpan">
-            <FaPhone className="cursor-pointer hover:text-white hover:scale-125 transition-transform duration-300" />
-          </Link>
-
-          {/* Ligne décorative (visible seulement sur desktop) */}
-          <div className="hidden sm:block w-[2px] h-20 bg-[#10b981]/50 mt-2" />
-        </motion.div>
-
-
-        {/* Grille du formulaire */}
-        <div className="grid md:grid-cols-[1fr,1.2fr] gap-6 mt-8">
-          {/* Colonne gauche - Champs de saisie */}
+          {/* Left Column: Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-5"
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8"
           >
-            {['fullName', 'email', 'phone', 'subject'].map((field, index) => (
-              <motion.div
-                key={field}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              >
-                <input
-                  type={field === 'email' ? 'email' : field === 'phone' ? 'tel' : 'text'}
-                  name={field}
-                  placeholder={
-                    field === 'fullName' ? 'Full Name' :
-                      field === 'email' ? 'Email' :
-                        field === 'phone' ? 'Phone Number' :
-                          'Subject'
-                  }
-                  value={formData[field]}
-                  onChange={handleChange}
-                  className="w-full px-6 py-3.5 bg-transparent border-2 border-[#10b981] rounded-full text-white text-sm placeholder-gray-500 focus:outline-none focus:border-green-400 focus:shadow-lg focus:shadow-green-500/20 transition-all duration-300"
-                />
-              </motion.div>
-            ))}
+            <div>
+              <motion.h2 className="text-6xl md:text-7xl font-black text-white leading-tight">
+                {t.title1} <br />
+                <span className="text-blue-500">{t.title2}</span>
+              </motion.h2>
+              <p className="text-gray-400 text-xl mt-6 font-medium leading-relaxed">
+                {t.subtitle}
+              </p>
+            </div>
+
+            <div className="space-y-6 pt-8">
+              <div className="flex items-center gap-6 group">
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500 group-hover:text-black transition-all">
+                  <FaEnvelope className="text-2xl" />
+                </div>
+                <div>
+                  <p className="text-gray-500 text-sm font-bold uppercase tracking-widest">Email</p>
+                  <p className="text-white text-xl font-medium">adriendogo@gmail.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-6 group">
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500 group-hover:text-black transition-all">
+                  <FaPhone className="text-2xl" />
+                </div>
+                <div>
+                  <p className="text-gray-500 text-sm font-bold uppercase tracking-widest">Phone</p>
+                  <p className="text-white text-xl font-medium">+229 94 79 21 34</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Icons Integrated */}
+            <div className="flex items-center gap-4 pt-10">
+              {[
+                { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/adrien-dogo-8290a9167/" },
+                //{ icon: <FaGithub />, href: "https://github.com/adriendogo" },
+                { icon: <FaFacebook />, href: "https://www.facebook.com/adrien.dogo" }
+              ].map((social, i) => (
+                <Link
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-blue-500 hover:border-blue-500 transition-all text-xl"
+                >
+                  {social.icon}
+                </Link>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Colonne droite - Message et bouton */}
+          {/* Right Column: Form */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col gap-5"
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 backdrop-blur-3xl border border-white/10 p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden group"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex-1"
-            >
-              <textarea
-                name="message"
-                placeholder="Ton Message"
-                value={formData.message}
-                onChange={handleChange}
-                rows="7"
-                className="w-full h-full px-6 py-4 bg-transparent border-2 border-[#10b981] rounded-3xl text-white text-sm placeholder-gray-500 focus:outline-none focus:border-green-400 focus:shadow-lg focus:shadow-green-500/20 transition-all duration-300 resize-none"
-              />
-            </motion.div>
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-[100px] group-hover:bg-blue-500/20 transition-all" />
 
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 255, 136, 0.5)" }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleSubmit}
-              className="px-10 py-3.5 bg-[#10b981] hover:bg-green-400 text-black font-semibold rounded-full transition-all duration-300 self-start shadow-lg shadow-green-500/30"
-            >
-              {t.send}
-            </motion.button>
+            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-gray-400 text-sm font-bold ml-4">{t.fullName}</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-gray-400 text-sm font-bold ml-4">{t.email}</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-gray-400 text-sm font-bold ml-4">{t.subject}</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-gray-400 text-sm font-bold ml-4">{t.message}</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="5"
+                  className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all resize-none"
+                  required
+                />
+              </div>
+
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-5 bg-blue-500 hover:bg-blue-400 text-black font-black text-lg rounded-2xl transition-all shadow-xl shadow-blue-500/20 mt-4"
+              >
+                {t.send}
+              </motion.button>
+            </form>
           </motion.div>
         </div>
 
-        {/* Badge flottant */}
+        {/* Floating Badge (Updated for Blue) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="absolute -bottom-8 -right-50 md:bottom-0 md:right-0"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute -bottom-10 right-0 hidden lg:flex items-center gap-4 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 px-6 py-3 rounded-2xl border-4 border-black group"
         >
-          <motion.div
-            animate={{
-              y: [0, -15, 0],
-              rotate: [0, 5, 0, -5, 0]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="w-16 h-16 bg-[#f59e0b] rounded-full flex items-center justify-center shadow-2xl border-4 border-[#10b981]"
-          >
-            <div className="text-center leading-tight ">
-              <div className="text-red-600 font-bold text-[10px]">I LOVE</div>
-              <div className="text-red-600 font-bold text-[10px]">MY JOBS</div>
-            </div>
-          </motion.div>
+          <div className="w-3 h-3 rounded-full bg-white animate-pulse" />
+          <p className="text-white font-black italic tracking-tighter">LET&apos;S GROW TOGETHER</p>
         </motion.div>
       </div>
     </div>

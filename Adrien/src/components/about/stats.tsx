@@ -4,31 +4,31 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/src/components/contexts/language_context"; // 👈
 
-type StatKey = "projects" | "clients" | "awards" | "Months";
+type StatKey = "experience" | "smes" | "academic" | "leadership";
 
 const translations = {
   fr: {
     stats: [
-      { label: "Projets finis", value: 1, key: "projects" },
-      { label: "Clients heureux", value: 1, key: "clients" },
-      { label: "Projets personnels", value: 2, key: "awards" },
-      { label: "Années d'expérience", value: 1, key: "Months" },
+      { label: "Années d'expérience", value: 9, key: "experience" },
+      { label: "PME & Entreprises accompagnées", value: 50, key: "smes" },
+      { label: "Titres Académiques", value: 4, key: "academic" },
+      { label: "Leadership & Initiatives", value: 10, key: "leadership" },
     ],
   },
   en: {
     stats: [
-      { label: "Completed Projects", value: 1, key: "projects" },
-      { label: "Happy Clients", value: 1, key: "clients" },
-      { label: "Personal Projects", value: 2, key: "awards" },
-      { label: "Years of Experience", value: 1, key: "Months" },
+      { label: "Years of Experience", value: 9, key: "experience" },
+      { label: "SMEs & Businesses Supported", value: 50, key: "smes" },
+      { label: "Academic Milestones", value: 4, key: "academic" },
+      { label: "Leadership & Initiatives", value: 10, key: "leadership" },
     ],
   },
   es: {
     stats: [
-      { label: "Proyectos terminados", value: 1, key: "projects" },
-      { label: "Clientes satisfechos", value: 1, key: "clients" },
-      { label: "Proyectos personales", value: 2, key: "awards" },
-      { label: "Años de experiencia", value: 1, key: "Months" },
+      { label: "Años de experiencia", value: 9, key: "experience" },
+      { label: "Pymes y Empresas acompañadas", value: 50, key: "smes" },
+      { label: "Títulos Académicos", value: 4, key: "academic" },
+      { label: "Liderazgo e Iniciativas", value: 10, key: "leadership" },
     ],
   },
 };
@@ -38,10 +38,10 @@ function StatsSection() {
   const t = translations[language];
 
   const [counts, setCounts] = useState<Record<StatKey, number>>({
-    projects: 0,
-    clients: 0,
-    awards: 0,
-    Months: 0,
+    experience: 0,
+    smes: 0,
+    academic: 0,
+    leadership: 0,
   });
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function StatsSection() {
               whileHover={{ scale: 1.1 }}
               className="text-center"
             >
-              <div className="text-5xl md:text-6xl font-bold text-[#10b981] mb-2">
+              <div className="text-5xl md:text-6xl font-bold text-blue-500 mb-2">
                 {counts[stat.key as StatKey]}+
               </div>
               <div className="text-gray-400 text-sm md:text-base">{stat.label}</div>

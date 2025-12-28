@@ -7,10 +7,10 @@ import { FaHandHoldingHeart, FaLightbulb, FaBalanceScale, FaRocket, FaUsers, FaG
 const translations = {
     fr: {
         title: "Ma Mission & Mes Valeurs",
-        missionTitle: "Notre Mission",
+        missionTitle: "Ma Mission",
         missionText:
             "Catalyser le changement dans les systèmes alimentaires en alliant science, innovation et engagement social. Je m'engage à construire un avenir où la nutrition est accessible, durable et vecteur d'équité pour toutes les communautés.",
-        valuesTitle: "Nos Valeurs Fondamentales",
+        valuesTitle: "Mes Valeurs Fondamentales",
         values: [
             {
                 title: "Intégrité",
@@ -21,21 +21,21 @@ const translations = {
                 description: "Repousser les limites pour créer des solutions nutritionnelles novatrices et adaptées.",
             },
             {
-                title: "Impact",
-                description: "Viser des résultats concrets et mesurables pour améliorer réellement les vies.",
+                title: "Créativité",
+                description: "Transformer les défis complexes en opportunités stratégiques grâce à une approche inventive et sur mesure.",
             },
             {
-                title: "Inclusivité",
-                description: "S'assurer que chaque voix compte et que les bénéfices sont partagés par tous.",
+                title: "Excellence",
+                description: "Maintenir les standards les plus élevés de rigueur scientifique et de performance commerciale pour garantir un succès durable.",
             },
         ],
     },
     en: {
         title: "My Mission & Values",
-        missionTitle: "Our Mission",
+        missionTitle: "My Mission",
         missionText:
             "To catalyze change in food systems by combining science, innovation, and social commitment. I am dedicated to building a future where nutrition is accessible, sustainable, and a driver of equity for all communities.",
-        valuesTitle: "Our Core Values",
+        valuesTitle: "My Core Values",
         values: [
             {
                 title: "Integrity",
@@ -46,21 +46,21 @@ const translations = {
                 description: "Pushing boundaries to create innovative and tailored nutritional solutions.",
             },
             {
-                title: "Impact",
-                description: "Aiming for concrete, measurable results to truly improve lives.",
+                title: "Creativity",
+                description: "Transforming complex challenges into strategic opportunities through an inventive and tailored approach.",
             },
             {
-                title: "Inclusivity",
-                description: "Ensuring every voice matters and benefits are shared by all.",
+                title: "Excellence",
+                description: "Maintaining the highest standards of scientific rigor and commercial performance to ensure sustainable success.",
             },
         ],
     },
     es: {
         title: "Mi Misión y Valores",
-        missionTitle: "Nuestra Misión",
+        missionTitle: "Mi Misión",
         missionText:
             "Catalizar el cambio en los sistemas alimentarios combinando ciencia, innovación y compromiso social. Me dedico a construir un futuro donde la nutrición sea accesible, sostenible y un motor de equidad para todas las comunidades.",
-        valuesTitle: "Nuestros Valores Fundamentales",
+        valuesTitle: "Mis Valores Fundamentales",
         values: [
             {
                 title: "Integridad",
@@ -71,12 +71,12 @@ const translations = {
                 description: "Superar los límites para crear soluciones nutricionales innovadoras y adaptadas.",
             },
             {
-                title: "Impacto",
-                description: "Buscar resultados concretos y medibles para mejorar realmente las vidas.",
+                title: "Creatividad",
+                description: "Transformar desafíos complejos en oportunidades estratégicas mediante un enfoque inventivo y personalizado.",
             },
             {
-                title: "Inclusividad",
-                description: "Asegurar que cada voz cuente y que los beneficios sean compartidos por todos.",
+                title: "Excelencia",
+                description: "Mantener los más altos estándares de rigor científico y rendimiento comercial para asegurar un éxito sostenible.",
             },
         ],
     },
@@ -106,7 +106,7 @@ export default function MissionValuesSection() {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-20"
                 >
-                    <h2 className="text-4xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-6">
+                    <h2 className="text-4xl md:text-4xl font-bold bg-clip-text text-blue-500 bg-gradient-to-r from-blue-400 to-purple-500 mb-6">
                         {t.title}
                     </h2>
                     <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full" />
@@ -129,7 +129,7 @@ export default function MissionValuesSection() {
                         <div className="text-center md:text-left">
                             <h3 className="text-3xl font-semibold mb-4 text-white">{t.missionTitle}</h3>
                             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
-                                "{t.missionText}"
+                                &quot;{t.missionText}&quot;
                             </p>
                         </div>
                     </div>

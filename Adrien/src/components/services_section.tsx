@@ -1,6 +1,6 @@
 "use client";
 
-import { FaGlobe, FaFlask, FaHandshake, FaChartLine, FaUsers, FaTruck, FaBullhorn, FaBriefcase } from "react-icons/fa";
+import { FaFlask, FaChartLine, FaUsers, FaTruck, FaBullhorn, FaBriefcase } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useLanguage } from "@/src/components/contexts/language_context"; // 👈
@@ -149,7 +149,7 @@ export default function ServicesSection() {
                 scale: 1.05,
                 boxShadow: "0px 0px 40px rgba(14, 158, 241, 0.3)",
               }}
-              className="bg-rgba(0,255,102,0.3) p-8 rounded-2xl border border-blue-500 shadow-lg hover:shadow-cyan-400/30 transition-all duration-300 flex flex-col text-center"
+              className="bg-gray-900/50 p-8 rounded-2xl border border-blue-500 shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex flex-col text-center"
             >
               <div className="flex justify-center mb-6">
                 <motion.div
@@ -172,7 +172,7 @@ export default function ServicesSection() {
                       scale: 1.1,
                       boxShadow: "0 0 20px rgba(14, 158, 241, 0.6)",
                     }}
-                    className="px-6 py-2 bg-blue-500 text-black font-semibold rounded-full shadow-lg hover:bg-blue-400 transition-all"
+                    className="px-6 py-2 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 text-black font-semibold rounded-full shadow-lg hover:bg-blue-400 transition-all"
                   >
                     {t.button}
                   </motion.button>

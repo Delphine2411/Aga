@@ -9,17 +9,17 @@ const translations = {
   fr: {
     title1: "A propos de ",
     title: " Moi",
-    subtitle: "Développeur Créatif & Artiste Digital",
+    subtitle: "Chercheur, Spécialiste en Nutrition et système agroalimentaire, Leader",
   },
   en: {
     title1: "About ",
     title: " Me",
-    subtitle: "Creative Developer & Digital Artist",
+    subtitle: "Researcher, Nutritionist and Agroalimentary System Specialist, Leader",
   },
   es: {
     title1: "Sobre",
     title: " Mí",
-    subtitle: "Desarrollador Creativo & Artista Digital",
+    subtitle: "Investigador, Especialista en Nutrición y Sistema Agroalimentario, Líder",
   },
 };
 
@@ -128,7 +128,7 @@ function HeroSection() {
           className="text-6xl md:text-8xl font-bold text-white mb-6"
         >
           {t.title1}{" "}
-          <span className="text-[#10b981]">{t.title}</span>
+          <span className="text-blue-500">{t.title}</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}

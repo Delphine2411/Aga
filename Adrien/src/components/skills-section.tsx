@@ -16,13 +16,13 @@ const translations = {
     technicalTitle: "Compétences Techniques",
     professionalTitle: "Compétences Professionnelles",
     technicalSkills: [
-      { name: "HTML", level: 85 },
-      { name: "JavaScript", level: 80 },
-      { name: "React / Next.js", level: 78 },
-      { name: "Figma", level: 90 },
-      { name: "CSS / Tailwind", level: 85 },
-      { name: "Node.js / MongoDB", level: 82 },
-      { name: "Dart / Bootstrap", level: 55 },
+      { name: "ONA / Kobocollect", level: 95 },
+      { name: "CommCare / Power BI", level: 90 },
+      { name: "SPSS / R", level: 85 },
+      { name: "Statistica / XL stat", level: 82 },
+      { name: "Eye tracking", level: 80 },
+      { name: "Canva", level: 95 },
+      { name: "Clipchamp / Inshot", level: 88 },
     ],
     professionalSkills: [
       { name: "Communication", level: 90 },
@@ -39,13 +39,13 @@ const translations = {
     technicalTitle: "Technical Skills",
     professionalTitle: "Professional Skills",
     technicalSkills: [
-      { name: "HTML", level: 85 },
-      { name: "JavaScript", level: 80 },
-      { name: "React / Next.js", level: 78 },
-      { name: "Figma", level: 90 },
-      { name: "CSS / Tailwind", level: 85 },
-      { name: "Node.js / MongoDB", level: 82 },
-      { name: "Dart / Bootstrap", level: 55 },
+      { name: "ONA / Kobocollect", level: 95 },
+      { name: "CommCare / Power BI", level: 90 },
+      { name: "SPSS / R", level: 85 },
+      { name: "Statistica / XL stat", level: 82 },
+      { name: "Eye tracking", level: 80 },
+      { name: "Canva", level: 95 },
+      { name: "Clipchamp / Inshot", level: 88 },
     ],
     professionalSkills: [
       { name: "Communication", level: 90 },
@@ -62,13 +62,13 @@ const translations = {
     technicalTitle: "Habilidades Técnicas",
     professionalTitle: "Habilidades Profesionales",
     technicalSkills: [
-      { name: "HTML", level: 85 },
-      { name: "JavaScript", level: 80 },
-      { name: "React / Next.js", level: 78 },
-      { name: "Figma", level: 90 },
-      { name: "CSS / Tailwind", level: 85 },
-      { name: "Node.js / MongoDB", level: 82 },
-      { name: "Dart / Bootstrap", level: 55 },
+      { name: "ONA / Kobocollect", level: 95 },
+      { name: "CommCare / Power BI", level: 90 },
+      { name: "SPSS / R", level: 85 },
+      { name: "Statistica / XL stat", level: 82 },
+      { name: "Eye tracking", level: 80 },
+      { name: "Canva", level: 95 },
+      { name: "Clipchamp / Inshot", level: 88 },
     ],
     professionalSkills: [
       { name: "Comunicación", level: 90 },
@@ -90,7 +90,7 @@ export default function SkillsSection() {
         <ambientLight intensity={0.4} />
         <directionalLight position={[3, 3, 3]} />
         <Sphere args={[1, 64, 64]} scale={6}>
-          <MeshDistortMaterial color="#1089b9ff" distort={0.5} speed={2} />
+          <MeshDistortMaterial color="#3b82f6" distort={0.5} speed={2} />
         </Sphere>
       </Canvas>
 
@@ -125,7 +125,7 @@ export default function SkillsSection() {
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       transition={{ duration: 1.5, delay: i * 0.2 }}
-                      className="h-3 rounded-full bg-gradient-to-r from-blue-400 to-yellow-500 shadow-[0_0_10px_#00FFFF]"
+                      className="h-3 rounded-full bg-gradient-to-r from-blue-400 to-orange-500 shadow-[0_0_10px_#00FFFF]"
                     />
                   </div>
                 </div>

@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/purity */
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useLanguage } from "@/src/components/contexts/language_context";
 import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, MeshDistortMaterial, Sphere, PerspectiveCamera, Environment, MeshWobbleMaterial, OrbitControls, Points, PointMaterial } from '@react-three/drei';
-import Link from 'next/link';
+import { Float, MeshDistortMaterial, Sphere, PerspectiveCamera, Environment, MeshWobbleMaterial, Points, PointMaterial } from '@react-three/drei';
 import CTASection from './cta_section';
+import TestimonialsSection from './testimonials_section';
 
 const translations = {
   fr: {
@@ -16,19 +17,38 @@ const translations = {
     heroSubtitle: "Expertise en nutrition, innovation inclusive et systèmes alimentaires",
     filters: ["Tous", "R&D Nutrition", "Innovation Inclusive", "Impact & Data", "Leadership"],
     viewDetails: "Détails de l'atelier",
-    ngo: "ONG",
-    location: "Lieu",
+    ngo: "Lieu",
+    location: "Institution",
     date: "Date",
+    scientific: {
+      title: "Réalisations Scientifiques",
+      items: [
+        { text: "5 Publications scientifiques dans des revues de renommée et à facteur d’impact.", icon: "microscope" },
+        { text: "Communicateur à plus de 8 conférences internationales et nationales.", icon: "talk" },
+        { text: "Membre du réseau scientifique African Food Environment Research Network (2023).", icon: "network" },
+        { text: "Pionnier de la recherche sur les environnements alimentaires en Afrique francophone.", icon: "pioneer" }
+      ]
+    }
   },
+
   en: {
     heroTitle1: "My",
     heroTitle: "Achievements",
     heroSubtitle: "Expertise in nutrition, inclusive innovation, and food systems",
     filters: ["All", "R&D Nutrition", "Inclusive Innovation", "Impact & Data", "Leadership"],
     viewDetails: "Workshop Details",
-    ngo: "NGO",
+    ngo: "Institution",
     location: "Location",
     date: "Date",
+    scientific: {
+      title: "Scientific Achievements",
+      items: [
+        { text: "5 Scientific publications in renowned journals with impact factor.", icon: "microscope" },
+        { text: "Speaker at more than 8 international and national conferences.", icon: "talk" },
+        { text: "Member of the African Food Environment Research Network (2023).", icon: "network" },
+        { text: "Pioneer in food environment research in Francophone Africa.", icon: "pioneer" }
+      ]
+    }
   },
   es: {
     heroTitle1: "Mis",
@@ -36,9 +56,18 @@ const translations = {
     heroSubtitle: "Experiencia en nutrición, innovación inclusiva y sistemas alimentarios",
     filters: ["Todos", "I+D Nutrición", "Innovación Inclusiva", "Impacto y Datos", "Liderazgo"],
     viewDetails: "Detalles del taller",
-    ngo: "ONG",
+    ngo: "Institución",
     location: "Ubicación",
     date: "Fecha",
+    scientific: {
+      title: "Logros Científicos",
+      items: [
+        { text: "5 Publicaciones científicas en revistas de renombre y con factor de impacto.", icon: "microscope" },
+        { text: "Ponente en más de 8 conferencias internacionales y nacionales.", icon: "talk" },
+        { text: "Miembro de la red científica African Food Environment Research Network (2023).", icon: "network" },
+        { text: "Pionero en la investigación sobre entornos alimentarios en el África francófona.", icon: "pioneer" }
+      ]
+    }
   },
 };
 
@@ -48,7 +77,7 @@ function FloatingShapes() {
     <>
       <Float speed={2} rotationIntensity={1} floatIntensity={2}>
         <Sphere args={[1, 64, 64]} position={[2, 1, -2]}>
-          <MeshDistortMaterial color="#10b981" speed={3} distort={0.4} />
+          <MeshDistortMaterial color="#3b82f6" speed={3} distort={0.4} />
         </Sphere>
       </Float>
       <Float speed={1.5} rotationIntensity={2} floatIntensity={1.5}>
@@ -80,7 +109,7 @@ function HeroSection() {
           <PerspectiveCamera makeDefault position={[0, 0, 5]} />
           <Environment preset="city" />
           <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} color="#10b981" />
+          <pointLight position={[10, 10, 10]} intensity={1} color="#3b82f6" />
           <pointLight position={[-10, -10, -10]} intensity={0.8} color="#3b82f6" />
           <FloatingShapes />
         </Canvas>
@@ -98,7 +127,7 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight"
           >
-            {t.heroTitle1} <span className="bg-gradient-to-r from-[#10b981] via-[#3b82f6] to-[#f59e0b] bg-clip-text text-transparent">{t.heroTitle}</span>
+            {t.heroTitle1} <span className="bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 bg-clip-text text-transparent">{t.heroTitle}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -125,19 +154,21 @@ function BackgroundParticles() {
   });
 
   const particlesCount = 2000;
-  const positions = new Float32Array(particlesCount * 3);
-
-  for (let i = 0; i < particlesCount; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 10;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-  }
+  const positions = useMemo(() => {
+    const pos = new Float32Array(particlesCount * 3);
+    for (let i = 0; i < particlesCount; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 10;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
+    }
+    return pos;
+  }, []);
 
   return (
     <Points ref={points} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#10b981"
+        color="#3b82f6"
         size={0.02}
         sizeAttenuation={true}
         depthWrite={false}
@@ -146,6 +177,70 @@ function BackgroundParticles() {
     </Points>
   );
 }
+
+// Nouvelle section pour les réalisations scientifiques
+import { FaMicroscope, FaChalkboardTeacher, FaNetworkWired, FaLightbulb } from 'react-icons/fa';
+
+function ScientificAchievements() {
+  const { language } = useLanguage();
+  const t = translations[language] || translations['en'];
+  const scientific = t.scientific;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const iconMap: { [key: string]: any } = {
+    microscope: FaMicroscope,
+    talk: FaChalkboardTeacher,
+    network: FaNetworkWired,
+    pioneer: FaLightbulb
+  };
+
+  return (
+    <section className="relative py-20 bg-black overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white/5 backdrop-blur-md rounded-[2.5rem] p-10 md:p-16 border border-white/10 shadow-2xl relative overflow-hidden group"
+        >
+          {/* Decorative background glow */}
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] group-hover:bg-blue-600/30 transition-colors duration-700" />
+          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/10 rounded-full blur-[100px] group-hover:bg-blue-500/20 transition-colors duration-700" />
+
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 text-center">
+            {scientific.title}
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {scientific.items.map((item: { text: string; icon: string }, index: number) => {
+              const Icon = iconMap[item.icon];
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-start gap-6 p-6 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-blue-500/30 transition-all duration-300"
+                >
+                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-500 text-2xl shadow-lg shadow-blue-500/10 group-hover:scale-110 transition-transform">
+                    <Icon />
+                  </div>
+                  <div>
+                    <p className="text-gray-200 text-lg leading-relaxed font-medium">
+                      {item.text}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 
 // Section Filtres
 interface FilterSectionProps {
@@ -159,21 +254,23 @@ function FilterSection({ activeFilter, setActiveFilter }: FilterSectionProps) {
 
   return (
     <section className="bg-black pt-20 pb-10 px-6 sticky top-0 z-20 backdrop-blur-3xl bg-black/50">
-      <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-4">
-        {t.filters.map((filter: string) => (
-          <motion.button
-            key={filter}
-            onClick={() => setActiveFilter(filter)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === filter
-              ? 'bg-gradient-to-r from-[#10b981] to-[#3b82f6] text-white shadow-lg shadow-[#10b981]/20 border-transparent'
-              : 'bg-white/5 text-gray-400 hover:text-white border border-white/10 hover:border-white/20'
-              }`}
-          >
-            {filter}
-          </motion.button>
-        ))}
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-16">
+          {t.filters.map((filter: string) => (
+            <motion.button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${activeFilter === filter
+                ? 'bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 text-white shadow-lg shadow-blue-500/20 border-transparent'
+                : 'bg-white/5 text-gray-400 hover:text-white border border-white/10 hover:border-white/20'
+                }`}
+            >
+              {filter}
+            </motion.button>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -230,7 +327,7 @@ function ProjectCard({ project, index, onOpenModal }: { project: Project; index:
         rotateX: rotation.x,
         rotateY: rotation.y,
       }}
-      className="group relative bg-[#0a0a0a] max-w-[600px] max-h-[650px] overflow-hidden cursor-pointer border border-white/5 hover:border-[#10b981]/30 transition-colors duration-500"
+      className="group relative bg-[#0a0a0a] max-w-[680px] max-h-[680px] overflow-hidden cursor-pointer border border-white/5 hover:border-blue-500 transition-colors duration-500"
     >
       <div className="aspect-[16/10] overflow-hidden relative">
         <motion.img
@@ -241,7 +338,7 @@ function ProjectCard({ project, index, onOpenModal }: { project: Project; index:
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
 
         {/* Overlay au survol */}
-        <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+        <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
           <motion.button
             whileHover={{ scale: 1.1 }}
             className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-xl"
@@ -253,13 +350,13 @@ function ProjectCard({ project, index, onOpenModal }: { project: Project; index:
 
       <div className="p-8">
         <div className="flex justify-between items-start mb-4">
-          <span className="px-4 py-1.5 rounded-full bg-white/5 text-[#10b981] text-xs font-bold tracking-wider uppercase border border-[#10b981]/20">
+          <span className="px-4 py-1.5 rounded-full bg-white/5 text-blue-500 text-xs font-bold tracking-wider uppercase border border-blue-500/20">
             {project.category}
           </span>
           <span className="text-gray-500 text-sm font-medium">{project.date}</span>
         </div>
 
-        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#10b981] transition-colors duration-300">
+        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-500 transition-colors duration-300">
           {project.title}
         </h3>
         <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">
@@ -268,11 +365,11 @@ function ProjectCard({ project, index, onOpenModal }: { project: Project; index:
 
         <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/5">
           <div>
-            <p className="text-[10px] uppercase tracking-widest text-[#10b981] font-bold mb-1">{t.ngo}</p>
+            <p className="text-[10px] uppercase tracking-widest text-blue-500 font-bold mb-1">{t.ngo}</p>
             <p className="text-white text-xs font-medium truncate">{project.ngo}</p>
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-widest text-[#3b82f6] font-bold mb-1">{t.location}</p>
+            <p className="text-[10px] uppercase tracking-widest text-blue-500 font-bold mb-1">{t.location}</p>
             <p className="text-white text-xs font-medium truncate">{project.location}</p>
           </div>
         </div>
@@ -289,6 +386,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
 
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrentImageIndex(0);
       setIsAutoPlaying(true);
     }
@@ -392,7 +490,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
                           setIsAutoPlaying(false);
                           setCurrentImageIndex(idx);
                         }}
-                        className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all ${currentImageIndex === idx ? 'border-[#10b981] scale-105' : 'border-white/10 opacity-50 hover:opacity-100'
+                        className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all ${currentImageIndex === idx ? 'border-blue-500 scale-105' : 'border-white/10 opacity-50 hover:opacity-100'
                           }`}
                       >
                         <img src={img} alt="" className="w-full h-full object-cover" />
@@ -403,14 +501,14 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
               </div>
 
               <div className="p-8 md:p-12">
-                <span className="inline-block px-4 py-1.5 rounded-full bg-[#10b981]/10 text-[#10b981] text-xs font-bold tracking-wider mb-6 border border-[#10b981]/20">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-500 text-xs font-bold tracking-wider mb-6 border border-blue-500/20">
                   {project.category}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                   {project.title}
                 </h2>
                 <div className="space-y-6">
-                  <p className="text-gray-300 leading-relaxed text-lg italic border-l-2 border-[#10b981] pl-4">
+                  <p className="text-gray-300 leading-relaxed text-lg italic border-l-2 border-blue-500 pl-4">
                     {project.description}
                   </p>
                   <p className="text-gray-400 leading-relaxed">
@@ -420,7 +518,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
 
                 <div className="mt-10 grid grid-cols-2 gap-8 py-8 border-t border-white/10">
                   <div>
-                    <h4 className="text-[10px] uppercase tracking-widest text-[#10b981] font-bold mb-2">{t.ngo}</h4>
+                    <h4 className="text-[10px] uppercase tracking-widest text-blue-500 font-bold mb-2">{t.ngo}</h4>
                     <p className="text-white font-medium">{project.ngo}</p>
                   </div>
                   <div>
@@ -462,76 +560,76 @@ function ProjectsSection({ activeFilter, onOpenModal }: { activeFilter: string; 
       projects: [
         {
           id: 1,
-          title: "Atelier sur l'innovation des systèmes alimentaires",
-          description: "Conception de solutions durables pour la sécurité alimentaire communautaire.",
-          fullDescription: "Cet atelier intensif de trois jours a réuni des chercheurs, des agriculteurs locaux et des décideurs politiques pour explorer des technologies de fortification alimentaire à bas coût. Nous avons élaboré une feuille de route pour l'adoption de semences biofortifiées, visant à réduire les carences en micronutriments dans les zones rurales. L'accent a été mis sur l'innovation inclusive, plaçant les petits exploitants au cœur du processus de R&D.",
-          category: "Innovation Inclusive",
-          ngo: "Action Contre la Faim",
-          location: "Dakar, Sénégal",
-          date: "Mars 2025",
-          image: "https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop",
+          title: "Conférence IAAS – Université de Parakou",
+          description: "Intervention sur l'employabilité et l'insertion professionnelle des jeunes agronomes au Bénin.",
+          fullDescription: "Plus de 150 étudiants en sciences agronomiques se sont réunis autour d'une thématique stratégique : « Emploi professionnel en sciences agronomiques : comment s'y prendre ? ». Cette conférence, organisée par IAAS UP avec le soutien de ABED ONG, s'inscrit dans le programme #Dcroch. Les échanges ont porté sur les réalités du marché de l'emploi agricole, les compétences clés à développer et les opportunités entrepreneuriales. Dr Aga Adrien Dogo, conférencier principal, a partagé des orientations précieuses pour préparer l'agriculture responsable de demain.",
+          category: "Leadership",
+          ngo: "ABED ONG & Fondation FDC",
+          location: "Parakou, Bénin",
+          date: "Décembre 2024",
+          image: "/image/issa1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000&auto=format&fit=crop"
+            "/image/iaas2.jpg",
+            "/image/iaas3.jpg",
+            "/image/iaas4.jpg"
           ],
-          tags: ["Food Systems", "Inclusive Innovation", "R&D"],
+          tags: ["Employabilité", "Agronomie", "Leadership"],
           gradient: "from-blue-600 to-indigo-800",
         },
         {
           id: 2,
-          title: "Évaluation d'impact nutritionnel à grande échelle",
-          description: "Analyse data-driven des interventions de fortification en fer.",
-          fullDescription: "Direction d'une équipe pluridisciplinaire pour évaluer l'efficacité des programmes de supplémentation en fer chez les femmes enceintes. Utilisation de modèles statistiques avancés pour isoler l'impact du programme par rapport aux variables environnementales. Les résultats ont permis de réorienter les budgets vers les districts les plus vulnérables, augmentant l'efficacité globale de 25%.",
-          category: "Impact & Data",
-          ngo: "UNICEF",
-          location: "Nairobi, Kenya",
-          date: "Juillet 2024",
-          image: "https://images.unsplash.com/photo-1576089234161-48396a3cd67c?q=80&w=1000&auto=format&fit=crop",
+          title: "Conférence « Mon Projet Pro, Mon Avenir » – Abomey",
+          description: "Session d'inspiration et d'orientation pour 131 étudiants sur la construction d'un projet professionnel unique.",
+          fullDescription: "Organisée par la FEUNSTIM avec le soutien de l'ABED ONG dans le cadre du projet #Dcroch, cette conférence a réuni 131 étudiants déterminés. Dr. Aga Adrien Dogo y a partagé les clés pour construire un projet professionnel cohérent et acquérir des compétences techniques et transversales. À travers son parcours inspirant, il a donné aux jeunes les outils pour anticiper et réussir leur insertion professionnelle.",
+          category: "Leadership",
+          ngo: "FEUNSTIM & ABED ONG (Projet #Dcroch)",
+          location: "Abomey, Bénin",
+          date: "Décembre 2024",
+          image: "/image/mpav1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1576089234161-48396a3cd67c?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
+            "/image/mpav2.jpg",
+            "/image/mpav3.jpg",
+            "/image/mpav4.jpg"
           ],
-          tags: ["Impact Assessment", "Data Science", "PhD Research"],
+          tags: ["#Dcroch", "Employabilité", "Jeunesse", "Leadership"],
           gradient: "from-pink-600 to-rose-800",
         },
         {
           id: 3,
-          title: "Sommet sur le Leadership en Bio-Innovation",
-          description: "Encadrer la prochaine génération d'entrepreneurs en agritech.",
-          fullDescription: "Une masterclass destinée aux fondateurs de startups africaines dans le domaine de la biotechnologie alimentaire. J'ai partagé des stratégies de business development adaptées aux contextes fragiles et des cadres de gouvernance éthique pour la recherche privée. Le sommet a abouti à la création d'un hub d'incubation pour les solutions de conservation post-récolte.",
+          title: "Conférence « Mon Projet Pro, Mon Avenir » – Dassa",
+          description: "Accompagnement enthousiaste des jeunes pour dessiner leur futur et favoriser l'épanouissement professionnel.",
+          fullDescription: "Un moment inspirant à Dassa organisé par la FEUNSTIM en collaboration avec la Fondation FDC. Dr. Aga Adrien Dogo, co-fondateur de la FDC, y a apporté sa sagesse et ses conseils avisés pour guider les étudiants dans leur quête d'employabilité. Chaque échange a été une preuve palpable de l'engagement envers une jeunesse ambitieuse et un avenir prometteur.",
           category: "Leadership",
-          ngo: "Fondation Bill & Melinda Gates",
-          location: "Accra, Ghana",
+          ngo: "Fondation FDC & FEUNSTIM",
+          location: "Dassa, Bénin",
           date: "Novembre 2024",
-          image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop",
+          image: "/image/avdassa1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000&auto=format&fit=crop"
+            "/image/avdassa2.jpg",
+            "/image/avdassa3.jpg",
+            "/image/avdassa4.jpg"
           ],
-          tags: ["Management", "Entrepreneurship", "Biotech"],
-          gradient: "from-yellow-600 to-orange-800",
+          tags: ["Fondation FDC", "Employabilité", "Jeunesse", "Dassa"],
+          gradient: "from-orange-600 to-orange-800",
         },
         {
           id: 4,
-          title: "Recherche Avancée sur les Protéines Végétales",
-          description: "Optimisation des procédés de transformation des légumineuses locales.",
-          fullDescription: "Projet de R&D industrielle visant à créer des substituts de viande riches en protéines à partir de niébé et de soja produits localement. Travail de laboratoire sur l'extrusion à haute humidité et l'amélioration du profil sensoriel. Ce projet a démontré la viabilité économique de la transformation locale pour soutenir les chaînes de valeur agricoles nationales.",
-          category: "R&D Nutrition",
-          ngo: "World Food Programme (WFP)",
-          location: "Lagos, Nigeria",
-          date: "Janvier 2025",
-          image: "https://images.unsplash.com/photo-1532187875460-120c1bcde00b?q=80&w=1000&auto=format&fit=crop",
+          title: "Concours de Génie en Herbe – CEG Tchetti",
+          description: "Initiative éducative et spirituelle pour éveiller la jeunesse à la connaissance et aux valeurs d'excellence.",
+          fullDescription: "Lancé officiellement par la FDC, ce concours a réuni 40 participants du CEG Tchetti autour du thème « Introduction à la Bible ». Sous la direction du Dr Adrien Dogo, cette initiative vise à promouvoir l'excellence scolaire et les valeurs chrétiennes, tout en offrant des kits scolaires aux élèves pour préparer leur rentrée. Un projet porteur pour former une génération éclairée et engagée.",
+          category: "Education",
+          ngo: "Fondation FDC",
+          location: "Tchetti, Bénin",
+          date: "Septembre 2025",
+          image: "/image/tchetti1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1532187875460-120c1bcde00b?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1581093148119-01e63a8a3036?q=80&w=1000&auto=format&fit=crop"
+            "/image/tchetti2.jpg",
+            "/image/tchetti3.jpg",
+            "/image/tchetti4.jpg"
           ],
-          tags: ["Scientific Research", "R&D", "Food Tech"],
+          tags: ["Jeunesse", "Éducation", "Excellence", "FDC"],
           gradient: "from-teal-600 to-emerald-800",
-        }
+        },
       ],
     },
     en: {
@@ -545,76 +643,76 @@ function ProjectsSection({ activeFilter, onOpenModal }: { activeFilter: string; 
       projects: [
         {
           id: 1,
-          title: "Food Systems Innovation Workshop",
-          description: "Designing sustainable solutions for community food security.",
-          fullDescription: "This three-day intensive workshop brought together researchers, local farmers, and policy makers to explore low-cost food fortification technologies. We developed a roadmap for the adoption of biofortified seeds, aiming to reduce micronutrient deficiencies in rural areas. The focus was on inclusive innovation, placing smallholders at the heart of the R&D process.",
-          category: "Inclusive Innovation",
-          ngo: "Action Against Hunger",
-          location: "Dakar, Senegal",
-          date: "March 2025",
-          image: "https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop",
+          title: "IAAS Conference – University of Parakou",
+          description: "Speech on employability and professional insertion of young agronomists in Benin.",
+          fullDescription: "More than 150 agronomical science students gathered around a strategic theme: 'Professional employment in agronomical sciences: how to go about it?'. This conference, organized by IAAS UP with the support of ABED NGO, is part of the #Dcroch program. Discussions focused on agricultural labor market realities, key skills to develop, and entrepreneurial opportunities. Dr. Aga Adrien Dogo, as the keynote speaker, shared valuable guidance to prepare for the responsible agriculture of tomorrow.",
+          category: "Leadership",
+          ngo: "ABED NGO & FDC Foundation",
+          location: "Parakou, Benin",
+          date: "December 2024",
+          image: "/image/issa1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000&auto=format&fit=crop"
+            "/image/iaas2.jpg",
+            "/image/iaas3.jpg",
+            "/image/iaas4.jpg"
           ],
-          tags: ["Food Systems", "Inclusive Innovation", "R&D"],
+          tags: ["Employability", "Agronomy", "Leadership"],
           gradient: "from-blue-600 to-indigo-800",
         },
         {
           id: 2,
-          title: "Large-Scale Nutritional Impact Assessment",
-          description: "Data-driven analysis of iron fortification interventions.",
-          fullDescription: "Led a multidisciplinary team to evaluate the effectiveness of iron supplementation programs among pregnant women. Used advanced statistical models to isolate program impact from environmental variables. The results helped redirect budgets toward the most vulnerable districts, increasing overall efficiency by 25%.",
-          category: "Impact & Data",
-          ngo: "UNICEF",
-          location: "Nairobi, Kenya",
-          date: "July 2024",
-          image: "https://images.unsplash.com/photo-1576089234161-48396a3cd67c?q=80&w=1000&auto=format&fit=crop",
+          title: "“My Professional Project, My Future” Conference – Abomey",
+          description: "Inspiration and orientation session for 131 students on building a unique professional career path.",
+          fullDescription: "Organized by FEUNSTIM with the support of ABED ONG under the #Dcroch project, this conference brought together 131 determined students. Dr. Aga Adrien Dogo shared keys to building a coherent professional project and acquiring technical and soft skills. Through his inspiring journey, he provided youth with the tools to anticipate and succeed in their professional integration.",
+          category: "Leadership",
+          ngo: "FEUNSTIM & ABED ONG (#Dcroch Project)",
+          location: "Abomey, Benin",
+          date: "December 2024",
+          image: "/image/mpav1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1576089234161-48396a3cd67c?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
+            "/image/mpav2.jpg",
+            "/image/mpav3.jpg",
+            "/image/mpav4.jpg"
           ],
-          tags: ["Impact Assessment", "Data Science", "PhD Research"],
+          tags: ["#Dcroch", "Employability", "Youth", "Leadership"],
           gradient: "from-pink-600 to-rose-800",
         },
         {
           id: 3,
-          title: "Bio-Innovation Leadership Summit",
-          description: "Mentoring the next generation of agritech entrepreneurs.",
-          fullDescription: "A masterclass for founders of African startups in the food biotechnology sector. I shared business development strategies tailored to fragile contexts and ethical governance frameworks for private research. The summit resulted in the creation of an incubation hub for post-harvest conservation solutions.",
+          title: "“My Professional Project, My Future” Conference – Dassa",
+          description: "Enthusiastic mentoring of young people to shape their future and foster professional growth.",
+          fullDescription: "An inspiring moment in Dassa organized by FEUNSTIM in collaboration with the FDC Foundation. Dr. Aga Adrien Dogo, co-founder of FDC, shared his wisdom and expert advice to guide students in their quest for employability. Each interaction served as tangible proof of the commitment to ambitious youth and a promising future.",
           category: "Leadership",
-          ngo: "Bill & Melinda Gates Foundation",
-          location: "Accra, Ghana",
+          ngo: "FDC Foundation & FEUNSTIM",
+          location: "Dassa, Benin",
           date: "November 2024",
-          image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop",
+          image: "/image/avdassa1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000&auto=format&fit=crop"
+            "/image/avdassa2.jpg",
+            "/image/avdassa3.jpg",
+            "/image/avdassa4.jpg"
           ],
-          tags: ["Management", "Entrepreneurship", "Biotech"],
-          gradient: "from-yellow-600 to-orange-800",
+          tags: ["FDC Foundation", "Employability", "Youth", "Dassa"],
+          gradient: "from-orange-600 to-orange-800",
         },
         {
           id: 4,
-          title: "Advanced Plant-Based Protein Research",
-          description: "Optimizing processing methods for local legumes.",
-          fullDescription: "Industrial R&D project aimed at creating high-protein meat substitutes from locally produced cowpea and soy. Laboratory work on high-moisture extrusion and sensory profile improvement. This project demonstrated the economic viability of local processing to support national agricultural value chains.",
-          category: "R&D Nutrition",
-          ngo: "World Food Programme (WFP)",
-          location: "Lagos, Nigeria",
-          date: "January 2025",
-          image: "https://images.unsplash.com/photo-1532187875460-120c1bcde00b?q=80&w=1000&auto=format&fit=crop",
+          title: "“Génie en Herbe” Competition – CEG Tchetti",
+          description: "Educational and spiritual initiative to awaken youth to knowledge and excellence values.",
+          fullDescription: "Officially launched by FDC, this competition brought together 40 participants from CEG Tchetti around the theme 'Introduction to the Bible'. Led by Dr. Adrien Dogo, this initiative aims to promote academic excellence and Christian values, while providing school kits to students to prepare for their return. A promising project to train an enlightened and committed generation.",
+          category: "Education",
+          ngo: "FDC Foundation",
+          location: "Tchetti, Benin",
+          date: "September 2025",
+          image: "/image/tchetti1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1532187875460-120c1bcde00b?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1581093148119-01e63a8a3036?q=80&w=1000&auto=format&fit=crop"
+            "/image/tchetti2.jpg",
+            "/image/tchetti3.jpg",
+            "/image/tchetti4.jpg"
           ],
-          tags: ["Scientific Research", "R&D", "Food Tech"],
+          tags: ["Youth", "Education", "Excellence", "FDC"],
           gradient: "from-teal-600 to-emerald-800",
-        }
+        },
       ],
     },
     es: {
@@ -628,76 +726,76 @@ function ProjectsSection({ activeFilter, onOpenModal }: { activeFilter: string; 
       projects: [
         {
           id: 1,
-          title: "Taller de Innovación en Sistemas Alimentarios",
-          description: "Diseño de soluciones sostenibles para la seguridad alimentaria comunitaria.",
-          fullDescription: "Este taller intensivo de tres días reunió a investigadores, agricultores locales y responsables políticos para explorar tecnologías de fortificación de alimentos a bajo costo. Desarrollamos una hoja de ruta para la adopción de semillas biofortificadas, con el objetivo de reducir las deficiencias de micronutrientes en las zonas rurales. El enfoque fue la innovación inclusiva, situando a los pequeños agricultores en el corazón del proceso de I+D.",
-          category: "Innovación Inclusiva",
-          ngo: "Acción Contra el Hambre",
-          location: "Dakar, Senegal",
-          date: "Marzo 2025",
-          image: "https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop",
+          title: "Conferencia IAAS – Universidad de Parakou",
+          description: "Intervención sobre empleabilidad e inserción profesional de jóvenes agrónomos en Benín.",
+          fullDescription: "Más de 150 estudiantes de ciencias agronómicas se reunieron en torno a un tema estratégico: “Empleo profesional en ciencias agronómicas: ¿cómo hacerlo?”. Esta conferencia, organizada por IAAS UP con el apoyo de ABED ONG, forma parte del programa #Dcroch. Los intercambios se centraron en las realidades del mercado laboral agrícola, las competencias clave a desarrollar y las oportunidades empresariales. El Dr. Aga Adrien Dogo, conferencista principal, compartió valiosas orientaciones para preparar la agricultura responsable del mañana.",
+          category: "Liderazgo",
+          ngo: "ABED ONG y Fundación FDC",
+          location: "Parakou, Benín",
+          date: "Diciembre 2024",
+          image: "/image/issa1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000&auto=format&fit=crop"
+            "/image/iaas2.jpg",
+            "/image/iaas3.jpg",
+            "/image/iaas4.jpg"
           ],
-          tags: ["Sistemas Alimentarios", "Innovación Inclusiva", "I+D"],
+          tags: ["Empleabilidad", "Agronomía", "Liderazgo"],
           gradient: "from-blue-600 to-indigo-800",
         },
         {
           id: 2,
-          title: "Evaluación de Impacto Nutricional a Gran Escala",
-          description: "Análisis basado en datos de intervenciones de fortificación de hierro.",
-          fullDescription: "Lideré un equipo multidisciplinario para evaluar la efectividad de los programas de suplementación con hierro en mujeres embarazadas. Se utilizaron modelos estadísticos avanzados para aislar el impacto del programa de las variables ambientales. Los resultados ayudaron a redirigir los presupuestos hacia los distritos más vulnerables, aumentando la eficiencia global en un 25%.",
-          category: "Impacto y Datos",
-          ngo: "UNICEF",
-          location: "Nairobi, Kenia",
-          date: "Julio 2024",
-          image: "https://images.unsplash.com/photo-1576089234161-48396a3cd67c?q=80&w=1000&auto=format&fit=crop",
+          title: "Conferencia “Mi Proyecto Pro, Mi Futuro” – Abomey",
+          description: "Sesión de inspiración y orientación para 131 estudiantes sobre la construcción de un proyecto profesional único.",
+          fullDescription: "Organizada por la FEUNSTIM con el apoyo de la ONG ABED en el marco del proyecto #Dcroch, esta conferencia reunió a 131 estudiantes decididos. El Dr. Aga Adrien Dogo compartió las claves para construir un proyecto profesional coherente y adquirir habilidades técnicas y transversales. A través de su trayectoria inspiradora, brindó a los jóvenes las herramientas para anticipar y lograr su inserción profesional.",
+          category: "Liderazgo",
+          ngo: "FEUNSTIM y ONG ABED (Proyecto #Dcroch)",
+          location: "Abomey, Benín",
+          date: "Diciembre 2024",
+          image: "/image/mpav1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1576089234161-48396a3cd67c?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
+            "/image/mpav2.jpg",
+            "/image/mpav3.jpg",
+            "/image/mpav4.jpg"
           ],
-          tags: ["Evaluación de Impacto", "Ciencia de Datos", "Investigación de Doctorado"],
+          tags: ["#Dcroch", "Empleabilidad", "Juventud", "Liderazgo"],
           gradient: "from-pink-600 to-rose-800",
         },
         {
           id: 3,
-          title: "Cumbre de Liderazgo en Bio-Innovación",
-          description: "Mentoria de la próxima generación de emprendedores agrotecnológicos.",
-          fullDescription: "Una clase magistral para fundadores de startups africanas en el sector de la biotecnología alimentaria. Compartí estrategias de desarrollo de negocios adaptadas a contextos frágiles y marcos de gobernanza ética para la investigación privada. La cumbre dio como resultado la creación de un centro de incubación para soluciones de conservación postcosecha.",
+          title: "Conferencia “Mi Proyecto Pro, Mi Futuro” – Dassa",
+          description: "Mentoria entusiasta de jóvenes para diseñar su futuro y fomentar el crecimiento profesional.",
+          fullDescription: "Un momento inspirador en Dassa organizado por FEUNSTIM en colaboración con la Fundación FDC. El Dr. Aga Adrien Dogo, cofundador de la FDC, aportó su sabiduría y valiosos consejos para orientar a los estudiantes en su búsqueda de empleabilidad. Cada intercambio fue una prueba palpable del compromiso con una juventud ambiciosa y un futuro prometedor.",
           category: "Liderazgo",
-          ngo: "Fundación Bill y Melinda Gates",
-          location: "Accra, Ghana",
+          ngo: "Fundación FDC y FEUNSTIM",
+          location: "Dassa, Benín",
           date: "Noviembre 2024",
-          image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop",
+          image: "/image/avdassa1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000&auto=format&fit=crop"
+            "/image/avdassa2.jpg",
+            "/image/avdassa3.jpg",
+            "/image/avdassa4.jpg"
           ],
-          tags: ["Gestión", "Emprendimiento", "Biotecnología"],
-          gradient: "from-yellow-600 to-orange-800",
+          tags: ["Fundación FDC", "Empleabilidad", "Juventud", "Dassa"],
+          gradient: "from-orange-600 to-orange-800",
         },
         {
           id: 4,
-          title: "Investigación Avanzada sobre Proteínas Vegetales",
-          description: "Optimización de los métodos de procesamiento de las legumbres locales.",
-          fullDescription: "Proyecto de I+D industrial destinado a crear sustitutos de carne con alto contenido de proteínas a partir de caupí y soja producidos localmente. Trabajo de laboratorio sobre extrusión de alta humedad y mejora del perfil sensorial. Este proyecto demostró la viabilidad económica del procesamiento local para apoyar las cadenas de valor agrícolas nacionales.",
-          category: "I+D Nutrición",
-          ngo: "Programa Mundial de Alimentos (PMA)",
-          location: "Lagos, Nigeria",
-          date: "Enero 2025",
-          image: "https://images.unsplash.com/photo-1532187875460-120c1bcde00b?q=80&w=1000&auto=format&fit=crop",
+          title: "Concurso “Génie en Herbe” – CEG Tchetti",
+          description: "Iniciativa educativa y espiritual para despertar a la juventud al conocimiento y los valores de excelencia.",
+          fullDescription: "Lanzado oficialmente por la FDC, este concurso reunió a 40 participantes del CEG Tchetti en torno al tema “Introducción a la Biblia”. Bajo la dirección del Dr. Adrien Dogo, esta iniciativa busca promover la excelencia académica y los valores cristianos, ofreciendo kits escolares a los estudiantes para preparar su regreso. Un proyecto prometedor para formar una generación iluminada y comprometida.",
+          category: "Educación",
+          ngo: "Fundación FDC",
+          location: "Tchetti, Benín",
+          date: "Septiembre 2025",
+          image: "/image/tchetti1.jpg",
           images: [
-            "https://images.unsplash.com/photo-1532187875460-120c1bcde00b?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1581093148119-01e63a8a3036?q=80&w=1000&auto=format&fit=crop"
+            "/image/tchetti2.jpg",
+            "/image/tchetti3.jpg",
+            "/image/tchetti4.jpg"
           ],
-          tags: ["Investigación Científica", "I+D", "Tecnología Alimentaria"],
+          tags: ["Juventud", "Educación", "Excelencia", "FDC"],
           gradient: "from-teal-600 to-emerald-800",
-        }
+        },
       ],
     }
   };
@@ -742,13 +840,7 @@ function ProjectsSection({ activeFilter, onOpenModal }: { activeFilter: string; 
 }
 
 // Composants existants conservés (simplifiés pour l'exemple, garder les originaux si nécessaire)
-function ProcessSection() {
-  return null; // À remplir si nécessaire ou garder l'ancien code
-}
-
-function TestimonialSection() {
-  return null; // À remplir si nécessaire ou garder l'ancien code
-}
+// Le code des composants inutilisés a été supprimé pour nettoyer le projet.
 
 // Page principale
 export default function RealisationsPage() {
@@ -762,7 +854,7 @@ export default function RealisationsPage() {
   };
 
   return (
-    <div className="bg-black min-h-screen selection:bg-[#10b981] selection:text-white">
+    <div className="bg-black min-h-screen selection:bg-blue-500 selection:text-white">
       <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
         <Canvas>
           <BackgroundParticles />
@@ -772,9 +864,10 @@ export default function RealisationsPage() {
       <HeroSection />
 
       <div className="relative z-10">
+        <ScientificAchievements />
         <FilterSection activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
         <ProjectsSection activeFilter={activeFilter} onOpenModal={handleOpenModal} />
-
+        <TestimonialsSection />
         <div className="bg-gradient-to-b from-black to-gray-900">
           <CTASection />
         </div>

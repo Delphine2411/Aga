@@ -44,7 +44,7 @@ export default function HeroSection() {
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
-    const pointLight1 = new THREE.PointLight(0x00FF66, 2);
+    const pointLight1 = new THREE.PointLight(0x3b82f6, 2);
     pointLight1.position.set(5, 5, 5);
     scene.add(pointLight1);
     const pointLight2 = new THREE.PointLight(0xff6b35, 1.5);
@@ -55,7 +55,7 @@ export default function HeroSection() {
     for (let i = 0; i < 10; i++) {
       const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
       const material = new THREE.MeshStandardMaterial({
-        color: i % 2 === 0 ? 0x00FF66 : 0xff6b35,
+        color: i % 2 === 0 ? 0x3b82f6 : 0xff6b35,
         metalness: 0.8,
         roughness: 0.2,
       });
@@ -110,7 +110,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8 }}
           className="text-6xl md:text-8xl font-bold text-white mb-6"
         >
-         {t.title1} <span className="text-[#10b981]">{t.title}</span>
+          {t.title1} <span className="text-blue-500">{t.title}</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
