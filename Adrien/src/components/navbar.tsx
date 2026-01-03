@@ -59,22 +59,22 @@ export default function Navbar() {
     fr: {
       home: "Accueil",
       about: "À propos",
-      realisations: "Mes réalisations",
-      services: "Services",
+      realisations: "Mon expertise",
+      services: "Mes engagements",
       contact: "Contact"
     },
     en: {
       home: "Home",
       about: "About",
-      realisations: "My work",
-      services: "Services",
+      realisations: "My Expertise",
+      services: "My engagements",
       contact: "Contact"
     },
     es: {
       home: "Inicio",
       about: "Acerca de",
-      realisations: "Mis trabajos",
-      services: "Servicios",
+      realisations: "Mi Experiencia",
+      services: "Mis compromisos",
       contact: "Contacto"
     }
   };

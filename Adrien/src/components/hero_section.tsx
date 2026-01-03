@@ -8,18 +8,18 @@ import { useLanguage } from "@/src/components/contexts/language_context"; // �
 const translations = {
   fr: {
     title1: "Mes",
-    title: "Services",
-    subtitle: "Découvrez mes services.",
+    title: "Engagements",
+    subtitle: "Découvrez mes engagements.",
   },
   en: {
     title1: "My",
-    title: "Services",
-    subtitle: "Explore what I offer.",
+    title: "Engagements",
+    subtitle: "Explore my engagements.",
   },
   es: {
     title1: "Mis",
-    title: "Servicios",
-    subtitle: "Descubre mis servicios.",
+    title: "Compromisos",
+    subtitle: "Descubre mis compromisos.",
   },
 };
 

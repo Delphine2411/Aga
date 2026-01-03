@@ -9,25 +9,25 @@ type StatKey = "experience" | "smes" | "academic" | "leadership";
 const translations = {
   fr: {
     stats: [
-      { label: "Années d'expérience", value: 9, key: "experience" },
+      { label: "Années d'expérience", value: 10, key: "experience" },
       { label: "PME & Entreprises accompagnées", value: 50, key: "smes" },
-      { label: "Titres Académiques", value: 4, key: "academic" },
+      //{ label: "Titres Académiques", value: 4, key: "academic" },
       { label: "Leadership & Initiatives", value: 10, key: "leadership" },
     ],
   },
   en: {
     stats: [
-      { label: "Years of Experience", value: 9, key: "experience" },
+      { label: "Years of Experience", value: 10, key: "experience" },
       { label: "SMEs & Businesses Supported", value: 50, key: "smes" },
-      { label: "Academic Milestones", value: 4, key: "academic" },
+      //{ label: "Academic Milestones", value: 4, key: "academic" },
       { label: "Leadership & Initiatives", value: 10, key: "leadership" },
     ],
   },
   es: {
     stats: [
-      { label: "Años de experiencia", value: 9, key: "experience" },
+      { label: "Años de experiencia", value: 10, key: "experience" },
       { label: "Pymes y Empresas acompañadas", value: 50, key: "smes" },
-      { label: "Títulos Académicos", value: 4, key: "academic" },
+      //{ label: "Títulos Académicos", value: 4, key: "academic" },
       { label: "Liderazgo e Iniciativas", value: 10, key: "leadership" },
     ],
   },
@@ -66,7 +66,7 @@ function StatsSection() {
   return (
     <section className="relative bg-gradient-to-b from-gray-900 to-black py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
           {t.stats.map((stat, index) => (
             <motion.div
               key={stat.label}

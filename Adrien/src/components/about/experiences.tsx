@@ -39,6 +39,17 @@ export default function ExperienceSection() {
           ],
         },
         {
+          year: "Août - Oct 2025",
+          title: "Consultant Principal : Mission d’Assistance technique pour le développement et la planification d’entreprise 2025-20230",
+          company: "Société Longue Vie SARL, Abomey-Calavi, Bénin",
+          tasks: [
+            "Conduire le diagnostic technique, organisationnel et financier de l’entreprise ",
+            "Conduire les entretiens et élaborer le plan développement stratégique de l’entreprise",
+            "Conduire l’étude de marché au profit de l’entreprise",
+            "Elaborer et faire valider le plan d’affaire opérationnel 2025-2030 de l’entreprise",
+          ],
+        },
+        {
           year: "Déc 2023 - Juil 2024",
           title: "Chef de Mission Adjoint - Stratégie Nationale SBN",
           company: "Global Alliance for Improved Nutrition (GAIN), Bénin",
@@ -177,6 +188,17 @@ export default function ExperienceSection() {
             "Develop success stories and case studies on TA and financing impact"
           ],
         },
+        {
+  year: "August – October 2025",
+  title: "Lead Consultant: Technical Assistance Mission for Business Development and Planning 2025–2030",
+  company: "Société Longue Vie SARL, Abomey-Calavi, Benin",
+  tasks: [
+    "Conduct the technical, organizational, and financial diagnosis of the company",
+    "Conduct interviews and develop the company’s strategic development plan",
+    "Carry out a market study for the benefit of the company",
+    "Develop and validate the company’s operational business plan for 2025–2030",
+  ],
+},
         {
           year: "Dec 2023 - July 2024",
           title: "Deputy Chief of Mission - National SBN Strategy",
@@ -331,6 +353,18 @@ export default function ExperienceSection() {
           ],
         },
         {
+  year: "Agosto – Octubre 2025",
+  title: "Consultor Principal: Misión de Asistencia Técnica para el Desarrollo y la Planificación Empresarial 2025–2030",
+  company: "Société Longue Vie SARL, Abomey-Calavi, Benín",
+  tasks: [
+    "Realizar el diagnóstico técnico, organizativo y financiero de la empresa",
+    "Conducir entrevistas y elaborar el plan estratégico de desarrollo de la empresa",
+    "Realizar el estudio de mercado en beneficio de la empresa",
+    "Elaborar y validar el plan de negocio operativo de la empresa para el período 2025–2030",
+  ],
+},
+
+        {
           year: "Nov - Dic 2023",
           title: "Consultor de Emprendimiento",
           company: "OneHope (Oficina de África Occidental)",
@@ -435,12 +469,12 @@ export default function ExperienceSection() {
 
   const researchTexts: Record<Language, { title: string; experiences: Experience[] }> = {
     fr: {
-      title: "Expédition de Recherche",
+      title: "Expériences de Recherche",
       experiences: [
         {
           year: "Oct 2020 – Sept 2023",
           title: "Chercheur associé, doctorant en nutrition et système alimentaire",
-          company: "Projet NaviNut (GIZ/Université de Parakou)",
+          company: "Projet NaviNut (Université de Parakou)",
           tasks: [
             "Analyser la littérature (bibliométrique et interprétative) sur les environnements alimentaires et produits traditionnels",
             "Piloter une approche collaborative et transdisciplinaire au Nord Bénin",
@@ -455,12 +489,12 @@ export default function ExperienceSection() {
       ],
     },
     en: {
-      title: "Research Expedition",
+      title: "Research Experiences",
       experiences: [
         {
           year: "Oct 2020 – Sept 2023",
           title: "Associate Researcher, PhD in Nutrition and Food Systems",
-          company: "NaviNut Research Project (GIZ/University of Parakou)",
+          company: "NaviNut Research Project (University of Parakou)",
           tasks: [
             "Analyze bibliometric and interpretative literature on food environments and traditional products",
             "Lead a collaborative and transdisciplinary research approach in Northern Benin",
@@ -475,12 +509,12 @@ export default function ExperienceSection() {
       ],
     },
     es: {
-      title: "Expedición de Investigación",
+      title: "Experiencias de Investigación",
       experiences: [
         {
           year: "Oct 2020 – Sept 2023",
           title: "Investigador Asociado, Doctorando en Nutrición y Sistemas Alimentarios",
-          company: "Proyecto de Investigación NaviNut (GIZ/Universidad de Parakou)",
+          company: "Proyecto de Investigación NaviNut (Universidad de Parakou)",
           tasks: [
             "Analizar la literatura bibliométrica e interpretativa sobre entornos alimentarios y productos tradicionales",
             "Liderar un enfoque de investigación colaborativo y transdisciplinario en el norte de Benín",

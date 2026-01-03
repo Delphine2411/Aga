@@ -8,27 +8,27 @@ import { FaLinkedin, FaWhatsapp, FaEnvelope, FaFacebook } from "react-icons/fa";
 
 const footerText = {
   fr: {
-    title1: "CONSTRUISONS UN",
-    title2: "AVENIR NUTRITIONNEL DURABLE",
-    subtitle: "Prêt à transformer les systèmes alimentaires ? Discutons de vos projets d'innovation et de développement.",
+    title1: "PRET A INCLURE LES JEUNES DANS LA",
+    title2: "TRANSFORMATION DES SYSTÈMES ALIMENTAIRES ?",
+    subtitle: "Discutons-en !",
     contact: "COORDONNÉES",
     social: "RÉSEAUX",
     rights: "Tous droits réservés",
     cta: "Me contacter",
   },
   en: {
-    title1: "BUILDING A",
-    title2: "SUSTAINABLE NUTRITIONAL FUTURE",
-    subtitle: "Ready to transform food systems? Let's discuss your innovation and development projects.",
+    title1: "READY TO INCLUDE YOUTH IN THE",
+    title2: "TRANSFORMATION OF FOOD SYSTEMS?",
+    subtitle: "Let's discuss it!",
     contact: "CONTACT INFO",
     social: "SOCIAL",
     rights: "All rights reserved",
     cta: "Contact me",
   },
   es: {
-    title1: "CONSTRUYAMOS UN",
-    title2: "FUTURO NUTRICIONAL SOSTENIBLE",
-    subtitle: "¿Listo para transformar los sistemas alimentarios? Hablemos de sus proyectos de innovación y desarrollo.",
+    title1: "¿LISTO PARA INCLUIR A LOS JÓVENES EN LA",
+    title2: "TRANSFORMACIÓN DE LOS SISTEMAS ALIMENTARIOS?",
+    subtitle: "¡Hablemos!",
     contact: "CONTACTO",
     social: "REDES",
     rights: "Todos los derechos reservados",
@@ -132,12 +132,12 @@ export default function Footer() {
                 </li>
                 <li>
                   <MagneticLink href="tel:+22994792134" className="text-lg text-gray-300">
-                    +229 94 79 21 34
+                    +229 01 94 79 21 34
                   </MagneticLink>
                 </li>
                 <li>
                   <MagneticLink href="tel:+22961338022" className="text-lg text-gray-300">
-                    +229 61 33 80 22
+                    +229 01 61 33 80 22
                   </MagneticLink>
                 </li>
               </ul>

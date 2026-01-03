@@ -9,17 +9,26 @@ const translations = {
   fr: {
     title1: "A propos de ",
     title: " Moi",
-    subtitle: "Chercheur, Spécialiste en Nutrition et système agroalimentaire, Leader",
+    subtitle: `Spécialiste en Nutrition et Systèmes agro-alimentaires, PhD
+Avec près de 10 ans d’expérience professionnelle dans l’appui et la gestion de projets et programmes en agriculture, sécurité alimentaire et entrepreneuriat en Afrique subsaharienne, je dispose d’une solide capacité à diriger des équipes et à accompagner des organisations dans l’amélioration durable des systèmes alimentaires.
+Mon expertise porte notamment sur l’entrepreneuriat des jeunes et des femmes, les partenariats et l’engagement du secteur privé, le développement de l’agrobusiness et des marchés, ainsi que la recherche et développement (R&D) dans les domaines des aliments nutritifs, de l’environnement alimentaire, des politiques alimentaires et de la nutrition humaine.
+Pays d’expérience : Bénin, Togo, Côte d’Ivoire, Burkina Faso, Sénégal, Nigeria, Rwanda, Kenya, Zambie, Tanzania.`,
   },
   en: {
     title1: "About ",
     title: " Me",
-    subtitle: "Researcher, Nutritionist and Agroalimentary System Specialist, Leader",
+    subtitle: `PhD Specialist in Nutrition and Agri-food Systems
+With nearly 10 years of professional experience in supporting and managing projects and programs in agriculture, food security, and entrepreneurship in sub-Saharan Africa, I possess a strong ability to lead teams and support organizations in the sustainable improvement of food systems.
+My expertise includes youth and women's entrepreneurship, private sector partnerships and engagement, agribusiness and market development, as well as research and development (R&D) in the fields of nutritious foods, food environments, food policies, and human nutrition.
+Countries of experience: Benin, Togo, Côte d'Ivoire, Burkina Faso, Senegal, Nigeria, Rwanda, Kenya, Zambia, Tanzania.`,
   },
   es: {
     title1: "Sobre",
     title: " Mí",
-    subtitle: "Investigador, Especialista en Nutrición y Sistema Agroalimentario, Líder",
+    subtitle: `Especialista en Nutrición y Sistemas Agroalimentarios, PhD
+Con cerca de 10 años de experiencia profesional en el apoyo y la gestión de proyectos y programas en agricultura, seguridad alimentaria y emprendimiento en África subsahariana, dispongo de una sólida capacidad para dirigir equipos y acompañar a organizaciones en la mejora sostenible de los sistemas alimentarios.
+Mi experiencia abarca notablemente el emprendimiento de jóvenes y mujeres, las asociaciones y el compromiso del sector privado, el desarrollo de agronegocios y mercados, así como la investigación y desarrollo (I+D) en los ámbitos de alimentos nutritivos, entorno alimentario, políticas alimentarias y nutrición humana.
+Países de experiencia: Benín, Togo, Costa de Marfil, Burkina Faso, Senegal, Nigeria, Ruanda, Kenia, Zambia, Tanzania.`,
   },
 };
 
@@ -134,7 +143,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto"
+          className="text-sm md:text-xl text-gray-400 max-w-3xl mx-auto"
         >
           {t.subtitle}
         </motion.p>

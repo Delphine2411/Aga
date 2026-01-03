@@ -20,9 +20,8 @@ export default function ContactPage() {
       <BioSection />
       <ExperienceSection />
       <PersonalLifeSection />
-      <StatsSection />
+      
       <SkillsSection />
-      <ProcessSection />
       <CTASection />
       <Footer />
     </main>

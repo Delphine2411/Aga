@@ -9,62 +9,32 @@ export default function PersonalLifeSection() {
 
     const texts = {
         fr: {
-            title: "Vie Spirituelle et Personnelle",
+            title: "Vie Spirituelle",
             items: [
                 {
                     icon: <FaStar className="w-8 h-8 text-rose-500" />,
                     title: "Foi & Spiritualité",
                     desc: "Disciple de Jésus-Christ et étudiant à Charis Bible College.",
                 },
-                {
-                    icon: <FaUsers className="w-8 h-8 text-rose-500" />,
-                    title: "Famille",
-                    desc: "Marié à Ayodélé Onisette ONIBON, père de 2 enfants.",
-                },
-                {
-                    icon: <FaHeart className="w-8 h-8 text-rose-500" />,
-                    title: "Engagement",
-                    desc: "Fondateur et dirigeant de la Fondation Dogo pour Christ avec son épouse.",
-                },
             ],
         },
         en: {
-            title: "Spiritual & Personal Life",
+            title: "Spiritual Life",
             items: [
                 {
                     icon: <FaStar className="w-8 h-8 text-rose-500" />,
                     title: "Faith & Spirituality",
                     desc: "Disciple of Jesus Christ and student at Charis Bible College.",
                 },
-                {
-                    icon: <FaUsers className="w-8 h-8 text-rose-500" />,
-                    title: "Family",
-                    desc: "Married to Ayodélé Onisette ONIBON, father of 2 children.",
-                },
-                {
-                    icon: <FaHeart className="w-8 h-8 text-rose-500" />,
-                    title: "Commitment",
-                    desc: "Founder and leader of the Dogo for Christ Foundation with his wife.",
-                },
             ],
         },
         es: {
-            title: "Vida Espiritual y Personal",
+            title: "Vida Espiritual",
             items: [
                 {
                     icon: <FaStar className="w-8 h-8 text-rose-500" />,
                     title: "Fe y Espiritualidad",
                     desc: "Discípulo de Jesucristo y estudiante en Charis Bible College.",
-                },
-                {
-                    icon: <FaUsers className="w-8 h-8 text-rose-500" />,
-                    title: "Familia",
-                    desc: "Casado con Ayodélé Onisette ONIBON, padre de 2 hijos.",
-                },
-                {
-                    icon: <FaHeart className="w-8 h-8 text-rose-500" />,
-                    title: "Compromiso",
-                    desc: "Fundador y líder de la Fundación Dogo para Cristo junto a su esposa.",
                 },
             ],
         },
@@ -90,7 +60,7 @@ export default function PersonalLifeSection() {
                     <div className="w-24 h-1 bg-rose-500 mx-auto rounded-full" />
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="">
                     {content.items.map((item, index) => (
                         <motion.div
                             key={index}

@@ -7,21 +7,21 @@ import { useLanguage } from "@/src/components/contexts/language_context"; // �
 
 const translations = {
   fr: {
-    title1: "Donnons vie à vos ",
-    title: "ambitions nutritionnelles",
-    subtitle: "Une expertise scientifique au service de systèmes alimentaires plus inclusifs et durables.",
+    title1: "Accelerons la transformation   ",
+    title: "inclusive de systèmes alimentaires durables",
+    subtitle: "en aliant expertise, accompagnement technique et engagement du secteur privé",
     button: "Contactez-moi",
   },
   en: {
-    title1: "Let's bring your ",
-    title: "nutritional ambitions to life",
-    subtitle: "Scientific expertise serving more inclusive and sustainable food systems.",
+    title1: "Let's accelerate the ",
+    title: "inclusive transformation of sustainable food systems",
+    subtitle: "by combining expertise, technical support, and private sector engagement",
     button: "Contact me",
   },
   es: {
-    title1: "Demos vida a sus ",
-    title: "ambiciones nutricionales",
-    subtitle: "Experiencia científica al servicio de sistemas alimentarios más inclusivos y sostenibles.",
+    title1: "Aceleremos la transformación ",
+    title: "inclusiva de sistemas alimentarios sostenibles",
+    subtitle: "uniendo experiencia, asistencia técnica y compromiso del sector privado",
     button: "Contáctame",
   },
 };
