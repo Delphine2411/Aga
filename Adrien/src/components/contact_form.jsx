@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useLanguage } from "@/src/components/contexts/language_context";
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
+import { toast } from "react-hot-toast";
 
 // 🎯 Traductions locales (FR, EN, ES)
 const translations = {
@@ -168,21 +169,28 @@ export default function ContactSection() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (res.ok) {
-        alert("✅ Success!");
-        setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
-      } else alert("❌ Failed.");
-    } catch (err) {
-      alert("⚠️ Error.");
+  e.preventDefault();
+  
+  // Création d'une promesse pour un toast de chargement (optionnel mais très pro)
+  const loadingToast = toast.loading("Envoi de votre message...");
+
+  try {
+    const res = await fetch("/api/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      toast.success("✅ Message envoyé avec succès !", { id: loadingToast });
+      setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
+    } else {
+      toast.error("❌ Échec de l'envoi. Veuillez réessayer.", { id: loadingToast });
     }
-  };
+  } catch (err) {
+    toast.error("⚠️ Une erreur est survenue.", { id: loadingToast });
+  }
+};
 
   return (
     <div className="relative min-h-screen bg-black flex items-center justify-center px-4 py-24 overflow-hidden">
