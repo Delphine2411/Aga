@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
-import { useLanguage } from "@/src/components/contexts/language_context"; // 👈
+import { useLanguage } from "@/src/components/contexts/language_context";
 
 const translations = {
   fr: {
@@ -23,6 +23,13 @@ const translations = {
   },
 };
 
+// Liste des images pour le carrousel
+const backgroundImages = [
+  "/image/about1.jpeg",
+  "/image/about2.jpeg",
+  "/image/about4.jpeg",
+];
+
 export default function HeroSection() {
   const canvasRef = useRef(null);
   const { scrollYProgress } = useScroll();
@@ -30,6 +37,17 @@ export default function HeroSection() {
 
   const { language } = useLanguage();
   const t = translations[language];
+
+  // État pour le carrousel
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Timer pour le changement d'image
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000); // Change toutes les 5 secondes
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -102,7 +120,32 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 opacity-40" />
+      
+      {/* 1. Carrousel d'images en Arrière-plan (Z-Index 0) */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.35 }} // Opacité contrôlée pour la lisibilité
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            className="absolute inset-0"
+          >
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
+            />
+            {/* Overlay pour assombrir davantage et lier les couleurs */}
+            <div className="absolute inset-0 bg-black/50" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* 2. Animation Three.js (Z-Index 1) */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-1 opacity-60" />
+
+      {/* 3. Contenu Texte (Z-Index 2) */}
       <motion.div style={{ y }} className="relative z-10 text-center px-6">
         <motion.h1
           initial={{ opacity: 0, scale: 0.5 }}

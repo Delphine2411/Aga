@@ -189,16 +189,16 @@ export default function ExperienceSection() {
           ],
         },
         {
-  year: "August – October 2025",
-  title: "Lead Consultant: Technical Assistance Mission for Business Development and Planning 2025–2030",
-  company: "Société Longue Vie SARL, Abomey-Calavi, Benin",
-  tasks: [
-    "Conduct the technical, organizational, and financial diagnosis of the company",
-    "Conduct interviews and develop the company’s strategic development plan",
-    "Carry out a market study for the benefit of the company",
-    "Develop and validate the company’s operational business plan for 2025–2030",
-  ],
-},
+          year: "August – October 2025",
+          title: "Lead Consultant: Technical Assistance Mission for Business Development and Planning 2025–2030",
+          company: "Société Longue Vie SARL, Abomey-Calavi, Benin",
+          tasks: [
+            "Conduct the technical, organizational, and financial diagnosis of the company",
+            "Conduct interviews and develop the company’s strategic development plan",
+            "Carry out a market study for the benefit of the company",
+            "Develop and validate the company’s operational business plan for 2025–2030",
+          ],
+        },
         {
           year: "Dec 2023 - July 2024",
           title: "Deputy Chief of Mission - National SBN Strategy",
@@ -353,16 +353,16 @@ export default function ExperienceSection() {
           ],
         },
         {
-  year: "Agosto – Octubre 2025",
-  title: "Consultor Principal: Misión de Asistencia Técnica para el Desarrollo y la Planificación Empresarial 2025–2030",
-  company: "Société Longue Vie SARL, Abomey-Calavi, Benín",
-  tasks: [
-    "Realizar el diagnóstico técnico, organizativo y financiero de la empresa",
-    "Conducir entrevistas y elaborar el plan estratégico de desarrollo de la empresa",
-    "Realizar el estudio de mercado en beneficio de la empresa",
-    "Elaborar y validar el plan de negocio operativo de la empresa para el período 2025–2030",
-  ],
-},
+          year: "Agosto – Octubre 2025",
+          title: "Consultor Principal: Misión de Asistencia Técnica para el Desarrollo y la Planificación Empresarial 2025–2030",
+          company: "Société Longue Vie SARL, Abomey-Calavi, Benín",
+          tasks: [
+            "Realizar el diagnóstico técnico, organizativo y financiero de la empresa",
+            "Conducir entrevistas y elaborar el plan estratégico de desarrollo de la empresa",
+            "Realizar el estudio de mercado en beneficio de la empresa",
+            "Elaborar y validar el plan de negocio operativo de la empresa para el período 2025–2030",
+          ],
+        },
 
         {
           year: "Nov - Dic 2023",
@@ -636,6 +636,11 @@ export default function ExperienceSection() {
           year: "2024",
           title: "Président du Club MANSSAH",
           desc: "Club MANSSAH Ab-Calavi H.K.Maga."
+        },
+        {
+          year: "2025",
+          title: "Président de la Fondation FDC",
+          desc: "DOGO pour Christ"
         }
       ]
     },
@@ -666,7 +671,13 @@ export default function ExperienceSection() {
           year: "2024",
           title: "President of Club MANSSAH",
           desc: "Club MANSSAH Ab-Calavi H.K.Maga."
+        },
+        {
+          year: "2025",
+          title: "President of the FDC Foundation",
+          desc: "DOGO for Christ"
         }
+
       ]
     },
     es: {
@@ -696,7 +707,13 @@ export default function ExperienceSection() {
           year: "2024",
           title: "Presidente del Club MANSSAH",
           desc: "Club MANSSAH Ab-Calavi H.K.Maga."
+        },
+        {
+          year: "2025",
+          title: "Presidente de la Fundación FDC",
+          desc: "DOGO para Cristo"
         }
+
       ]
     }
   };

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import * as THREE from "three";
 import { useLanguage } from "@/src/components/contexts/language_context"; // 👈
 
@@ -32,6 +32,14 @@ Países de experiencia: Benín, Togo, Costa de Marfil, Burkina Faso, Senegal, Ni
   },
 };
 
+// Liste de vos images
+const backgroundImages = [
+  "/image/real1.jpeg",
+  "/image/real2.jpeg",
+  "/image/real3.jpeg",
+  "/image/dogd.jpeg",
+];
+
 function HeroSection() {
   const canvasRef = useRef(null);
   const { scrollYProgress } = useScroll();
@@ -39,6 +47,16 @@ function HeroSection() {
 
   const { language } = useLanguage();
   const t = translations[language];
+
+  // État pour le carrousel
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -128,7 +146,29 @@ function HeroSection() {
       style={{ opacity }}
       className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
     >
-      <canvas ref={canvasRef} className="absolute inset-0 opacity-70" />
+      {/* Carrousel d'images en BG (Z-index 0) */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }} // Opacité faible pour laisser briller le Three.js
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            className="absolute inset-0"
+          >
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Animation Three.js (Z-index 1) */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-1 opacity-70" />
+      
+      {/* Contenu Texte (Z-index 2) */}
       <div className="relative z-10 text-center px-6">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}

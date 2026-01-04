@@ -14,6 +14,7 @@ import TestimonialsSection from './testimonials_section';
 import { FaMicroscope, FaChalkboardTeacher, FaNetworkWired, FaLightbulb } from 'react-icons/fa';
 import StatsSection from '../about/stats';
 
+
 const translations = {
   fr: {
     heroTitle1: "Mon",
@@ -106,15 +107,57 @@ function FloatingShapes() {
   );
 }
 
+
+
+const backgroundImages = [
+  "/image/about.jpeg",
+  "/image/about1.jpeg",
+  "/image/about2.jpeg",
+  "/image/about3.jpeg",
+  "/image/about4.jpeg",
+];
+
 function HeroSection() {
   const { language } = useLanguage();
   const t = translations[language] || translations['en'];
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
 
+  // Gestion du carrousel
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000); // Change toutes le 5 secondes
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-      <div className="absolute inset-0">
+      {/* Carrousel d'images en arrière-plan */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }} // Opacité réduite pour laisser voir les animations 3D
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            className="absolute inset-0"
+          >
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
+            />
+            {/* Overlay pour assurer la lisibilité du texte */}
+            <div className="absolute inset-0 bg-black/40" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Vos animations 3D (Canvas) */}
+      <div className="absolute inset-0 z-1">
         <Canvas>
           <PerspectiveCamera makeDefault position={[0, 0, 5]} />
           <Environment preset="city" />
@@ -125,6 +168,7 @@ function HeroSection() {
         </Canvas>
       </div>
 
+      {/* Contenu Texte */}
       <motion.div style={{ y }} className="relative z-10 text-center px-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -535,298 +579,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
   );
 }
 
-// Section Projets avec grille
-function ProjectsSection({ activeFilter, onOpenModal }: { activeFilter: string; onOpenModal: (p: Project) => void }) {
-  const translations = {
-    fr: {
-      categories: {
-        all: "Tous",
-        nutrition: "R&D Nutrition",
-        innovation: "Innovation Inclusive",
-        data: "Impact & Data",
-        leadership: "Leadership",
-      },
-      projects: [
-        {
-          id: 1,
-          title: "Conférence IAAS – Université de Parakou",
-          description: "Intervention sur l'employabilité et l'insertion professionnelle des jeunes agronomes au Bénin.",
-          fullDescription: "Plus de 150 étudiants en sciences agronomiques se sont réunis autour d'une thématique stratégique : « Emploi professionnel en sciences agronomiques : comment s'y prendre ? ». Cette conférence, organisée par IAAS UP avec le soutien de ABED ONG, s'inscrit dans le programme #Dcroch. Les échanges ont porté sur les réalités du marché de l'emploi agricole, les compétences clés à développer et les opportunités entrepreneuriales. Dr Aga Adrien Dogo, conférencier principal, a partagé des orientations précieuses pour préparer l'agriculture responsable de demain.",
-          category: "Leadership",
-          ngo: "ABED ONG & Fondation FDC",
-          location: "Parakou, Bénin",
-          date: "Décembre 2024",
-          image: "/image/issa1.jpg",
-          images: [
-            "/image/iaas2.jpg",
-            "/image/iaas3.jpg",
-            "/image/iaas4.jpg"
-          ],
-          tags: ["Employabilité", "Agronomie", "Leadership"],
-          gradient: "from-blue-600 to-indigo-800",
-        },
-        {
-          id: 2,
-          title: "Conférence « Mon Projet Pro, Mon Avenir » – Abomey",
-          description: "Session d'inspiration et d'orientation pour 131 étudiants sur la construction d'un projet professionnel unique.",
-          fullDescription: "Organisée par la FEUNSTIM avec le soutien de l'ABED ONG dans le cadre du projet #Dcroch, cette conférence a réuni 131 étudiants déterminés. Dr. Aga Adrien Dogo y a partagé les clés pour construire un projet professionnel cohérent et acquérir des compétences techniques et transversales. À travers son parcours inspirant, il a donné aux jeunes les outils pour anticiper et réussir leur insertion professionnelle.",
-          category: "Leadership",
-          ngo: "FEUNSTIM & ABED ONG (Projet #Dcroch)",
-          location: "Abomey, Bénin",
-          date: "Décembre 2024",
-          image: "/image/mpav1.jpg",
-          images: [
-            "/image/mpav2.jpg",
-            "/image/mpav3.jpg",
-            "/image/mpav4.jpg"
-          ],
-          tags: ["#Dcroch", "Employabilité", "Jeunesse", "Leadership"],
-          gradient: "from-pink-600 to-rose-800",
-        },
-        {
-          id: 3,
-          title: "Conférence « Mon Projet Pro, Mon Avenir » – Dassa",
-          description: "Accompagnement enthousiaste des jeunes pour dessiner leur futur et favoriser l'épanouissement professionnel.",
-          fullDescription: "Un moment inspirant à Dassa organisé par la FEUNSTIM en collaboration avec la Fondation FDC. Dr. Aga Adrien Dogo, co-fondateur de la FDC, y a apporté sa sagesse et ses conseils avisés pour guider les étudiants dans leur quête d'employabilité. Chaque échange a été une preuve palpable de l'engagement envers une jeunesse ambitieuse et un avenir prometteur.",
-          category: "Leadership",
-          ngo: "Fondation FDC & FEUNSTIM",
-          location: "Dassa, Bénin",
-          date: "Novembre 2024",
-          image: "/image/avdassa1.jpg",
-          images: [
-            "/image/avdassa2.jpg",
-            "/image/avdassa3.jpg",
-            "/image/avdassa4.jpg"
-          ],
-          tags: ["Fondation FDC", "Employabilité", "Jeunesse", "Dassa"],
-          gradient: "from-orange-600 to-orange-800",
-        },
-        {
-          id: 4,
-          title: "Concours de Génie en Herbe – CEG Tchetti",
-          description: "Initiative éducative et spirituelle pour éveiller la jeunesse à la connaissance et aux valeurs d'excellence.",
-          fullDescription: "Lancé officiellement par la FDC, ce concours a réuni 40 participants du CEG Tchetti autour du thème « Introduction à la Bible ». Sous la direction du Dr Adrien Dogo, cette initiative vise à promouvoir l'excellence scolaire et les valeurs chrétiennes, tout en offrant des kits scolaires aux élèves pour préparer leur rentrée. Un projet porteur pour former une génération éclairée et engagée.",
-          category: "Education",
-          ngo: "Fondation FDC",
-          location: "Tchetti, Bénin",
-          date: "Septembre 2025",
-          image: "/image/tchetti1.jpg",
-          images: [
-            "/image/tchetti2.jpg",
-            "/image/tchetti3.jpg",
-            "/image/tchetti4.jpg"
-          ],
-          tags: ["Jeunesse", "Éducation", "Excellence", "FDC"],
-          gradient: "from-teal-600 to-emerald-800",
-        },
-      ],
-    },
-    en: {
-      categories: {
-        all: "All",
-        nutrition: "R&D Nutrition",
-        innovation: "Inclusive Innovation",
-        data: "Impact & Data",
-        leadership: "Leadership",
-      },
-      projects: [
-        {
-          id: 1,
-          title: "IAAS Conference – University of Parakou",
-          description: "Speech on employability and professional insertion of young agronomists in Benin.",
-          fullDescription: "More than 150 agronomical science students gathered around a strategic theme: 'Professional employment in agronomical sciences: how to go about it?'. This conference, organized by IAAS UP with the support of ABED NGO, is part of the #Dcroch program. Discussions focused on agricultural labor market realities, key skills to develop, and entrepreneurial opportunities. Dr. Aga Adrien Dogo, as the keynote speaker, shared valuable guidance to prepare for the responsible agriculture of tomorrow.",
-          category: "Leadership",
-          ngo: "ABED NGO & FDC Foundation",
-          location: "Parakou, Benin",
-          date: "December 2024",
-          image: "/image/issa1.jpg",
-          images: [
-            "/image/iaas2.jpg",
-            "/image/iaas3.jpg",
-            "/image/iaas4.jpg"
-          ],
-          tags: ["Employability", "Agronomy", "Leadership"],
-          gradient: "from-blue-600 to-indigo-800",
-        },
-        {
-          id: 2,
-          title: "“My Professional Project, My Future” Conference – Abomey",
-          description: "Inspiration and orientation session for 131 students on building a unique professional career path.",
-          fullDescription: "Organized by FEUNSTIM with the support of ABED ONG under the #Dcroch project, this conference brought together 131 determined students. Dr. Aga Adrien Dogo shared keys to building a coherent professional project and acquiring technical and soft skills. Through his inspiring journey, he provided youth with the tools to anticipate and succeed in their professional integration.",
-          category: "Leadership",
-          ngo: "FEUNSTIM & ABED ONG (#Dcroch Project)",
-          location: "Abomey, Benin",
-          date: "December 2024",
-          image: "/image/mpav1.jpg",
-          images: [
-            "/image/mpav2.jpg",
-            "/image/mpav3.jpg",
-            "/image/mpav4.jpg"
-          ],
-          tags: ["#Dcroch", "Employability", "Youth", "Leadership"],
-          gradient: "from-pink-600 to-rose-800",
-        },
-        {
-          id: 3,
-          title: "“My Professional Project, My Future” Conference – Dassa",
-          description: "Enthusiastic mentoring of young people to shape their future and foster professional growth.",
-          fullDescription: "An inspiring moment in Dassa organized by FEUNSTIM in collaboration with the FDC Foundation. Dr. Aga Adrien Dogo, co-founder of FDC, shared his wisdom and expert advice to guide students in their quest for employability. Each interaction served as tangible proof of the commitment to ambitious youth and a promising future.",
-          category: "Leadership",
-          ngo: "FDC Foundation & FEUNSTIM",
-          location: "Dassa, Benin",
-          date: "November 2024",
-          image: "/image/avdassa1.jpg",
-          images: [
-            "/image/avdassa2.jpg",
-            "/image/avdassa3.jpg",
-            "/image/avdassa4.jpg"
-          ],
-          tags: ["FDC Foundation", "Employability", "Youth", "Dassa"],
-          gradient: "from-orange-600 to-orange-800",
-        },
-        {
-          id: 4,
-          title: "“Génie en Herbe” Competition – CEG Tchetti",
-          description: "Educational and spiritual initiative to awaken youth to knowledge and excellence values.",
-          fullDescription: "Officially launched by FDC, this competition brought together 40 participants from CEG Tchetti around the theme 'Introduction to the Bible'. Led by Dr. Adrien Dogo, this initiative aims to promote academic excellence and Christian values, while providing school kits to students to prepare for their return. A promising project to train an enlightened and committed generation.",
-          category: "Education",
-          ngo: "FDC Foundation",
-          location: "Tchetti, Benin",
-          date: "September 2025",
-          image: "/image/tchetti1.jpg",
-          images: [
-            "/image/tchetti2.jpg",
-            "/image/tchetti3.jpg",
-            "/image/tchetti4.jpg"
-          ],
-          tags: ["Youth", "Education", "Excellence", "FDC"],
-          gradient: "from-teal-600 to-emerald-800",
-        },
-      ],
-    },
-    es: {
-      categories: {
-        all: "Todos",
-        nutrition: "I+D Nutrición",
-        innovation: "Innovación Inclusiva",
-        data: "Impacto y Datos",
-        leadership: "Liderazgo",
-      },
-      projects: [
-        {
-          id: 1,
-          title: "Conferencia IAAS – Universidad de Parakou",
-          description: "Intervención sobre empleabilidad e inserción profesional de jóvenes agrónomos en Benín.",
-          fullDescription: "Más de 150 estudiantes de ciencias agronómicas se reunieron en torno a un tema estratégico: “Empleo profesional en ciencias agronómicas: ¿cómo hacerlo?”. Esta conferencia, organizada por IAAS UP con el apoyo de ABED ONG, forma parte del programa #Dcroch. Los intercambios se centraron en las realidades del mercado laboral agrícola, las competencias clave a desarrollar y las oportunidades empresariales. El Dr. Aga Adrien Dogo, conferencista principal, compartió valiosas orientaciones para preparar la agricultura responsable del mañana.",
-          category: "Liderazgo",
-          ngo: "ABED ONG y Fundación FDC",
-          location: "Parakou, Benín",
-          date: "Diciembre 2024",
-          image: "/image/issa1.jpg",
-          images: [
-            "/image/iaas2.jpg",
-            "/image/iaas3.jpg",
-            "/image/iaas4.jpg"
-          ],
-          tags: ["Empleabilidad", "Agronomía", "Liderazgo"],
-          gradient: "from-blue-600 to-indigo-800",
-        },
-        {
-          id: 2,
-          title: "Conferencia “Mi Proyecto Pro, Mi Futuro” – Abomey",
-          description: "Sesión de inspiración y orientación para 131 estudiantes sobre la construcción de un proyecto profesional único.",
-          fullDescription: "Organizada por la FEUNSTIM con el apoyo de la ONG ABED en el marco del proyecto #Dcroch, esta conferencia reunió a 131 estudiantes decididos. El Dr. Aga Adrien Dogo compartió las claves para construir un proyecto profesional coherente y adquirir habilidades técnicas y transversales. A través de su trayectoria inspiradora, brindó a los jóvenes las herramientas para anticipar y lograr su inserción profesional.",
-          category: "Liderazgo",
-          ngo: "FEUNSTIM y ONG ABED (Proyecto #Dcroch)",
-          location: "Abomey, Benín",
-          date: "Diciembre 2024",
-          image: "/image/mpav1.jpg",
-          images: [
-            "/image/mpav2.jpg",
-            "/image/mpav3.jpg",
-            "/image/mpav4.jpg"
-          ],
-          tags: ["#Dcroch", "Empleabilidad", "Juventud", "Liderazgo"],
-          gradient: "from-pink-600 to-rose-800",
-        },
-        {
-          id: 3,
-          title: "Conferencia “Mi Proyecto Pro, Mi Futuro” – Dassa",
-          description: "Mentoria entusiasta de jóvenes para diseñar su futuro y fomentar el crecimiento profesional.",
-          fullDescription: "Un momento inspirador en Dassa organizado por FEUNSTIM en colaboración con la Fundación FDC. El Dr. Aga Adrien Dogo, cofundador de la FDC, aportó su sabiduría y valiosos consejos para orientar a los estudiantes en su búsqueda de empleabilidad. Cada intercambio fue una prueba palpable del compromiso con una juventud ambiciosa y un futuro prometedor.",
-          category: "Liderazgo",
-          ngo: "Fundación FDC y FEUNSTIM",
-          location: "Dassa, Benín",
-          date: "Noviembre 2024",
-          image: "/image/avdassa1.jpg",
-          images: [
-            "/image/avdassa2.jpg",
-            "/image/avdassa3.jpg",
-            "/image/avdassa4.jpg"
-          ],
-          tags: ["Fundación FDC", "Empleabilidad", "Juventud", "Dassa"],
-          gradient: "from-orange-600 to-orange-800",
-        },
-        {
-          id: 4,
-          title: "Concurso “Génie en Herbe” – CEG Tchetti",
-          description: "Iniciativa educativa y espiritual para despertar a la juventud al conocimiento y los valores de excelencia.",
-          fullDescription: "Lanzado oficialmente por la FDC, este concurso reunió a 40 participantes del CEG Tchetti en torno al tema “Introducción a la Biblia”. Bajo la dirección del Dr. Adrien Dogo, esta iniciativa busca promover la excelencia académica y los valores cristianos, ofreciendo kits escolares a los estudiantes para preparar su regreso. Un proyecto prometedor para formar una generación iluminada y comprometida.",
-          category: "Educación",
-          ngo: "Fundación FDC",
-          location: "Tchetti, Benín",
-          date: "Septiembre 2025",
-          image: "/image/tchetti1.jpg",
-          images: [
-            "/image/tchetti2.jpg",
-            "/image/tchetti3.jpg",
-            "/image/tchetti4.jpg"
-          ],
-          tags: ["Juventud", "Educación", "Excelencia", "FDC"],
-          gradient: "from-teal-600 to-emerald-800",
-        },
-      ],
-    }
-  };
 
-  const { language } = useLanguage();
-  const t = translations[language] || translations['en'];
-
-  const translatedFilter = Object.values(t.categories).includes(activeFilter)
-    ? activeFilter
-    : t.categories.all;
-
-  const filteredProjects =
-    translatedFilter === t.categories.all
-      ? t.projects
-      : t.projects.filter((p: Project) => p.category === translatedFilter);
-
-  return (
-    <section className="bg-black py-24 px-6 relative z-10">
-      <div className="max-w-7xl mx-auto">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={translatedFilter}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-2 gap-10"
-          >
-            {filteredProjects.map((project: Project, index: number) => (
-              <ProjectCard
-                key={project.id}
-                project={project as Project}
-                index={index}
-                onOpenModal={onOpenModal}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </section>
-  );
-}
 
 // Composants existants conservés (simplifiés pour l'exemple, garder les originaux si nécessaire)
 // Le code des composants inutilisés a été supprimé pour nettoyer le projet.

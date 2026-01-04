@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/src/components/contexts/language_context";
 import { ThemeProvider } from "@/src/components/contexts/theme_context";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -22,7 +23,10 @@ export default function RootLayout({
         className=""
       >
          <ThemeProvider>
-          <LanguageProvider>{children}</LanguageProvider>
+          <LanguageProvider>
+            <Toaster position="top-right" reverseOrder={false} />
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

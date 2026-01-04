@@ -1,9 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useLanguage } from "@/src/components/contexts/language_context";
 
-import { useLanguage } from "@/src/components/contexts/language_context"; // 👈 important !
+const backgroundImages = [
+  "/image/cta1.jpeg",
+  "/image/cta2.jpeg",
+  "/image/cta3.jpeg",
+];
 
 const translations = {
   fr: {
@@ -29,8 +35,40 @@ const translations = {
 function CTASection() {
   const { language } = useLanguage();
   const t = translations[language];
+
+  // Gestion du carrousel
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="relative bg-black py-24 px-4 overflow-hidden">
+    <section className="relative bg-black py-24 px-4 overflow-hidden min-h-[60vh] flex items-center">
+      {/* Carrousel d'images en arrière-plan */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }} // Opacité réglée pour garder le texte lisible
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            className="absolute inset-0"
+          >
+            <div 
+              className="w-full h-full bg-cover bg-center transition-transform duration-[5000ms] scale-110"
+              style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
+            />
+            {/* Overlay dégradé pour améliorer le contraste */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -69,4 +107,5 @@ function CTASection() {
     </section>
   );
 }
+
 export default CTASection;

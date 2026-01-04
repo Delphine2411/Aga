@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast';
 export default function ContactPage() {
   return (
     <main className="">
-      <Toaster position="top-right" reverseOrder={false} />
+      
       <Navbar />
       <br />
       <br />

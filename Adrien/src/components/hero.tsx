@@ -1,11 +1,51 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {  AnimatePresence } from "framer-motion";
+import { motion,  } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaFacebook, FaPhone } from "react-icons/fa";
 import { useLanguage } from "@/src/components/contexts/language_context";
 import Link from "next/link";
+import { useState } from "react";
+import {  FaTimes, FaPaperPlane } from "react-icons/fa";
+import { toast } from "react-hot-toast";
+
+
 
 export default function HeroSection() {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    reason: ""
+  });
+
+  const handleRequest = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const loadingToast = toast.loading("Envoi de la demande...");
+
+    try {
+      const res = await fetch("/api/request-cv", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        toast.success("Demande envoyée ! Adrien vous répondra bientôt.", { id: loadingToast });
+        setIsOpen(false);
+        setFormData({ name: "", email: "", reason: "" });
+      } else {
+        throw new Error();
+      }
+    } catch (err) {
+      toast.error("Erreur lors de l'envoi de la demande.", { id: loadingToast });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const translations = {
     fr: {
       title: "Télécharger le CV",
@@ -13,6 +53,12 @@ export default function HeroSection() {
       intro: `Je suis titulaire d’un Master en nutrition humaine et sécurité alimentaire ainsi que d’un doctorat (PhD) en nutrition et systèmes alimentaires, avec un intérêt particulier pour la création d’environnements alimentaires plus sains favorisant l’accès à des aliments nutritifs dans les zones arides africaines. Mon objectif est d’accompagner les organisations dans la lutte contre la malnutrition en Afrique, qui touche près de 30 % des enfants de moins de cinq ans.`,
       desc: `Fort de plus de 8 années d’expérience professionnelle dans la mise en œuvre de projets et programmes de sécurité alimentaire, ainsi que dans l’entrepreneuriat des jeunes et des femmes et le développement des entreprises agroalimentaires, je suis convaincu que l’éradication de la malnutrition passe par une transformation inclusive et durable des systèmes alimentaires dans les pays africains, avec un accent particulier sur le lien entre la nutrition et le business.`,
       button: "Découvrir mes réalisations",
+           cvDes: "Veuillez justifier votre demande pour recevoir le CV d'Adrien.",
+      cvDemande: "Demander le CV",
+      nam: "Nom Complet",
+      email: "Votre Email",
+      reason: "Raison de la demande",
+      sendRequest: "Envoyer la demande",
     },
     en: {
       title: "Download CV",
@@ -20,6 +66,12 @@ export default function HeroSection() {
       intro: `I hold a Master's degree in human nutrition and food security as well as a PhD in nutrition and food systems, with a particular interest in creating healthier food environments that promote access to nutritious food in African drylands. My goal is to support organizations in the fight against malnutrition in Africa, which affects nearly 30% of children under five.`,
       desc: `With over 8 years of professional experience in implementing food security projects and programs, as well as in youth and women's entrepreneurship and agribusiness development, I am convinced that eradicating malnutrition requires an inclusive and sustainable transformation of food systems in African countries, with a particular focus on the link between nutrition and business.`,
       button: "Discover my projects",
+            cvDes: "Please justify your request to receive Adrien's CV.",
+      cvDemande: "Request the CV",
+      nam: "Full Name",
+      email: "Your Email",
+      reason: "Reason for the request",
+      sendRequest: "Send request",
     },
     es: {
       title: "Descargar el CV",
@@ -27,6 +79,12 @@ export default function HeroSection() {
       intro: `Tengo una Maestría en nutrición humana y seguridad alimentaria, así com un doctorado (PhD) en nutrición y sistemas alimentarios, con un interés particular en la creación de entornos alimentarios más saludables que promuevan el acceso a alimentos nutritivos en las zonas áridas de África. Mi objetivo es apoyar a las organizaciones en la lucha contra la desnutrición en África, que afecta a casi el 30% de los niños menores de cinco años.`,
       desc: `Con más de 8 años de experiencia profesional en la implementación de proyectos y programas de seguridad alimentaria, así como en el emprendimiento de jóvenes y mujeres y el desarrollo de empresas agroalimentarias, estoy convencido de que la erradicación de la desnutrición requiere una transformación inclusiva y sostenible de los sistemas alimentarios en los países africanos, con un enfoque particular en el vínculo entre la nutrición y los negocios.`,
       button: "Descubrir mis proyectos",
+            cvDes: "Por favor, justifique su solicitud para recibir el CV de Adrien.",
+      cvDemande: "Solicitar el CV",
+      nam: "Nombre completo",
+      email: "Su correo electrónico",
+      reason: "Motivo de la solicitud",
+      sendRequest: "Enviar solicitud",
     },
   };
 
@@ -59,15 +117,81 @@ export default function HeroSection() {
 
           {/* --- Bouton + Icônes --- */}
           <div className="flex flex-wrap justify-center md:justify-start items-center gap-5 mt-8">
-            <a href="/files/CV_Adrien_DOGO.pdf" download="CV_Adrien_DOGO.pdf">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-transparent border-2 border-blue-500 text-blue-500 font-semibold rounded-full hover:bg-blue-500 hover:text-black transition-all flex items-center text-sm sm:text-base"
-              >
-                <FaDownload className="inline-block mr-2" />
-                {t.title}
-              </motion.button>
-            </a>
+            {/* Le Bouton Principal */}
+      <motion.button
+        onClick={() => setIsOpen(true)}
+        whileHover={{ scale: 1.1 }}
+        className="px-4 sm:px-6 py-2 sm:py-3 bg-transparent border-2 border-blue-500 text-blue-500 font-semibold rounded-full hover:bg-blue-500 hover:text-black transition-all flex items-center text-sm sm:text-base"
+      >
+        <FaDownload className="inline-block mr-2" />
+        {t.title}
+      </motion.button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+            
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative bg-gray-900 border border-blue-500/30 p-8 rounded-3xl max-w-md w-full shadow-2xl"
+            >
+              <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <FaTimes size={20} />
+              </button>
+
+              <h3 className="text-2xl font-bold text-white mb-2">{t.cvDemande}</h3>
+              <p className="text-gray-400 mb-6 text-sm">{t.cvDes}</p>
+
+              <form onSubmit={handleRequest} className="space-y-4">
+                <div>
+                  <label className="block text-gray-300 text-sm mb-1">{t.nam}</label>
+                  <input 
+                    required type="text" 
+                    className="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-white focus:border-blue-500 outline-none"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-300 text-sm mb-1">{t.email}</label>
+                  <input 
+                    required type="email" 
+                    className="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-white focus:border-blue-500 outline-none"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-300 text-sm mb-1">{t.reason}</label>
+                  <textarea 
+                    required rows={3}
+                    className="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-white focus:border-blue-500 outline-none"
+                    placeholder="Ex: Recrutement pour le poste de..."
+                    value={formData.reason}
+                    onChange={(e) => setFormData({...formData, reason: e.target.value})}
+                  />
+                </div>
+
+                <button 
+                  disabled={isSubmitting}
+                  type="submit"
+                  className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+                >
+                  <FaPaperPlane size={14} />
+                  {isSubmitting ? "Envoi..." : t.sendRequest}
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
             <div className="flex gap-4 text-blue-500 text-xl sm:text-2xl">
               { /*             <Link href="https://github.com/awogbin2411" target="_blank" rel="noopener noreferrer">
