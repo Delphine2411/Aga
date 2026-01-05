@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/src/components/contexts/language_context";
 import { ThemeProvider } from "@/src/components/contexts/theme_context";
 import { Toaster } from "react-hot-toast";
 
 
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-oswald",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Adrien Aga",
@@ -18,9 +29,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${oswald.variable} ${inter.variable}`}>
       <body
-        className=""
+        className="font-sans antialiased bg-black text-white"
       >
          <ThemeProvider>
           <LanguageProvider>

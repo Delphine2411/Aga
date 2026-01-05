@@ -159,9 +159,17 @@ export default function ServicesSection() {
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-20 px-6 relative">
-      <div className="text-center mb-16">
-        <h2 className="lg:text-4xl text-3xl font-bold mt-2 text-blue-500">{t.sectionTitle}</h2>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-20"
+      >
+        <h2 className="text-4xl md:text-4xl font-bold bg-clip-text text-blue-500 bg-gradient-to-r from-blue-400 to-purple-500 mb-6">
+          {t.sectionTitle}
+        </h2>
+        <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full" />
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
         {t.services.map((service, index) => {
@@ -221,7 +229,7 @@ export default function ServicesSection() {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-      className={`
+              className={`
     relative bg-gray-900 border-2 border-blue-500 p-8 rounded-3xl max-w-lg w-full 
     shadow-[0_0_50px_rgba(59,130,246,0.5)] 
     max-h-[75vh] overflow-y-auto 

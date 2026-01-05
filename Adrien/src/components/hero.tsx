@@ -182,7 +182,7 @@ export default function HeroSection() {
                 <button 
                   disabled={isSubmitting}
                   type="submit"
-                  className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 hover:bg-blue-500 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2"
                 >
                   <FaPaperPlane size={14} />
                   {isSubmitting ? "Envoi..." : t.sendRequest}

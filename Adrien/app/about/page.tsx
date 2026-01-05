@@ -9,6 +9,7 @@ import StatsSection from "../../src/components/about/stats";
 import SkillsSection from "../../src/components/skills-section";
 import CTASection from "../../src/components/realisations/cta_section";
 import ProcessSection from "@/src/components/realisations/process_section";
+import TestimonialsSection from "@/src/components/realisations/testimonials_section";
 
 export default function ContactPage() {
   return (
@@ -23,6 +24,7 @@ export default function ContactPage() {
       
       <SkillsSection />
       <CTASection />
+      <TestimonialsSection />
       <Footer />
     </main>
   );

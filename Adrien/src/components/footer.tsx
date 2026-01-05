@@ -1,10 +1,22 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react"; // 👈 useEffect ajouté
+import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion"; // 👈 AnimatePresence ajouté
 import { useLanguage } from "@/src/components/contexts/language_context";
 import Footer3D from "./Footer3D";
 import { FaLinkedin, FaWhatsapp, FaEnvelope, FaFacebook } from "react-icons/fa";
+
+// --- AJOUT : Liste des images ---
+const backgroundImages = [
+  "/image/about1.jpeg",
+  "/image/about2.jpeg",
+  "/image/about3.jpeg",
+  "/image/about4.jpeg",
+  "/image/cta1.jpeg",
+  "/image/real1.jpeg",
+  "/image/real2.jpeg",
+  "/image/real3.jpeg",
+];
 
 const footerText = {
   fr: {
@@ -75,10 +87,43 @@ export default function Footer() {
   const { language: lang } = useLanguage();
   const year = new Date().getFullYear();
 
+  // --- AJOUT : Logique du Carrousel ---
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <footer className="relative bg-black text-white pt-24 pb-12 overflow-hidden border-t border-gray-900">
-      {/* 3D Background Scene */}
-      <Footer3D />
+    <footer className="relative bg-black text-white pt-18 pb-12 overflow-hidden border-t border-gray-900">
+      
+      {/* --- AJOUT : Carrousel d'images en BG (z-0) --- */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.2 }} // Opacité faible pour le footer
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            className="absolute inset-0"
+          >
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
+            />
+            <div className="absolute inset-0 bg-black/60" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* 3D Background Scene (z-1) */}
+      <div className="absolute inset-0 z-1 pointer-events-none">
+        <Footer3D />
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

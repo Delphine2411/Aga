@@ -4,28 +4,48 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Ces variables seront remplies par Next.js Font */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  /* Police par défaut pour tout le texte (Inter) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  
+  /* Police spécifique pour les titres (Oswald) */
+  --font-display: var(--font-oswald), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #030712;
+    --foreground: #f3f4f6;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* --- Styles de base --- */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans); /* Applique Inter partout par défaut */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Application automatique d'Oswald à tous les titres */
+  h1, h2, h3, h4, h5, h6, .text-display {
+    font-family: var(--font-display);
+    @apply tracking-tight uppercase; /* Oswald est plus impactant en majuscules */
+  }
+
+  /* Ajustement de l'interlettrage pour Inter (le corps de texte) */
+  p, li, span {
+    letter-spacing: -0.01em;
+  }
 }

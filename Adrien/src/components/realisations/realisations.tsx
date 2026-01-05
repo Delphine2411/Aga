@@ -141,7 +141,7 @@ function HeroSection() {
           <motion.div
             key={currentIndex}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }} // Opacité réduite pour laisser voir les animations 3D
+            animate={{ opacity: 0.8 }} // Opacité réduite pour laisser voir les animations 3D
             exit={{ opacity: 0 }}
             transition={{ duration: 2 }}
             className="absolute inset-0"
@@ -269,33 +269,36 @@ function ScientificAchievements() {
             {scientific.items.map((item: { text: string; icon: string; Link: string }, index: number) => {
               const Icon = iconMap[item.icon];
               return (
-                <motion.a
-                  href={item.Link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative flex items-start gap-6 p-6 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-blue-500/30 transition-all duration-300 group overflow-hidden cursor-pointer"
-                >
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-transparent flex items-end justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 p-2">
-                    <p className="text-black font-semibold text-sm flex items-center gap-2 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 px-2 py-1 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                      {scientific.clickDetails} <span className="text-lg">↗</span>
-                    </p>
-                  </div>
+<motion.a
+  href={item.Link}
+  target="_blank"
+  rel="noopener noreferrer"
+  key={index}
+  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: index * 0.1 }}
+  /* Modification ici : flex-col par défaut, items-center sur mobile, sm:flex-row items-start pour le reste */
+  className="relative flex flex-col items-center sm:items-start sm:flex-row gap-6 p-6 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-blue-500/30 transition-all duration-300 group overflow-hidden cursor-pointer"
+>
+  {/* Hover Overlay */}
+  <div className="absolute inset-0 bg-transparent flex items-end justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 p-2">
+    <p className="text-black font-semibold text-sm flex items-center gap-2 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 px-2 py-1 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+      {scientific.clickDetails} <span className="text-lg">↗</span>
+    </p>
+  </div>
 
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-500 text-2xl shadow-lg shadow-blue-500/10 group-hover:scale-110 transition-transform">
-                    <Icon />
-                  </div>
-                  <div>
-                    <p className="text-gray-200 text-lg leading-relaxed font-medium">
-                      {item.text}
-                    </p>
-                  </div>
-                </motion.a>
+  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-500 text-2xl shadow-lg shadow-blue-500/10 group-hover:scale-110 transition-transform">
+    <Icon />
+  </div>
+  
+  {/* Ajout de text-center sur mobile pour harmoniser avec l'icône centrée */}
+  <div className="text-center sm:text-left">
+    <p className="text-gray-200 text-lg leading-relaxed font-medium">
+      {item.text}
+    </p>
+  </div>
+</motion.a>
               );
             })}
           </div>
@@ -609,10 +612,10 @@ export default function RealisationsPage() {
         <StatsSection />
         <Service />
         <ScientificAchievements />
-        <TestimonialsSection />
         <div className="bg-gradient-to-b from-black to-gray-900">
           <CTASection />
         </div>
+        <TestimonialsSection />
       </div>
 
       <ProjectModal

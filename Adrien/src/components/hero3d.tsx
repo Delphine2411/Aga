@@ -10,6 +10,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import * as THREE from 'three';
 
+// --- AJOUT : Liste des images du carrousel ---
+const backgroundImages = [
+  "/image/aga1.jpeg",
+  "/image/adrien-dogo.png",
+  "/image/aga.jpeg",
+];
+
 // 💎 Dynamic Particle Background
 function ParticleSystem() {
   const points = useMemo(() => {
@@ -71,7 +78,6 @@ function ResponsiveGeometry() {
   return (
     <group ref={groupRef} scale={scale}>
       <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-        {/* Core Geometry */}
         <Icosahedron args={[1.5, 1]}>
           <MeshDistortMaterial
             color="#3b82f6"
@@ -83,8 +89,6 @@ function ResponsiveGeometry() {
             transparent
           />
         </Icosahedron>
-
-        {/* Inner Core */}
         <Icosahedron args={[0.8, 15]}>
           <meshStandardMaterial
             color="#ec4899"
@@ -94,8 +98,6 @@ function ResponsiveGeometry() {
             roughness={0.1}
           />
         </Icosahedron>
-
-        {/* Outer Wireframe Ring */}
         <mesh rotation={[Math.PI / 4, 0, 0]}>
           <torusGeometry args={[2.5, 0.02, 16, 100]} />
           <meshBasicMaterial color="#f97316" transparent opacity={0.5} />
@@ -108,6 +110,16 @@ function ResponsiveGeometry() {
 export default function Hero3D() {
   const [showButton, setShowButton] = useState(false);
   const [lang, setLang] = useState<"fr" | "en" | "es">("fr");
+
+  // --- AJOUT : État pour le carrousel ---
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 6000); // Change toutes les 6 secondes
+    return () => clearInterval(timer);
+  }, []);
 
   const text = {
     fr: {
@@ -131,7 +143,7 @@ export default function Hero3D() {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowButton(true), 3000); // Shorter delay for better flow
+    const timer = setTimeout(() => setShowButton(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -139,16 +151,37 @@ export default function Hero3D() {
 
   return (
     <div className="h-screen w-full bg-[#030712] flex flex-col items-center justify-center relative overflow-hidden">
+      
+      {/* --- AJOUT : CARROUSEL D'IMAGES EN BG --- */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 0.6, scale: 1 }} // Opacité 0.3 pour ne pas gêner le texte
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2.5, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <div 
+              className="w-full h-full bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
+            />
+            {/* Overlay sombre pour assurer le contraste avec le texte */}
+            <div className="absolute inset-0 bg-black/40" />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
-      {/* --- BACKGROUND EFFECTS --- */}
-      <div className="absolute inset-0 z-0 opacity-60 md:opacity-100">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(59,130,246,0.1),_transparent_70%)]" />
+      {/* --- BACKGROUND EFFECTS (CANVAS) --- */}
+      <div className="absolute inset-0 z-10 opacity-60 md:opacity-100 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(59,130,246,0.15),_transparent_70%)]" />
         <Canvas camera={{ position: [0, 0, 8], fov: typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 45 }}>
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} />
           <ParticleSystem />
           <ResponsiveGeometry />
-          <OrbitControls enableZoom={false} enablePan={false} />
+          {/* OrbitControls retiré ou réglé sur pointer-events car le Canvas est au milieu */}
         </Canvas>
       </div>
 
@@ -182,7 +215,7 @@ export default function Hero3D() {
       </div>
 
       {/* --- MAIN CONTENT --- */}
-      <div className="relative z-10 text-center px-6 lg:py-0 py-32">
+      <div className="relative z-20 text-center px-6 lg:py-0 py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -241,7 +274,7 @@ export default function Hero3D() {
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-0 flex flex-col items-center gap-4 z-10"
+        className="absolute bottom-6 flex flex-col items-center gap-4 z-20"
       >
         <span className="text-blue-500 text-[10px] uppercase font-black tracking-[0.3em]">Scroll</span>
         <div className="w-[1px] h-16 bg-gradient-to-b from-blue-500 to-transparent" />

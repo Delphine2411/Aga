@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "votre-email-adrien@gmail.com", // Votre email
+      to: process.env.EMAIL_TO, // Votre email
       subject: `📄 Nouvelle demande de CV de ${name}`,
       html: `
         <div style="font-family: sans-serif; padding: 20px; border: 1px solid #3b82f6; border-radius: 10px;">

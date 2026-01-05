@@ -8,7 +8,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        // Cela remplace la police sans-serif par défaut par Oswald
+        sans: ['var(--font-oswald)', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }

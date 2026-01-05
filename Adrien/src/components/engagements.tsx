@@ -7,6 +7,7 @@ import { useLanguage } from "@/src/components/contexts/language_context";
 const engagements = {
   fr: {
     title: "Mes Engagements",
+    title1: " Professionnels et Bénévoles",
     proActuels: "Professionnels - Actuels",
     proPrecedents: "Professionnels - Précédents",
     benevole: "Bénévolat & Engagement Social",
@@ -21,6 +22,7 @@ const engagements = {
   },
   en: {
     title: "My Engagements",
+    title1: "Professional and Volunteer",
     proActuels: "Professional - Current",
     proPrecedents: "Professional - Past",
     benevole: "Volunteer & Social Work",
@@ -32,7 +34,22 @@ const engagements = {
       { name: "MANSSAH", logo: "/image/manssa.webp", category: "benevole", url: "https://www.manssah.com/" },
       { name: "ABED ONG", logo: "/image/abed.png", category: "precedent", url: "https://abedong.org/" },
     ]
-  }
+  },
+  es: {
+    title: "Mis compromisos",
+    title1: " profesionales y de voluntariado",
+    proActuels: "Profesional - Actual",
+    proPrecedents: "Profesional - Pasado",
+    benevole: "Voluntariado y Trabajo Social",
+    items: [
+      { name: "Global Alliance for Improved Nutrition (GAIN)", logo: "/image/logo-gain-health.svg", category: "actuel", url: "https://www.gainhealth.org/" },
+      { name: "Laboratoire de Nutrition et des Sciences alimentaires, Université de Parakou", logo: "/image/universite.png", category: "actuel", url: "https://share.google/OHSwEyzBvAoMOOr3J" },
+      { name: "BoPinc", logo: "/image/bopinc_logo.png", category: "precedent", url: "https://bopinc.org/" },
+      { name: "Technoserve", logo: "/image/technologo.png", category: "precedent", url: "https://www.technoserve.org/" },
+      { name: "MANSSAH", logo: "/image/manssa.webp", category: "benevole", url: "https://www.manssah.com/" },
+      { name: "ABED ONG", logo: "/image/abed.png", category: "precedent", url: "https://abedong.org/" },
+    ]
+  },
 };
 
 export default function EngagementsSection() {
@@ -112,8 +129,8 @@ export default function EngagementsSection() {
           viewport={{ once: true }}
           className="text-center mb-24 flex flex-col items-center"
         >
-          <h2 className="text-4xl md:text-6xl font-black text-blue-500 mb-6 uppercase tracking-tight">
-            {t.title}
+          <h2 className="lg:text-5xl text-3xl font-bold text-white mb-6 tracking-tight">
+            {t.title} <span className="text-blue-500">{t.title1} </span>
           </h2>
           <div className="h-2 w-32 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 rounded-full"></div>
         </motion.div>

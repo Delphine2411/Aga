@@ -60,7 +60,7 @@ function CTASection() {
             className="absolute inset-0"
           >
             <div 
-              className="w-full h-full bg-cover bg-center transition-transform duration-[5000ms] scale-110"
+              className="w-full h-full bg-cover bg-center transition-transform duration-[5000ms] scale-100"
               style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
             />
             {/* Overlay dégradé pour améliorer le contraste */}
