@@ -158,9 +158,9 @@ function BioSection() {
               whileHover={{ scale: 1.05, rotateY: 5 }}
               className="relative w-full aspect-square bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 rounded-3xl overflow-hidden shadow-2xl"
             >
-              <div className="absolute inset-0 " />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img src="/image/adrien.png" alt="Adrien DOGO" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 " />
+              <div className="absolute inset-0 flex items-center justify-center ">
+                <img src="/image/adrien.png" alt="Adrien DOGO" className="w-full h-full object-cover " />
               </div>
               <div className="absolute -bottom-16 -right-16">
                 <div className="w-64 h-64 bg-blue-500/30 rounded-full blur-3xl animate-pulse" />
