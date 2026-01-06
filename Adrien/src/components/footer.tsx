@@ -98,7 +98,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-black text-white pt-18 pb-12 overflow-hidden border-t border-gray-900">
+    <footer className="relative bg-black text-gray-200 pt-18 pb-12 overflow-hidden border-t border-gray-900">
       
       {/* --- AJOUT : Carrousel d'images en BG (z-0) --- */}
       <div className="absolute inset-0 z-0">

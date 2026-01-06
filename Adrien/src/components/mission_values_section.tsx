@@ -128,7 +128,7 @@ export default function MissionValuesSection() {
                         </div>
                         <div className="text-center md:text-left">
                             <h3 className="text-3xl font-semibold mb-4 text-white">{t.missionTitle}</h3>
-                            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
+                            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
                                 &quot;{t.missionText}&quot;
                             </p>
                         </div>

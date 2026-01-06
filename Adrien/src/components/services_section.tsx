@@ -158,7 +158,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-20 px-6 relative">
+    <section className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-gray-200 py-20 px-6 relative">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -287,7 +287,7 @@ export default function ServicesSection() {
 
               <div className="mt-8 flex justify-center">
                 <Link href="/contact" onClick={() => setSelectedService(null)}>
-                  <button className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full transition-all">
+                  <button className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-gray-200 font-bold rounded-full transition-all">
                     Me contacter
                   </button>
                 </Link>

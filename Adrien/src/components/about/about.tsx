@@ -174,7 +174,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-6xl md:text-8xl font-bold text-white mb-6"
+          className="text-6xl md:text-8xl font-bold text-gray-200 mb-6"
         >
           {t.title1}{" "}
           <span className="text-blue-500">{t.title}</span>

@@ -789,7 +789,7 @@ export default function ExperienceSection() {
                   {exp.year}
                 </span>
 
-                <h3 className={`text-2xl font-bold text-white mb-2 transition-colors leading-tight ${expandedIndex === index ? 'text-blue-500' : 'group-hover:text-blue-500'}`}>
+                <h3 className={`text-2xl font-bold text-gray-200 mb-2 transition-colors leading-tight ${expandedIndex === index ? 'text-blue-500' : 'group-hover:text-blue-500'}`}>
                   {exp.title}
                 </h3>
 
@@ -827,7 +827,7 @@ export default function ExperienceSection() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h3 className="text-4xl font-bold text-white mb-4">
+            <h3 className="text-4xl font-bold text-gray-200 mb-4">
               {researchContent.title.split(" ")[0]}{" "}
               <span className="text-blue-500">
                 {researchContent.title.replace(researchContent.title.split(" ")[0], "")}
@@ -852,7 +852,7 @@ export default function ExperienceSection() {
                     <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-500 text-xs font-bold tracking-widest mb-4">
                       {exp.year}
                     </span>
-                    <h4 className="text-3xl font-bold text-white group-hover:text-blue-500 transition-colors">
+                    <h4 className="text-3xl font-bold text-gray-200 group-hover:text-blue-500 transition-colors">
                       {exp.title}
                     </h4>
                     <p className="text-xl text-gray-400 mt-2">{exp.company}</p>
@@ -886,7 +886,7 @@ export default function ExperienceSection() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h3 className="text-4xl font-bold text-white mb-4">
+            <h3 className="text-4xl font-bold text-gray-200 mb-4">
               {leadershipContent.title.split(" ")[0]}{" "}
               <span className="text-amber-500">
                 {leadershipContent.title.replace(leadershipContent.title.split(" ")[0], "")}
@@ -912,7 +912,7 @@ export default function ExperienceSection() {
                   {item.year}
                 </span>
 
-                <h4 className="text-xl font-bold text-white mb-3 leading-tight group-hover:text-amber-500 transition-colors">
+                <h4 className="text-xl font-bold text-gray-200 mb-3 leading-tight group-hover:text-amber-500 transition-colors">
                   {item.title}
                 </h4>
 
@@ -932,7 +932,7 @@ export default function ExperienceSection() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h3 className="text-4xl font-bold text-white mb-4">
+            <h3 className="text-4xl font-bold text-gray-200 mb-4">
               {activismContent.title.split(" ")[0]}{" "}
               <span className="text-indigo-500">
                 {activismContent.title.replace(activismContent.title.split(" ")[0], "")}
@@ -958,7 +958,7 @@ export default function ExperienceSection() {
                   {item.year}
                 </span>
 
-                <h4 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors">
+                <h4 className="text-xl font-bold text-gray-200 mb-3 group-hover:text-indigo-400 transition-colors">
                   {item.title}
                 </h4>
 

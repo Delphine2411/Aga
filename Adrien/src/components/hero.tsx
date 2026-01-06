@@ -108,10 +108,10 @@ export default function HeroSection() {
           <h3 className="text-lg sm:text-xl lg:text-2xl mt-3 text-blue-500 font-semibold">
             {t.role}
           </h3>
-          <p className="text-gray-300 mt-4 max-w-2lg mx-auto md:mx-0  sm:text-base">
+          <p className="text-gray-400 mt-4 max-w-2lg mx-auto md:mx-0  sm:text-base">
             {t.intro}
           </p>
-          <p className="text-gray-300 mt-4 max-w-2lg mx-auto md:mx-0  sm:text-base">
+          <p className="text-gray-400 mt-4 max-w-2lg mx-auto md:mx-0  sm:text-base">
             {t.desc}
           </p>
 

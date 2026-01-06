@@ -336,7 +336,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
                 <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-500 text-xs font-bold tracking-wider mb-6 border border-blue-500/20">
                   {project.category}
                 </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-200 mb-6">
                   {project.title}
                 </h2>
                 <div className="space-y-6">
@@ -686,7 +686,7 @@ export default function Realisations() {
   };
 
   return (
-    <div className="bg-black min-h-screen selection:bg-blue-500 selection:text-white">
+    <div className="bg-black min-h-screen selection:bg-blue-500 selection:text-gray-200">
       <div className="relative z-10">
         <FilterSection activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
         <ProjectsSection activeFilter={activeFilter} onOpenModal={handleOpenModal} />

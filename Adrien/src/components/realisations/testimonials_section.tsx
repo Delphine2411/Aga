@@ -160,7 +160,7 @@ export default function TestimonialsSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-5xl font-bold text-white text-center"
+          className="text-3xl md:text-5xl font-bold text-gray-200 text-center"
         >
           {t.title1} <span className="text-blue-500">{t.title}</span>
         </motion.h2>

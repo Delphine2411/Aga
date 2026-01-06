@@ -51,7 +51,7 @@ export default function PersonalLifeSection() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                    <h3 className="text-4xl md:text-5xl font-bold text-gray-200 mb-4">
                         {content.title.split(" ")[0]}{" "}
                         <span className="text-rose-500">
                             {content.title.replace(content.title.split(" ")[0], "")}
@@ -77,7 +77,7 @@ export default function PersonalLifeSection() {
                                 {item.icon}
                             </div>
 
-                            <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-rose-400 transition-colors">
+                            <h4 className="text-2xl font-bold text-gray-200 mb-4 group-hover:text-rose-400 transition-colors">
                                 {item.title}
                             </h4>
 

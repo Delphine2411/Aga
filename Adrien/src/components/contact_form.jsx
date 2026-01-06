@@ -208,7 +208,7 @@ export default function ContactSection() {
             className="space-y-8"
           >
             <div>
-              <motion.h2 className="text-6xl md:text-7xl font-black text-white leading-tight">
+              <motion.h2 className="text-6xl md:text-7xl font-black text-gray-200 leading-tight">
                 {t.title1} <br />
                 <span className="text-blue-500">{t.title2}</span>
               </motion.h2>
@@ -234,7 +234,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-gray-500 text-sm font-bold uppercase tracking-widest">Phone</p>
-                  <p className="text-white text-xl font-medium">+229 01 94 79 21 34</p>
+                  <p className="text-gray-200 text-xl font-medium">+229 01 94 79 21 34</p>
                 </div>
               </div>
             </div>
@@ -336,7 +336,7 @@ export default function ContactSection() {
           className="absolute -bottom-10 right-0 hidden lg:flex items-center gap-4 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 px-6 py-3 rounded-2xl border-4 border-black group"
         >
           <div className="w-3 h-3 rounded-full bg-white animate-pulse" />
-          <p className="text-white font-black italic tracking-tighter">LET&apos;S GROW TOGETHER</p>
+          <p className="text-gray-200 font-black italic tracking-tighter">LET&apos;S GROW TOGETHER</p>
         </motion.div>
       </div>
     </div>

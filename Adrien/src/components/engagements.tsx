@@ -65,7 +65,7 @@ export default function EngagementsSection() {
       <div className="mb-20 w-full flex flex-col items-center">
         {/* Titre de catégorie */}
         <div className="flex flex-col items-center mb-10 text-center">
-          <h3 className="text-xl font-bold text-white uppercase tracking-[0.2em]">
+          <h3 className="text-xl font-bold text-gray-200 uppercase">
             {categoryTitle}
           </h3>
           <div className="h-1 w-12 bg-blue-600 mt-2 rounded-full"></div>
@@ -89,7 +89,7 @@ export default function EngagementsSection() {
             >
               {/* Conteneur de l'image (Centré et en couleur) */}
               <div className="flex flex-col items-center gap-6">
-                 <div className="relative w-32 h-32 rounded-full bg-white p-4 shadow-xl flex items-center justify-center overflow-hidden border-2 border-blue-500/20">
+                 <div className="relative w-32 h-32 rounded-full bg-gray-100 p-4 shadow-xl flex items-center justify-center overflow-hidden border-2 border-blue-500/20">
                   <Image 
                     src={item.logo} 
                     alt={item.name} 
@@ -129,7 +129,7 @@ export default function EngagementsSection() {
           viewport={{ once: true }}
           className="text-center mb-24 flex flex-col items-center"
         >
-          <h2 className="lg:text-5xl text-3xl font-bold text-white mb-6 tracking-tight">
+          <h2 className="lg:text-5xl text-3xl font-bold text-gray-200 mb-6">
             {t.title} <span className="text-blue-500">{t.title1} </span>
           </h2>
           <div className="h-2 w-32 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 rounded-full"></div>

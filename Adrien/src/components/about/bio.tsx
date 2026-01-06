@@ -160,7 +160,7 @@ function BioSection() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 " />
               <div className="absolute inset-0 flex items-center justify-center ">
-                <img src="/image/adrien.png" alt="Adrien DOGO" className="w-full h-full object-cover " />
+                <img src="/image/adrien1.png" alt="Adrien DOGO" className="w-full h-full object-cover " />
               </div>
               <div className="absolute -bottom-16 -right-16">
                 <div className="w-64 h-64 bg-blue-500/30 rounded-full blur-3xl animate-pulse" />
@@ -170,7 +170,7 @@ function BioSection() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="space-y-6">
-            <h2 className="text-5xl font-bold text-white">
+            <h2 className="text-5xl font-bold text-gray-200 leading-tight">
               {t.me} <span className="text-blue-500">Adrien DOGO</span>
             </h2>
             <p className="text-gray-400 text-lg leading-relaxed">
@@ -210,7 +210,7 @@ function BioSection() {
                       <FaTimes size={20} />
                     </button>
 
-                    <h3 className="text-2xl font-bold text-white mb-2">{t.cvDemande}</h3>
+                    <h3 className="text-2xl font-bold text-gray-200 mb-2">{t.cvDemande}</h3>
                     <p className="text-gray-400 mb-6 text-sm">{t.cvDes}</p>
 
                     <form onSubmit={handleRequest} className="space-y-4">
@@ -267,7 +267,7 @@ function BioSection() {
           className="relative z-10"
         >
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold text-white mb-4">{t.academicTitle}</h3>
+            <h3 className="text-4xl font-bold text-gray-200 mb-4">{t.academicTitle}</h3>
             <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full" />
           </div>
 
@@ -285,7 +285,7 @@ function BioSection() {
                   <span className="text-blue-500 font-bold text-2xl mb-4 block group-hover:scale-110 transition-transform">
                     {edu.year}
                   </span>
-                  <h4 className="text-xl font-bold text-white mb-2">{edu.title}</h4>
+                  <h4 className="text-xl font-bold text-gray-200 mb-2">{edu.title}</h4>
                   <p className="text-gray-400 text-sm leading-relaxed">{edu.desc}</p>
                 </motion.div>
               ))}
