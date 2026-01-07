@@ -12,9 +12,9 @@ const translations = {
     button: "En savoir plus",
     services: [
       {
-        title: "Développement d’entreprises nutritionnelles et assistance technique",
+        title: "Développement d’entreprises de nutrition et assistance technique",
         description:
-          "J'accompagne le développement de votre entreprise nutritionnelle grâce à une expertise technique pointue. De la formulation de produits à la conformité réglementaire, je vous aide à bâtir des solutions durables, performantes et adaptées au marché.",
+          "J'accompagne le développement de votre entreprise de nutrition grâce à une expertise technique pointue. De la formulation de produits à la conformité réglementaire, je vous aide à bâtir des solutions durables, performantes et adaptées au marché.",
         stats: ["53 PME agroalimentaires assistées techniquement", "10 Projets d'assistance technique coordonnés"]
       },
       {
