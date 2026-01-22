@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     // Lien de validation pour Adrien
     // Ce lien pointe vers l'étape 2 ci-dessous
-    const approveUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/approve-cv?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`;
+    const approveUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "https://aga-l8lv.vercel.app"}/api/approve-cv?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`;
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
