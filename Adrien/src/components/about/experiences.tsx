@@ -1,21 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { motion , AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/src/components/contexts/language_context";
 import { useEffect } from "react";
 
 // Liste des images pour le fond
-const backgroundImages = [
-  "/image/bg1.jpg",
-  "/image/bg2.jpg",
-  "/image/bg3.jpg",
-];
+// experience section content starts here
 
 export default function ExperienceSection() {
   type Language = "fr" | "en" | "es";
   //const { language } = useLanguage();
-  
+
   interface Experience {
     year: string;
     title: string;
@@ -738,7 +734,7 @@ export default function ExperienceSection() {
   const leadershipContent = leadershipTexts[language as Language] || leadershipTexts.en;
   const activismContent = activismTexts[language as Language] || activismTexts.en;
 
-  
+
   const handleCardClick = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react"; // 👈 useEffect ajouté
+import React, { useState, useEffect } from "react"; // 👈 useEffect ajouté
 import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion"; // 👈 AnimatePresence ajouté
 import { useLanguage } from "@/src/components/contexts/language_context";
 import Footer3D from "./Footer3D";
@@ -99,7 +99,7 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-black text-gray-200 pt-18 pb-12 overflow-hidden border-t border-gray-900">
-      
+
       {/* --- AJOUT : Carrousel d'images en BG (z-0) --- */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
@@ -111,7 +111,7 @@ export default function Footer() {
             transition={{ duration: 2 }}
             className="absolute inset-0"
           >
-            <div 
+            <div
               className="w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
             />

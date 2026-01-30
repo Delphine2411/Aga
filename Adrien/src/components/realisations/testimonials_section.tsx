@@ -32,19 +32,20 @@ const translations = {
         text: "Adrien est un jeune talentueux, compétent et très orienté résultat dans ses actions.",
         rating: 5,
       },
-     // {
-       // name: "Marc Ouédraogo",
-       // role: "Investisseur, Sahel Ventures",
-       // text: "Son analyse du marché nutritionnel est d'une précision chirurgicale. Il sait transformer des défis techniques en opportunités de business.",
-       // rating: 5,
+      // {
+      // name: "Marc Ouédraogo",
+      // role: "Investisseur, Sahel Ventures",
+      // text: "Son analyse du marché nutritionnel est d'une précision chirurgicale. Il sait transformer des défis techniques en opportunités de business.",
+      // rating: 5,
       //},
-     // {
+      // {
       //  name: "Lucie Zoma",
       //  role: "Coordinatrice de Projet, ONG SantéPlus",
       //  text: "Efficace et passionné. Adrien a su mobiliser les acteurs clés pour la réussite de notre programme de fortification alimentaire.",
       //  rating: 5,
       //},
     ],
+    cta: "Me contacter",
   },
   en: {
     title1: "What they",
@@ -74,19 +75,20 @@ const translations = {
         text: "Adrien is a young talent, competent and very result-oriented in his actions.",
         rating: 5,
       },
-     // {
+      // {
       //  name: "Marc Ouédraogo",
       //  role: "Investor, Sahel Ventures",
       //  text: "His analysis of the nutritional market is surgically precise. He knows how to transform technical challenges into business opportunities.",
       //  rating: 5,
       //},
-     // {
+      // {
       //  name: "Lucie Zoma",
       //  role: "Project Coordinator, ONG SantéPlus",
       //  text: "Efficient and passionate. Adrien was able to mobilize key stakeholders for the success of our food fortification program.",
       //  rating: 5,
       //},
     ],
+    cta: "Contact me",
   },
   es: {
     title1: "Lo que",
@@ -116,31 +118,46 @@ const translations = {
         text: "Adrien es un joven talento, competente y muy orientado resultado en sus acciones.",
         rating: 5,
       },
-    //  {
-     //   name: "Marc Ouédraogo",
+      //  {
+      //   name: "Marc Ouédraogo",
       //  role: "Inversor, Sahel Ventures",
       //  text: "Su análisis del mercado nutricional es de una precisión quirúrgica. Sabe transformar los desafíos técnicos en oportunidades de negocio.",
       //  rating: 5,
       //},
-     // {
-       // name: "Lucie Zoma",
-       // role: "Coordinadora de Proyectos, ONG SantéPlus",
-       // text: "Eficiente y apasionado. Adrien supo movilizar a los actores clave para el éxito de nuestro programa de fortificación alimentaria.",
-       // rating: 5,
+      // {
+      // name: "Lucie Zoma",
+      // role: "Coordinadora de Proyectos, ONG SantéPlus",
+      // text: "Eficiente y apasionado. Adrien supo movilizar a los actores clave para el éxito de nuestro programa de fortificación alimentaria.",
+      // rating: 5,
       //},
     ],
+    cta: "Contáctame",
   },
 };
+
+import { useRef } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 export default function TestimonialsSection() {
   const { language } = useLanguage();
   const t = translations[language];
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Create a doubled list for infinite scroll effect
   const doubledTestimonials = [...t.testimonials, ...t.testimonials];
 
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = 400; // Adjust based on card width
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <section className="bg-gray-900 py-16 md:py-24 px-4 md:px-6 overflow-hidden">
+    <section className="bg-gray-900 py-16 md:py-24 px-4 md:px-6 overflow-hidden relative group">
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes scroll {
@@ -152,6 +169,13 @@ export default function TestimonialsSection() {
         }
         .pause-on-hover:hover .animate-scroll {
           animation-play-state: paused;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}} />
 
@@ -166,33 +190,71 @@ export default function TestimonialsSection() {
         </motion.h2>
       </div>
 
-      <div className="relative flex overflow-hidden pause-on-hover">
-        <div className="flex gap-8 whitespace-nowrap animate-scroll">
-          {doubledTestimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-gray-800 rounded-2xl p-6 md:p-8 border border-gray-700 hover:border-blue-500/50 transition-all w-[85vw] sm:w-[350px] lg:w-[450px] flex-shrink-0 whitespace-normal flex flex-col min-h-[280px] md:min-h-[300px]"
-            >
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-blue-500 text-2xl">★</span>
-                ))}
+      <div className="relative max-w-7xl mx-auto">
+        {/* Navigation Arrows */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-8 md:left-8 z-20 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-active:opacity-100">
+          <button
+            onClick={() => scroll("left")}
+            className="p-2 md:p-3 bg-gray-800/80 hover:bg-blue-500 rounded-full text-white backdrop-blur-sm border border-gray-700 transition-all shadow-xl"
+            aria-label="Previous"
+          >
+            <FiChevronLeft size={20} className="md:w-6 md:h-6" />
+          </button>
+        </div>
+        <div className="absolute top-1/2 -translate-y-1/2 right-8 md:right-8 z-20 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-active:opacity-100">
+          <button
+            onClick={() => scroll("right")}
+            className="p-2 md:p-3 bg-gray-800/80 hover:bg-blue-500 rounded-full text-white backdrop-blur-sm border border-gray-700 transition-all shadow-xl"
+            aria-label="Next"
+          >
+            <FiChevronRight size={20} className="md:w-6 md:h-6" />
+          </button>
+        </div>
+
+        <div
+          ref={scrollRef}
+          className="relative flex overflow-x-auto no-scrollbar pause-on-hover scroll-smooth"
+        >
+          <div className="flex gap-8 whitespace-nowrap animate-scroll py-4">
+            {doubledTestimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-gray-800 rounded-2xl p-6 md:p-8 border border-gray-700 hover:border-blue-500/50 transition-all w-[85vw] sm:w-[350px] lg:w-[450px] flex-shrink-0 whitespace-normal flex flex-col min-h-[280px] md:min-h-[300px]"
+              >
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <span key={i} className="text-blue-500 text-2xl">★</span>
+                  ))}
+                </div>
+                <p className="text-gray-300 mb-6 italic text-base md:text-lg leading-relaxed flex-grow">
+                  &quot;{testimonial.text}&quot;
+                </p>
+                <div className="mt-auto pt-4 border-t border-gray-700/50">
+                  <p className="text-white font-bold text-lg">{testimonial.name}</p>
+                  <p className="text-blue-400 text-sm font-medium">{testimonial.role}</p>
+                </div>
               </div>
-              <p className="text-gray-300 mb-6 italic text-base md:text-lg leading-relaxed flex-grow">
-                &quot;{testimonial.text}&quot;
-              </p>
-              <div className="mt-auto pt-4 border-t border-gray-700/50">
-                <p className="text-white font-bold text-lg">{testimonial.name}</p>
-                <p className="text-blue-400 text-sm font-medium">{testimonial.role}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Gradient overlays for professional feel */}
-        <div className="absolute top-0 left-0 h-full w-12 md:w-24 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 right-0 h-full w-12 md:w-24 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 left-0 h-full w-12 md:w-32 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 right-0 h-full w-12 md:w-32 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
       </div>
+
+      {/* <div className="mt-16 flex justify-center">
+        <Link href="/contact">
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(59, 130, 246, 0.4)" }}
+            whileTap={{ scale: 0.95 }}
+            className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold rounded-full transition-all shadow-lg flex items-center gap-2"
+          >
+            {t.cta}
+            <FiChevronRight className="group-hover:translate-x-1 transition-transform" />
+          </motion.button>
+        </Link>
+      </div>*/}
     </section>
   );
 }

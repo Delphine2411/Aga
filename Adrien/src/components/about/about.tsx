@@ -183,7 +183,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-sm md:text-xl text-gray-400 max-w-3xl mx-auto"
+          className="text-md md:text-xl text-gray-400 max-w-3xl mx-auto text-justify py-4"
         >
           {t.subtitle}
         </motion.p>

@@ -171,22 +171,11 @@ export default function ServicesSection() {
         <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full" />
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
         {t.services.map((service, index) => {
           const Icon = icons[index];
           return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 80, rotateY: -45 }}
-              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-              transition={{ duration: 1, delay: index * 0.2, type: "spring" }}
-              whileHover={{
-                rotateY: 10,
-                scale: 1.05,
-                boxShadow: "0px 0px 40px rgba(14, 158, 241, 0.3)",
-              }}
-              className="bg-gray-900/50 p-8 rounded-2xl border border-blue-500 shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex flex-col text-center"
-            >
+            <div key={index} className="bg-gray-900/50 p-8 rounded-2xl border border-blue-500 shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex flex-col text-center">
               <div className="flex justify-center mb-6">
                 <motion.div
                   animate={{ rotate: [0, 360] }}
@@ -198,7 +187,7 @@ export default function ServicesSection() {
               </div>
 
               <h3 className="text-xl font-semibold mb-3 text-blue-500">{service.title}</h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">{service.description}</p>
+              <p className="text-gray-400 mb-6 leading-relaxed text-justify">{service.description}</p>
 
               <div className="mt-auto">
                 <motion.button
@@ -209,7 +198,7 @@ export default function ServicesSection() {
                   {t.button}
                 </motion.button>
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>

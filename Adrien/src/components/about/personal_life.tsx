@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "@/src/components/contexts/language_context";
-import { FaHeart, FaStar, FaUsers } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
 export default function PersonalLifeSection() {
     const { language } = useLanguage();

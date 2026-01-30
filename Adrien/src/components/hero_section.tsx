@@ -151,7 +151,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-6xl md:text-8xl font-bold text-white mb-6"
+          className="text-5xl md:text-7xl lg:text-8xl px-4 font-bold text-white mb-6 tracking-tight"
         >
           {t.title1} <span className="text-blue-500">{t.title}</span>
         </motion.h1>

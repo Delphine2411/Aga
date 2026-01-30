@@ -109,7 +109,7 @@ export default function Navbar() {
         </Link>
 
         {/* Liens Desktop */}
-        <ul className="hidden md:flex gap-8 text-lg">
+        <ul className="hidden lg:flex gap-8 text-lg">
           {links.map((link) => {
             const isActive = pathname === link.path;
             return (
@@ -140,7 +140,7 @@ export default function Navbar() {
         </ul>
 
         {/* Actions Desktop (Theme + Language) */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           {/* Bouton Theme */}
           {/* <motion.button
             whileHover={{ scale: 1.1, rotate: 180 }}
@@ -198,7 +198,7 @@ export default function Navbar() {
         </div>
 
         {/* Menu Mobile Toggle */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="lg:hidden flex items-center gap-4">
           {/* Theme Mobile */}
           {/* <motion.button
             whileTap={{ scale: 0.9 }}
@@ -231,7 +231,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#0b0c10]/95 border-t border-blue-500/20 overflow-hidden"
+            className="lg:hidden bg-[#0b0c10]/95 border-t border-blue-500/20 overflow-hidden"
           >
             <ul className="flex flex-col items-center gap-6 py-8 text-lg">
               {links.map((link) => {

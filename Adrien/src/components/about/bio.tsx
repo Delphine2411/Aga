@@ -1,5 +1,5 @@
 "use client";
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from "@/src/components/contexts/language_context";
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
@@ -37,7 +37,7 @@ function BioSection() {
       } else {
         throw new Error();
       }
-    } catch (err) {
+    } catch {
       toast.error("Erreur lors de l'envoi de la demande.", { id: loadingToast });
     } finally {
       setIsSubmitting(false);
@@ -135,7 +135,7 @@ function BioSection() {
 
   };
 
-  const { language, setLanguage } = useLanguage();
+  const { language } = useLanguage();
   // Sauvegarder la langue
   useEffect(() => {
     document.documentElement.setAttribute("lang", language);
@@ -151,7 +151,7 @@ function BioSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
-          className="grid md:grid-cols-2 gap-12 items-center mb-24"
+          className="grid lg:grid-cols-2 gap-12 items-center mb-24"
         >
           <motion.div variants={itemVariants}>
             <motion.div
@@ -160,7 +160,7 @@ function BioSection() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-pink-500 to-orange-500 " />
               <div className="absolute inset-0 flex items-center justify-center ">
-                <img src="/image/adrien1.png" alt="Adrien DOGO" className="w-full h-full object-cover " />
+                <Image src="/image/adrien1.png" alt="Adrien DOGO" fill className="object-cover " />
               </div>
               <div className="absolute -bottom-16 -right-16">
                 <div className="w-64 h-64 bg-blue-500/30 rounded-full blur-3xl animate-pulse" />

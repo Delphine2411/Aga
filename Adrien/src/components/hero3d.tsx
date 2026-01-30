@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/purity */
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, MeshDistortMaterial, Sphere, Float, Icosahedron, Points, PointMaterial } from "@react-three/drei";
-import { Mesh, Group, Vector3 } from "three";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { MeshDistortMaterial, Float, Icosahedron, Points, PointMaterial } from "@react-three/drei";
+import { Group } from "three";
 import { useEffect, useRef, useState, useMemo } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import * as THREE from 'three';
 
 // --- AJOUT : Liste des images du carrousel ---
@@ -151,7 +152,7 @@ export default function Hero3D() {
 
   return (
     <div className="h-screen w-full bg-[#030712] flex flex-col items-center justify-center relative overflow-hidden">
-      
+
       {/* --- AJOUT : CARROUSEL D'IMAGES EN BG --- */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence mode="wait">
@@ -163,7 +164,7 @@ export default function Hero3D() {
             transition={{ duration: 2.5, ease: "easeInOut" }}
             className="absolute inset-0"
           >
-            <div 
+            <div
               className="w-full h-full bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${backgroundImages[currentIndex]})` }}
             />
@@ -189,7 +190,7 @@ export default function Hero3D() {
       <div className="absolute top-6 left-6 md:top-8 md:left-8 z-50 flex items-center gap-3 md:gap-4">
         <div className={`relative p-[2px] md:p-[3px] rounded-full ${gradientClasses} group cursor-pointer shadow-2xl`}>
           <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-black">
-            <img src="/image/ad.png" alt="Adrien DOGO" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <Image src="/image/ad.png" alt="Adrien DOGO" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
           </div>
           <div className={`absolute -inset-2 rounded-full blur-xl opacity-20 ${gradientClasses} group-hover:opacity-40 transition-opacity`} />
         </div>

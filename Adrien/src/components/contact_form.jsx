@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaFacebook, FaPhone } from "react-icons/fa";
+import { FaLinkedin, FaEnvelope, FaFacebook, FaPhone } from "react-icons/fa";
 import Link from 'next/link';
 import { useLanguage } from "@/src/components/contexts/language_context";
 import { motion } from 'framer-motion';
@@ -169,28 +169,28 @@ export default function ContactSection() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  // Création d'une promesse pour un toast de chargement (optionnel mais très pro)
-  const loadingToast = toast.loading("Envoi de votre message...");
+    e.preventDefault();
 
-  try {
-    const res = await fetch("/api/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    // Création d'une promesse pour un toast de chargement (optionnel mais très pro)
+    const loadingToast = toast.loading("Envoi de votre message...");
 
-    if (res.ok) {
-      toast.success("✅ Message envoyé avec succès !", { id: loadingToast });
-      setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
-    } else {
-      toast.error("❌ Échec de l'envoi. Veuillez réessayer.", { id: loadingToast });
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        toast.success("✅ Message envoyé avec succès !", { id: loadingToast });
+        setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        toast.error("❌ Échec de l'envoi. Veuillez réessayer.", { id: loadingToast });
+      }
+    } catch {
+      toast.error("⚠️ Une erreur est survenue.", { id: loadingToast });
     }
-  } catch (err) {
-    toast.error("⚠️ Une erreur est survenue.", { id: loadingToast });
-  }
-};
+  };
 
   return (
     <div className="relative min-h-screen bg-black flex items-center justify-center px-4 py-24 overflow-hidden">

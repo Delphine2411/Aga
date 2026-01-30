@@ -1,10 +1,11 @@
- 
+
 "use client";
 
-import React, { useEffect, useState} from 'react';
-import { motion,  AnimatePresence } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from "@/src/components/contexts/language_context";
 import TestimonialsSection from '@/src/components/realisations/testimonials_section';
+import Image from 'next/image';
 
 const translations = {
   fr: {
@@ -162,10 +163,11 @@ function ProjectCard({ project, index, onOpenModal }: { project: Project; index:
       className="group relative bg-[#0a0a0a] max-w-[680px] max-h-[680px] overflow-hidden cursor-pointer border border-white/5 hover:border-blue-500 transition-colors duration-500"
     >
       <div className="aspect-[16/10] overflow-hidden relative">
-        <motion.img
+        <Image
           src={project.image || `https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop`}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
 
@@ -281,10 +283,11 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
             <div className="grid md:grid-cols-2">
               <div className="group md:h-full relative overflow-hidden bg-white/5 flex flex-col">
                 <div className="relative h-[300px] md:h-full flex-shrink-0">
-                  <img
+                  <Image
                     src={project.images?.[currentImageIndex] || `https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop`}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-all duration-500"
+                    fill
+                    className="object-cover transition-all duration-500"
                   />
 
                   {/* Navigation Arrows */}
@@ -325,7 +328,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
                         className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all ${currentImageIndex === idx ? 'border-blue-500 scale-105' : 'border-white/10 opacity-50 hover:opacity-100'
                           }`}
                       >
-                        <img src={img} alt="" className="w-full h-full object-cover" />
+                        <Image src={img} alt="" fill className="object-cover" />
                       </button>
                     ))}
                   </div>
