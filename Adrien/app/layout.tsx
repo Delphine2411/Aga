@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Roboto } from 'next/font/google';
 import { Roboto_Slab } from 'next/font/google';
 import "./globals.css";
 import { LanguageProvider } from "@/src/components/contexts/language_context";
 import { ThemeProvider } from "@/src/components/contexts/theme_context";
 import { Toaster } from "react-hot-toast";
+import FloatingQuote from "@/src/components/floating_quote";
 
 
 
@@ -34,6 +34,7 @@ export default function RootLayout({
          <ThemeProvider>
           <LanguageProvider>
             <Toaster position="top-right" reverseOrder={false} />
+            {/*<FloatingQuote />*/}
             {children}
           </LanguageProvider>
         </ThemeProvider>

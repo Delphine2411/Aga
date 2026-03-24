@@ -52,7 +52,7 @@ export async function GET(req: Request) {
       </html>
     `, { headers: { 'Content-Type': 'text/html' } });
 
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Erreur lors de l'envoi" });
   }
 }

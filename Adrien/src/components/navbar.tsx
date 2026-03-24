@@ -18,6 +18,7 @@ type Translations = {
     realisations: string;
     services: string;
     contact: string;
+    book: string;
   };
 };
 
@@ -61,26 +62,30 @@ export default function Navbar() {
       about: "À propos",
       realisations: "Mon expertise",
       services: "Mes engagements",
-      contact: "Contact"
+      contact: "Contact",
+      book: "Mon livre"
     },
     en: {
       home: "Home",
       about: "About",
       realisations: "My Expertise",
       services: "My engagements",
-      contact: "Contact"
+      contact: "Contact",
+      book: "My Book"
     },
     es: {
       home: "Inicio",
       about: "Acerca de",
       realisations: "Mi Experiencia",
       services: "Mis compromisos",
-      contact: "Contacto"
+      contact: "Contacto",
+      book: "Mi Libro"
     }
   };
 
   const links = [
     { name: translations[language].home, path: "/home", key: "home" },
+    { name: translations[language].book, path: "/livre", key: "book" },
     { name: translations[language].about, path: "/about", key: "about" },
     { name: translations[language].realisations, path: "/realisations", key: "realisations" },
     { name: translations[language].services, path: "/services", key: "services" },

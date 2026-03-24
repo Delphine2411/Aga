@@ -1,11 +1,9 @@
-/* eslint-disable react-hooks/purity */
-"use client";
 
+"use client";
+8/* eslint-disable react-hooks/purity */
 import { Canvas, useFrame } from "@react-three/fiber";
-import { MeshDistortMaterial, Float, Icosahedron, Points, PointMaterial } from "@react-three/drei";
-import { Group } from "three";
+import { Points, PointMaterial } from "@react-three/drei";
 import { useEffect, useRef, useState, useMemo } from "react";
-import { TypeAnimation } from "react-type-animation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -53,60 +51,6 @@ function ParticleSystem() {
   );
 }
 
-// 💎 Glassmorphic Central Geometries
-function ResponsiveGeometry() {
-  const groupRef = useRef<Group>(null);
-  const [scale, setScale] = useState(1);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) setScale(0.6);
-      else if (window.innerWidth < 1024) setScale(0.8);
-      else setScale(1);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.2;
-      groupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.1;
-    }
-  });
-
-  return (
-    <group ref={groupRef} scale={scale}>
-      <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-        <Icosahedron args={[1.5, 1]}>
-          <MeshDistortMaterial
-            color="#3b82f6"
-            speed={2}
-            distort={0.4}
-            radius={1}
-            wireframe
-            opacity={0.3}
-            transparent
-          />
-        </Icosahedron>
-        <Icosahedron args={[0.8, 15]}>
-          <meshStandardMaterial
-            color="#ec4899"
-            emissive="#ec4899"
-            emissiveIntensity={0.5}
-            metalness={0.9}
-            roughness={0.1}
-          />
-        </Icosahedron>
-        <mesh rotation={[Math.PI / 4, 0, 0]}>
-          <torusGeometry args={[2.5, 0.02, 16, 100]} />
-          <meshBasicMaterial color="#f97316" transparent opacity={0.5} />
-        </mesh>
-      </Float>
-    </group>
-  );
-}
 
 export default function Hero3D() {
   const [showButton, setShowButton] = useState(false);
@@ -144,7 +88,7 @@ export default function Hero3D() {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowButton(true), 3000);
+    const timer = setTimeout(() => setShowButton(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -181,7 +125,7 @@ export default function Hero3D() {
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} />
           <ParticleSystem />
-          <ResponsiveGeometry />
+
           {/* OrbitControls retiré ou réglé sur pointer-events car le Canvas est au milieu */}
         </Canvas>
       </div>
@@ -216,34 +160,49 @@ export default function Hero3D() {
       </div>
 
       {/* --- MAIN CONTENT --- */}
-      <div className="relative z-20 text-center px-6 lg:py-0 py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-white tracking-tighter mb-4 drop-shadow-2xl">
-            {text[lang].hello.split(" ")[0]} <span className="text-blue-500">{text[lang].hello.split(" ")[1]}</span> {text[lang].hello.split(" ")[2]}
-          </h1>
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 lg:py-0 py-32">
 
-          <div className="h-28 xs:h-20 sm:h-16 md:h-12 max-w-4xl mx-auto px-4">
-            <p className="text-lg sm:text-xl md:text-2xl font-medium text-gray-400 leading-relaxed md:leading-normal">
-              <TypeAnimation
-                key={lang}
-                sequence={[text[lang].job, 2000]}
-                wrapper="span"
-                cursor={true}
-                repeat={Infinity}
-                style={{ display: "inline-block" }}
-              />
-            </p>
-          </div>
+        {/* LIVRE - Gauche */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex-shrink-0 w-56 sm:w-72 md:w-80 lg:w-96"
+        >
+          <Image
+            src="/image/livre1.png"
+            alt="Livre Adrien DOGO"
+            width={400}
+            height={520}
+            className="object-contain drop-shadow-[0_20px_60px_rgba(59,130,246,0.4)] hover:scale-105 transition-transform duration-500"
+          />
+        </motion.div>
+
+        {/* TEXTE - Droite */}
+        <div className="flex flex-col items-start text-left">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tighter mb-4 drop-shadow-2xl"
+          >
+            {text[lang].hello.split(" ")[0]} <span className="text-blue-500">{text[lang].hello.split(" ")[1]}</span> {text[lang].hello.split(" ")[2]}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+            className="text-lg sm:text-xl md:text-2xl font-medium text-gray-400 leading-relaxed max-w-xl mb-6"
+          >
+            {text[lang].job}
+          </motion.p>
 
           <motion.h2
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="text-2xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-500 mt-8 md:mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-500 mb-10"
           >
             {text[lang].welcome}
           </motion.h2>
@@ -251,12 +210,12 @@ export default function Hero3D() {
           <AnimatePresence>
             {showButton && (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="mt-16"
+                transition={{ duration: 0.3 }}
               >
-                <Link href="/home">
+                <Link href="/livre">
                   <motion.button
                     whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(59, 130, 246, 0.5)" }}
                     whileTap={{ scale: 0.95 }}
@@ -268,7 +227,7 @@ export default function Hero3D() {
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
 
       {/* --- SCROLL INDICATOR --- */}

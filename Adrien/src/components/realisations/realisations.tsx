@@ -324,94 +324,6 @@ interface Project {
   gradient?: string;
 }
 
-function ProjectCard({ project, index, onOpenModal }: { project: Project; index: number; onOpenModal: (p: Project) => void }) {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const { language } = useLanguage();
-  const t = translations[language] || translations['en'];
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    setRotation({
-      x: (y - centerY) / 20,
-      y: (centerX - x) / 20,
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setRotation({ x: 0, y: 0 });
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={() => onOpenModal(project)}
-      style={{
-        perspective: 1000,
-        rotateX: rotation.x,
-        rotateY: rotation.y,
-      }}
-      className="group relative bg-[#0a0a0a] max-w-[680px] max-h-[680px] overflow-hidden cursor-pointer border border-white/5 hover:border-blue-500 transition-colors duration-500"
-    >
-      <div className="aspect-[16/10] overflow-hidden relative">
-        <motion.div className="w-full h-full">
-          <Image
-            src={project.image || `https://images.unsplash.com/photo-1591084728795-1149f32d9866?q=80&w=1000&auto=format&fit=crop`}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-
-        {/* Overlay au survol */}
-        <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-xl"
-          >
-            {t.viewDetails}
-          </motion.button>
-        </div>
-      </div>
-
-      <div className="p-8">
-        <div className="flex justify-between items-start mb-4">
-          <span className="px-4 py-1.5 rounded-full bg-white/5 text-blue-500 text-xs font-bold tracking-wider uppercase border border-blue-500/20">
-            {project.category}
-          </span>
-          <span className="text-gray-500 text-sm font-medium">{project.date}</span>
-        </div>
-
-        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-500 transition-colors duration-300">
-          {project.title}
-        </h3>
-        <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-2">
-          {project.description}
-        </p>
-
-        <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/5">
-          <div>
-            <p className="text-[10px] uppercase tracking-widest text-blue-500 font-bold mb-1">{t.ngo}</p>
-            <p className="text-white text-xs font-medium truncate">{project.ngo}</p>
-          </div>
-          <div>
-            <p className="text-[10px] uppercase tracking-widest text-blue-500 font-bold mb-1">{t.location}</p>
-            <p className="text-white text-xs font-medium truncate">{project.location}</p>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 function ProjectModal({ project, isOpen, onClose }: { project: Project | null; isOpen: boolean; onClose: () => void }) {
   const { language } = useLanguage();
@@ -589,7 +501,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project | null; i
 
 // Page principale
 export default function RealisationsPage() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
